@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row"></div>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <form
+        ngNativeValidate
+        name="myForm"
+        ng-submit="count = count + 1"
+        ng-init="count=0"
+        ng-app
+      >
+        <div class="mb-3">
+          <label for="city" class="form-label">City:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="city"
+            id="city"
+            [(ngModel)]="usersServiceService._User.City"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="street" class="form-label">Street:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="street"
+            aria-describedby="emailHelp"
+            required
+            [(ngModel)]="usersServiceService._User.Street"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="Fname" class="form-label">First Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Fname"
+            [(ngModel)]="usersServiceService._User.Fname"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="Lname" class="form-label">Last Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Lname"
+            [(ngModel)]="usersServiceService._User.Lname"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="usersServiceService._createNewUser()"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row"></div>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <div class="mb-3">
+        <label for="identification" class="form-label">Identification</label>
+        <input
+          type="number"
+          class="form-control"
+          name="identification"
+          id="identification"
+          [(ngModel)]="usersServiceService._User.Identification"
+          minlength="5"
+          [ngModelOptions]="{ standalone: true }"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          required
+          [(ngModel)]="usersServiceService._User.Mail"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          [(ngModel)]="usersServiceService._User.Password"
+          [ngModelOptions]="{ standalone: true }"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="ConfirmPassword" class="form-label">Confirm Password</label>
+        <input
+          (keyup)="confirmPassword($event)"
+          type="password"
+          class="form-control"
+          id="ConfirmPassword"
+          required
+        />
+      </div>
+
+      <div
+        *ngIf="confirmPasswordText == true"
+        [ngClass]="confirmPasswordSuccess ? 'text-success' : 'text-danger'"
+      >
+        {{
+          confirmPasswordSuccess
+            ? " confirm password is accurate"
+            : "confirm password is no accurate"
+        }}
+      </div>
+      <a routerLink="/registerPart2"
+        ><button class="btn btn-success">Submit</button></a
+      >
+      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>

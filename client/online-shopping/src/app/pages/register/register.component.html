@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-      <form ngNativeValidate>
+      <form ngNativeValidate #form>
         <div class="mb-3">
           <label for="identification" class="form-label">Identification</label>
           <input
@@ -88,9 +88,29 @@
               : "confirm password is no accurate"
           }}
         </div>
-        <a routerLink="/registerPart2"
-          ><button class="btn btn-success">Submit</button></a
+
+        <button
+          type="submit"
+          class="btn btn-success"
+          [routerLink]="
+            confirmPasswordSuccess &&
+            confirmMailSuccess &&
+            confirmIdentificationSuccess
+              ? ['/registerPart2']
+              : []
+          "
         >
+          Submit
+          <!-- <a
+            *ngIf="
+              confirmPasswordSuccess &&
+              confirmMailSuccess &&
+              confirmIdentificationSuccess
+            "
+            routerLink="/registerPart2"
+          >
+          </a> -->
+        </button>
       </form>
     </div>
     <div class="col-4"></div>

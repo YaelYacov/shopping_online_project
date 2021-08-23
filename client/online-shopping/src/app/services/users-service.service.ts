@@ -31,18 +31,18 @@ export class UsersServiceService {
 
   async _createNewUser() {
     console.log(this._User);
-    await this.apiService.createPostService('users/createNewUser', {
-      Fname: this._User.Fname,
-      Lname: this._User.Lname,
-      Mail: this._User.Mail,
-      Password: this._User.Password,
-      Identification: this._User.Identification,
-      City: this._User.City,
-      Street: this._User.Street,
-      IsAdmin: false,
-    });
+    // await this.apiService.createPostService('users/createNewUser', {
+    //   Fname: this._User.Fname,
+    //   Lname: this._User.Lname,
+    //   Mail: this._User.Mail,
+    //   Password: this._User.Password,
+    //   Identification: this._User.Identification,
+    //   City: this._User.City,
+    //   Street: this._User.Street,
+    //   IsAdmin: false,
+    // });
 
-    this._getUser();
+    // this._getUser();
   }
 }
 

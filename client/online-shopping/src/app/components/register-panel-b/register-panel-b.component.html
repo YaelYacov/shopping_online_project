@@ -3,24 +3,32 @@
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-      <form
-        ngNativeValidate
-        name="myForm"
-        ng-submit="count = count + 1"
-        ng-init="count=0"
-        ng-app
-      >
+      <form ngNativeValidate="true">
         <div class="mb-3">
           <label for="city" class="form-label">City:</label>
-          <input
-            type="text"
-            class="form-control"
+          <select
+            class="form-select"
+            aria-label="Default select example"
             name="city"
             id="city"
             [(ngModel)]="usersServiceService._User.City"
             [ngModelOptions]="{ standalone: true }"
             required
-          />
+          >
+            <option selected>Open this select menu</option>
+            <option value="Jerusalem">Jerusalem</option>
+            <option value="Tel Aviv">Tel Aviv</option>
+            <option value="Haifa">Haifa</option>
+            <option value="Ashdod">Ashdod</option>
+            <option value="Rishon LeZiyyon">Rishon LeZiyyon</option>
+            <option value="Petah Tikva">Petah Tikva</option>
+            <option value="Beersheba">Beersheba</option>
+            <option value="Netanya">Netanya</option>
+            <option value="Holon">Holon</option>
+            <option value="Bnei Brak">Bnei Brak</option>
+            <option value="Rehovot">Rehovot</option>
+            <option value="Bat Yam">Bat Yam</option>
+          </select>
         </div>
         <div class="mb-3">
           <label for="street" class="form-label">Street:</label>

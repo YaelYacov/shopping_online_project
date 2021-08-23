@@ -15,9 +15,9 @@ export class UsersServiceService {
   async _getUser() {
     this._Users = (await this.apiService.createPostService(
       `users/getUserByMailNPass`,
-      { Password: '111', Mail: 'yoshi@gmail.com' }
+      { Password: this._User.Password, Mail: this._User.Mail }
     )) as Array<User>;
-    console.log(this._User);
+    console.log(this._Users);
   }
 
   async _updateUserCart() {

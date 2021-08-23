@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row"></div>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <form ngNativeValidate #form>
+        <label for="mail" class="form-label">Email:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="mail"
+          id="mail"
+          [(ngModel)]="usersServiceService._User.Mail"
+          required
+        />
+
+        <label for="password" class="form-label">Password:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="password"
+          id="password"
+          [(ngModel)]="usersServiceService._User.Password"
+          required
+        />
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="usersServiceService._getUser()"
+        >
+          Log In
+        </button>
+      </form>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>

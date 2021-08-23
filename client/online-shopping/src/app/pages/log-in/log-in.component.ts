@@ -12,6 +12,11 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./log-in.component.css'],
 })
 export class LogInComponent implements OnInit {
+  // logInOb: object = {
+  //   Mail: '',
+  //   Password: '',
+  // };
+
   constructor(
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
@@ -20,7 +25,7 @@ export class LogInComponent implements OnInit {
     public categoriesService: CategoriesService,
     public ordersService: OrdersService
   ) {
-    console.log(this.usersServiceService._getUser());
+    // console.log(this.usersServiceService._getUser());
     // console.log(this.usersServiceService._updateUserCart());
     // console.log(this.usersServiceService._createNewUser());
     // console.log(this.productsService._addNewProd());
@@ -29,14 +34,11 @@ export class LogInComponent implements OnInit {
     // console.log(this.cartsService._addNewCart());
     // console.log(this.cartsService._getCartByID());
     // console.log(this.cartsService._updateCartStatus());
-
     // console.log(this.prodInCartService._getProdInCartByCartID());
-
     // console.log(this.categoriesService._getAllCategories());
     // console.log(this.ordersService._getOrders());
     // console.log(this.ordersService._updateOrder());
     // console.log(this.ordersService._addNewOrder());
-
     // console.log(this.prodInCartService._getProdInCartByCartID());
     // console.log(this.prodInCartService._addNewProdInCart());
   }

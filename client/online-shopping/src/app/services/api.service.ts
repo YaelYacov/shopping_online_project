@@ -15,16 +15,16 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       try {
         this.httpClient.get(this.settingsService._baseUrl + params).subscribe(
-          (data) => {
+          (data: any) => {
             // console.log('Data : ', data);
             resolve(data);
           },
-          (error) => {
+          (error: any) => {
             console.log('oops', error, error.error);
           }
         );
       } catch (err) {
-        console.log('ERRORRR : ', err);
+        console.log('ERROR : ', err);
       }
     });
   }
@@ -35,16 +35,16 @@ export class ApiService {
         this.httpClient
           .post(this.settingsService._baseUrl + params, ob)
           .subscribe(
-            (data) => {
+            (data: any) => {
               // console.log('Data : ', data);
               resolve(data);
             },
-            (error) => {
-              console.log('oops', error, error.error);
+            (err: any) => {
+              console.log('oops', err, err.error);
             }
           );
       } catch (err) {
-        console.log('ERRORRR : ', err);
+        console.log('ERROR : ', err);
       }
     });
   }

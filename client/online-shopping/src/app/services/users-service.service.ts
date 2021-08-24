@@ -6,8 +6,8 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class UsersServiceService {
-  // _User: any = [];
-  _Users: Array<User> = [];
+  _Users: any = [];
+  // _Users: Array<User> = [];
   _User: User = new User();
 
   constructor(public apiService: ApiService) {}
@@ -31,16 +31,19 @@ export class UsersServiceService {
 
   async _createNewUser() {
     console.log(this._User);
-    await this.apiService.createPostService('users/createNewUser', {
-      Fname: this._User.Fname,
-      Lname: this._User.Lname,
-      Mail: this._User.Mail,
-      Password: this._User.Password,
-      Identification: this._User.Identification,
-      City: this._User.City,
-      Street: this._User.Street,
-      IsAdmin: false,
-    });
+    let register = await this.apiService.createPostService(
+      'users/createNewUser',
+      {
+        Fname: this._User.Fname,
+        Lname: this._User.Lname,
+        Mail: this._User.Mail,
+        Password: this._User.Password,
+        Identification: this._User.Identification,
+        City: this._User.City,
+        Street: this._User.Street,
+        IsAdmin: false,
+      }
+    );
 
     this._getUser();
   }

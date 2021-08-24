@@ -12,10 +12,7 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./log-in.component.css'],
 })
 export class LogInComponent implements OnInit {
-  // logInOb: object = {
-  //   Mail: '',
-  //   Password: '',
-  // };
+  startShopping: boolean = false;
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -42,6 +39,27 @@ export class LogInComponent implements OnInit {
     // console.log(this.prodInCartService._getProdInCartByCartID());
     // console.log(this.prodInCartService._addNewProdInCart());
   }
+
+  getUserNCart = () => {
+    this.usersServiceService._getUser();
+    this.startShopping = this.usersServiceService._User.ID > 0 ? false : true;
+    console.log(this.usersServiceService._User.ID);
+  };
+
+  findCart = () => {
+    console.log(this.usersServiceService._Users.CartID);
+    // let parsingUsers = JSON.parse(this.usersServiceService._Users);
+    // let currentUserCart: number;
+    // console.log(stringifyUsers);
+    // let objectKeys = Object.values(this.usersServiceService._Users.find(user => user.CartID));
+    // console.log(objectKeys);
+    // this.usersServiceService._Users.CartID = currentUserCart ;
+    // let currentUser = { ...this.usersServiceService._Users };
+    // console.log(currentUser);
+    // this.usersServiceService._Users.CartID == null
+    //   ? console.log("there's no cart yet")
+    //   : console.log('cartID is: ', this.usersServiceService._User.CartID);
+  };
 
   ngOnInit(): void {}
 }

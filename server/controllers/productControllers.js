@@ -13,7 +13,7 @@ exports.getAllProducts = async (req, res, next) => {
     .findAll(condition, options)
     // .findAll(condition, options)
     .then((result) => {
-      console.log(req.body.CategoryID);
+      // console.log(req.body.CategoryID);
       res.send(result);
     })
     .catch((err) => {

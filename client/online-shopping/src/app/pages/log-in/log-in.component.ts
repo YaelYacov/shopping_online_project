@@ -47,7 +47,9 @@ export class LogInComponent implements OnInit {
   };
 
   findCart = () => {
-    console.log(this.usersServiceService._Users.CartID);
+    let CartID = this.usersServiceService._Users.CartID;
+    console.log(CartID);
+    console.log(this.prodInCartService._getProdInCartByCartID(CartID));
     // let parsingUsers = JSON.parse(this.usersServiceService._Users);
     // let currentUserCart: number;
     // console.log(stringifyUsers);

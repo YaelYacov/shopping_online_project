@@ -34,6 +34,7 @@ Users.belongsTo(Cart);
 CartProduct.belongsTo(Cart);
 // Cart.hasMany(CartProduct);
 
+Products.hasMany(CartProduct);
 CartProduct.belongsTo(Products);
 
 Orders.belongsTo(Users);

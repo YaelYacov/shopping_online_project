@@ -8,25 +8,25 @@ export class ProdInCartService {
   _prodInCart: any = [];
   constructor(public apiService: ApiService) {}
 
-  _getProdInCartByCartID = async () => {
+  _getProdInCartByCartID = async (CartID: number) => {
     this._prodInCart = await this.apiService.createPostService(
       'prodInCart/getProdInCartByCartID',
       {
-        CartID: 1,
+        CartID: CartID,
         // AllOrCartProds: 'All',
       }
     );
     console.log(this._prodInCart);
   };
 
-  _addNewProdInCart = async () => {
+  _addNewProdInCart = async (CartID: number) => {
     await this.apiService.createPostService('prodInCart/addNewProdInCart', {
       Qnt: 2,
       TotalPrice: 33,
-      CartID: 2,
+      CartID: CartID,
       ProductID: 2,
     });
-    this._getProdInCartByCartID();
+    this._getProdInCartByCartID(CartID);
     // console.log(this._cart);
   };
 }

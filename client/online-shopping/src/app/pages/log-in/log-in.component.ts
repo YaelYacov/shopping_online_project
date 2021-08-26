@@ -22,6 +22,7 @@ export class LogInComponent implements OnInit {
     public categoriesService: CategoriesService,
     public ordersService: OrdersService
   ) {
+    this.categoriesService._categories;
     // console.log(this.usersServiceService._getUser());
     // console.log(this.usersServiceService._updateUserCart());
     // console.log(this.usersServiceService._createNewUser());

@@ -12,10 +12,9 @@ export class ProductsService {
   _products: Array<Product> = [];
   constructor(public apiService: ApiService) {}
 
-  _getAllProducts = async (reqCat: any) => {
+  _getAllProducts = async () => {
     this._products = (await this.apiService.createPostService(
-      'products/getAllProducts',
-      reqCat
+      'products/getAllProducts'
     )) as Array<Product>;
     // { CategoryID: 2 }
     console.log(this._products);
@@ -28,7 +27,7 @@ export class ProductsService {
       CategoryID: 1,
     });
 
-    this._getAllProducts({ AllProds: 'All' });
+    this._getAllProducts();
   }
 
   async _editProd() {
@@ -37,6 +36,6 @@ export class ProductsService {
       editCol: { Name: 'White whine!', Price: 91.9 },
     });
 
-    this._getAllProducts({ AllProds: 'All' });
+    this._getAllProducts();
   }
 }

@@ -48,6 +48,7 @@
             class="btn btn-primary"
             [disabled]="!startShopping"
             (click)="findCart()"
+            [routerLink]="usersServiceService._Users.ID > 0 ? ['/home'] : []"
           >
             {{
               usersServiceService._Users.CartID > 0

@@ -8,7 +8,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductCardComponent implements OnInit {
   constructor(public productsService: ProductsService) {
-    this.productsService._getAllProducts({ AllProds: 'All' });
+    this.productsService._getAllProducts();
   }
 
   ngOnInit(): void {}

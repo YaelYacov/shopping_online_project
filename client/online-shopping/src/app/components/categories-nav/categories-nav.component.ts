@@ -14,8 +14,19 @@ export class CategoriesNavComponent implements OnInit {
   ) {
     this.categoriesService._getAllCategories();
     console.log();
-    this.productsService._getAllProducts({ AllProds: 'All' });
+    this.productsService._getAllProducts();
   }
+
+  filterCategories = (CategoryID?: number) => {
+    console.log(CategoryID);
+    // this.productsService._getAllProducts();
+    let filtered = [
+      ...this.productsService._products.filter(
+        (prod) => prod.CategoryID == CategoryID
+      ),
+    ];
+    console.log(filtered);
+  };
 
   ngOnInit(): void {}
 }

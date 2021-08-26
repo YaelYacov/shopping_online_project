@@ -4,13 +4,12 @@ const categories = require("../models/categoriesModel");
 
 exports.getAllProducts = async (req, res, next) => {
   let attributes = ["Name"];
-  let nothing;
-  let condition = req.body.AllProds == "All" ? {} : { where: { CategoryID: req.body.CategoryID } };
+  // let condition = req.body.AllProds == "All" ? {} : { where: { CategoryID: req.body.CategoryID } };
   let options = { include: [{ model: categories, attributes: attributes }] };
-  console.log("condition", condition);
+  // console.log("condition", condition);
 
   await products
-    .findAll(condition, options)
+    .findAll(options)
     // .findAll(condition, options)
     .then((result) => {
       // console.log(req.body.CategoryID);

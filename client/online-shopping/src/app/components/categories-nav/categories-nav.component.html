@@ -17,7 +17,7 @@
           <a
             class="nav-link active"
             aria-current="page"
-            (click)="productsService._getAllProducts()"
+            (click)="productsService._defineCategory()"
             >All</a
           >
         </li>
@@ -25,9 +25,11 @@
           *ngFor="let category of categoriesService._categories"
           class="nav-item"
         >
-          <a class="nav-link" (click)="filterCategories(category.ID)">{{
-            category.Name
-          }}</a>
+          <a
+            class="nav-link"
+            (click)="productsService._defineCategory(category.ID)"
+            >{{ category.Name }}</a
+          >
         </li>
         <!-- <li
           *ngFor="let item of categoriesService._categories; index as i; trackBy: trackByFn"

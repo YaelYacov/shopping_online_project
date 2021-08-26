@@ -10,13 +10,39 @@ export class ProductsService {
   // _products : <Array><Products> = [];
 
   _products: Array<Product> = [];
+  _filteredProds: Array<Product> = [];
+  _currentCategory: any;
+
   constructor(public apiService: ApiService) {}
+
+  _defineCategory = (CategoryID?: number) => {
+    this._currentCategory = CategoryID;
+    // console.log(CategoryID, this._currentCategory);
+  };
+
+  _filterCategories = (CategoryID?: number) => {
+    // console.log(CategoryID);
+    // console.log(this._products);
+
+    if (!CategoryID) {
+      return this._products;
+    } else {
+      // this.productsService._getAllProducts();
+      // this._getAllProducts();
+
+      // console.log(this._filteredProds);
+      return (this._filteredProds = [
+        ...this._products.filter((prod) => prod.CategoryID == CategoryID),
+      ]);
+
+      // this._products = this._filteredProds;
+    }
+  };
 
   _getAllProducts = async () => {
     this._products = (await this.apiService.createPostService(
       'products/getAllProducts'
     )) as Array<Product>;
-    // { CategoryID: 2 }
     console.log(this._products);
   };
 

@@ -21,7 +21,13 @@
           *ngFor="let category of categoriesService._categories"
           class="nav-item"
         >
-          <a class="nav-link">{{ category.Name }}</a>
+          <a
+            class="nav-link"
+            (click)="
+              productsService._getAllProducts({ CategoryID: category.ID })
+            "
+            >{{ category.Name }}</a
+          >
         </li>
         <!-- <li
           *ngFor="let item of categoriesService._categories; index as i; trackBy: trackByFn"

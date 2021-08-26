@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
+import { Product } from '../models/productsModel';
 import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  _products: any = [];
+  // _products: <Array><Product>;
+  // _products : <Array><Products> = [];
 
+  _products: Array<Product> = [];
   constructor(public apiService: ApiService) {}
 
-  _getAllProducts = async () => {
-    this._products = await this.apiService.createPostService(
+  _getAllProducts = async (reqCat: any) => {
+    this._products = (await this.apiService.createPostService(
       'products/getAllProducts',
-      { CategoryID: 2 }
-      // { AllProds: 'All' }
-    );
+      reqCat
+    )) as Array<Product>;
+    // { CategoryID: 2 }
     console.log(this._products);
   };
 
@@ -25,7 +28,7 @@ export class ProductsService {
       CategoryID: 1,
     });
 
-    this._getAllProducts();
+    this._getAllProducts({ AllProds: 'All' });
   }
 
   async _editProd() {
@@ -34,6 +37,6 @@ export class ProductsService {
       editCol: { Name: 'White whine!', Price: 91.9 },
     });
 
-    this._getAllProducts();
+    this._getAllProducts({ AllProds: 'All' });
   }
 }

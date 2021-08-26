@@ -10,9 +10,10 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { RegisterPanelBComponent } from './components/register-panel-b/register-panel-b.component';
 import { CategoriesNavComponent } from './components/categories-nav/categories-nav.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
-  declarations: [AppComponent, LogInComponent, ProductComponent, RegisterComponent, HeaderComponent, RegisterPanelBComponent, CategoriesNavComponent],
+  declarations: [AppComponent, LogInComponent, ProductComponent, RegisterComponent, HeaderComponent, RegisterPanelBComponent, CategoriesNavComponent, ProductCardComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

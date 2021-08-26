@@ -1,41 +1,63 @@
 <div class="container">
-  <div class="row"></div>
-  <div class="row">
+  <div class="row mb-3"></div>
+  <div class="row mb-3">
     <div class="col-4"></div>
-    <div class="col-4">
+    <div class="col-4 mx-auto">
       <form ngNativeValidate #form>
-        <label for="mail" class="form-label">Email:</label>
-        <input
-          type="text"
-          class="form-control"
-          name="mail"
-          id="mail"
-          [(ngModel)]="usersServiceService._User.Mail"
-          required
-        />
-
-        <label for="password" class="form-label">Password:</label>
-        <input
-          type="text"
-          class="form-control"
-          name="password"
-          id="password"
-          [(ngModel)]="usersServiceService._User.Password"
-          required
-        />
-        <button type="submit" class="btn btn-primary" (click)="getUserNCart()">
-          Log In
-        </button>
+        <div class="row mb-3 mx-auto">
+          <label for="mail" class="form-label">Email:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="mail"
+            id="mail"
+            [(ngModel)]="usersServiceService._User.Mail"
+            required
+          />
+        </div>
+        <div class="row mb-3 mx-auto">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="password"
+            id="password"
+            [(ngModel)]="usersServiceService._User.Password"
+            required
+          />
+        </div>
+        <div class="row mb-3">
+          <div class="col-4"></div>
+          <div class="col-4">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="getUserNCart()"
+            >
+              Log In
+            </button>
+          </div>
+          <div class="col-4"></div>
+        </div>
       </form>
       Doesn't Have An Account Yet ? <a routerLink="/registerPart1">Sight Up</a>
-
-      <button
-        class="btn btn-primary"
-        [disabled]="!startShopping"
-        (click)="findCart()"
-      >
-        go to cart or start shopping
-      </button>
+      <div class="row mt-3">
+        <div class="col-2"></div>
+        <div class="col-8">
+          <button
+            class="btn btn-primary"
+            [disabled]="!startShopping"
+            (click)="findCart()"
+          >
+            {{
+              usersServiceService._Users.CartID > 0
+                ? "Go To Cart"
+                : "Start New Shopping"
+            }}
+          </button>
+        </div>
+        <div class="col-2"></div>
+      </div>
     </div>
     <div class="col-4"></div>
   </div>

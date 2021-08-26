@@ -47,9 +47,12 @@ export class LogInComponent implements OnInit {
   };
 
   findCart = () => {
-    let CartID = this.usersServiceService._Users.CartID;
-    console.log(CartID);
-    console.log(this.prodInCartService._getProdInCartByCartID(CartID));
+    if (this.usersServiceService._Users.CartID > 0) {
+      let CartID = this.usersServiceService._Users.CartID;
+      console.log(CartID);
+      console.log(this.prodInCartService._getProdInCartByCartID(CartID));
+    } else this.cartsService._addNewCart();
+
     // let parsingUsers = JSON.parse(this.usersServiceService._Users);
     // let currentUserCart: number;
     // console.log(stringifyUsers);

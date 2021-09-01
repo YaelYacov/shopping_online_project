@@ -1,9 +1,5 @@
 <div
-  *ngFor="
-    let product of productsService._filterCategories(
-      productsService._currentCategory
-    )
-  "
+  *ngFor="let product of productsService._products"
   class="card"
   style="width: 18rem"
 >

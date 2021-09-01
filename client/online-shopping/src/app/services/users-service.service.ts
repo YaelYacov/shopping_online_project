@@ -6,17 +6,22 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class UsersServiceService {
-  _Users: any = [];
+  _Users: any;
+  // _Users: Array<User> = [];
   // _Users: Array<User> = [];
   _User: User = new User();
+  _currentUserID: any;
 
   constructor(public apiService: ApiService) {}
 
   async _getUser() {
-    this._Users = (await this.apiService.createPostService(
+    this._Users = await this.apiService.createPostService(
       `users/getUserByMailNPass`,
       { Password: this._User.Password, Mail: this._User.Mail }
-    )) as Array<User>;
+    );
+    this._currentUserID = this._Users.ID;
+    console.log(this._currentUserID);
+
     console.log(this._Users);
   }
 

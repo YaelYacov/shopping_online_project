@@ -12,6 +12,6 @@ export class CategoriesService {
     this._categories = await this.apiService.createPostService(
       'categories/getAllCategories'
     );
-    console.log(this._categories);
+    // console.log(this._categories);
   };
 }

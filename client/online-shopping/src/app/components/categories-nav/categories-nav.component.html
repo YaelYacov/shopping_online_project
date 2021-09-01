@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <button
       class="navbar-toggler"
@@ -17,7 +17,7 @@
           <a
             class="nav-link active"
             aria-current="page"
-            (click)="productsService._defineCategory()"
+            (click)="productsService._getAllProducts()"
             >All</a
           >
         </li>
@@ -27,15 +27,11 @@
         >
           <a
             class="nav-link"
-            (click)="productsService._defineCategory(category.ID)"
-            >{{ category.Name }}</a
-          >
+            (click)="productsService._getAllProducts(category.ID)"
+            >{{ category.Name }}
+          </a>
         </li>
-        <!-- <li
-          *ngFor="let item of categoriesService._categories; index as i; trackBy: trackByFn"
-        >
-          ...
-        </li> -->
+
       </ul>
       <form class="d-flex">
         <input
@@ -48,4 +44,20 @@
       </form>
     </div>
   </div>
-</nav>
+</nav> -->
+
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <li class="nav-item">
+    <a
+      class="nav-link active"
+      aria-current="page"
+      (click)="productsService._getAllProducts()"
+      >All</a
+    >
+  </li>
+  <li *ngFor="let category of categoriesService._categories" class="nav-item">
+    <a class="nav-link" (click)="productsService._getAllProducts(category.ID)"
+      >{{ category.Name }}
+    </a>
+  </li>
+</ul>

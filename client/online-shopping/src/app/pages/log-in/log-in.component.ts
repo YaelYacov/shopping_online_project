@@ -44,7 +44,7 @@ export class LogInComponent implements OnInit {
   getUserNCart = () => {
     this.usersServiceService._getUser();
     this.startShopping = this.usersServiceService._User.ID > 0 ? false : true;
-    console.log(this.usersServiceService._User.ID);
+    // console.log(this.usersServiceService._User.ID);
   };
 
   findCart = () => {

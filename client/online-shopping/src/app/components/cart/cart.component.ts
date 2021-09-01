@@ -13,7 +13,10 @@ export class CartComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public cartsService: CartsService,
     public prodInCartService: ProdInCartService
-  ) {}
+  ) {
+    this.prodInCartService._getProdInCartByCartID(2);
+    // console.log(this.usersServiceService._Users);
+  }
 
   ngOnInit(): void {}
 }

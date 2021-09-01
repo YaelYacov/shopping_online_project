@@ -13,9 +13,26 @@ import { CategoriesNavComponent } from './components/categories-nav/categories-n
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CartComponent } from './components/cart/cart.component';
+import { WhyYouShouldBuyComponent } from './components/why-you-should-buy/why-you-should-buy.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { MainLogInComponent } from './pages/main-log-in/main-log-in.component';
 
 @NgModule({
-  declarations: [AppComponent, LogInComponent, ProductComponent, RegisterComponent, HeaderComponent, RegisterPanelBComponent, CategoriesNavComponent, ProductCardComponent, HomeComponent, CartComponent],
+  declarations: [
+    AppComponent,
+    LogInComponent,
+    ProductComponent,
+    RegisterComponent,
+    HeaderComponent,
+    RegisterPanelBComponent,
+    CategoriesNavComponent,
+    ProductCardComponent,
+    HomeComponent,
+    CartComponent,
+    WhyYouShouldBuyComponent,
+    AboutUsComponent,
+    MainLogInComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

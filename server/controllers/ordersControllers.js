@@ -3,15 +3,17 @@ const Orders = require("../models/ordersModel");
 const User = require("../models/usersModel");
 
 exports.getOrders = async (req, res, next) => {
-  let condition = req.body.AllOrUserOrder == "All" ? {} : { where: { userID: req.body.userID } };
-  let options = { include: User, attributes: ["userID"] };
+  let condition = req.body.AllOrders == "All" ? {} : { where: { userID: req.body.userID } };
+  // let condition = req.body.AllProds == "All" ? {} : { where: { CategoryID: req.body.CategoryID } };
+  // console.log(req.body);
+  let options = { include: User };
   await Orders.findAll(condition, options)
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       res.send(result);
     })
     .catch((err) => {
-      console.log("err getting orders", err);
+      // console.log("err getting orders", err);
       res.send("err getting orders", err);
       // res.status(200).send("err getting orders", err);
     });

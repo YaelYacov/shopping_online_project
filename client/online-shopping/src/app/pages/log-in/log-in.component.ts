@@ -12,8 +12,6 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./log-in.component.css'],
 })
 export class LogInComponent implements OnInit {
-  startShopping: boolean = false;
-
   constructor(
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
@@ -23,7 +21,7 @@ export class LogInComponent implements OnInit {
     public ordersService: OrdersService
   ) {
     this.categoriesService._categories;
-    // console.log(this.usersServiceService._getUser());
+    console.log(this.usersServiceService._getUser());
     // console.log(this.usersServiceService._updateUserCart());
     // console.log(this.usersServiceService._createNewUser());
     // console.log(this.productsService._addNewProd());
@@ -43,16 +41,21 @@ export class LogInComponent implements OnInit {
 
   getUserNCart = () => {
     this.usersServiceService._getUser();
-    this.startShopping = this.usersServiceService._User.ID > 0 ? false : true;
-    // console.log(this.usersServiceService._User.ID);
+    // if (this.usersServiceService._Users) {
+    //   console.log(this.usersServiceService._Users.ID);
+    //   this.startShopping = !this.usersServiceService._Users ? false : true;
+    //   console.log(this.usersServiceService._Users.CartID);
+    // }
   };
 
   findCart = () => {
-    if (this.usersServiceService._Users.CartID > 0) {
+    if (this.usersServiceService._Users) {
       let CartID = this.usersServiceService._Users.CartID;
-      console.log(CartID);
-      console.log(this.prodInCartService._getProdInCartByCartID(CartID));
-    } else this.cartsService._addNewCart();
+      if (this.usersServiceService._Users.CartID > 0) {
+        console.log(CartID);
+        console.log(this.prodInCartService._getProdInCartByCartID(CartID));
+      } else this.cartsService._addNewCart();
+    }
 
     // let parsingUsers = JSON.parse(this.usersServiceService._Users);
     // let currentUserCart: number;

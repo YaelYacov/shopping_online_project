@@ -8,7 +8,7 @@ export class User {
   City: string = '';
   Street: string = '';
   IsAdmin: string = '';
-  CartID: number = 0;
+  CartID: number;
   createdAt: string = '';
   updatedAt: string = '';
 

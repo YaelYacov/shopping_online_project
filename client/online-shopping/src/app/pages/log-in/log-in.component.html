@@ -43,11 +43,11 @@
       Doesn't Have An Account Yet ? <a routerLink="/registerPart1">Sight Up</a>
       <div class="row mt-3">
         <div class="col-2"></div>
-        <div class="col-8">
+
+        <div class="col-8" (click)="findCart()">
           <button
             class="btn btn-primary"
-            [disabled]="!startShopping"
-            (click)="findCart()"
+            [disabled]="!usersServiceService._Users"
             [routerLink]="
               !usersServiceService._Users
                 ? []
@@ -57,11 +57,10 @@
             "
           >
             {{
-              !usersServiceService._Users
+              !usersServiceService._Users ||
+              usersServiceService._Users.CartID == null
                 ? "Start New Shopping"
-                : usersServiceService._Users.CartID > 0
-                ? "Go To Cart"
-                : "Start New Shopping"
+                : "Go To Cart"
             }}
           </button>
         </div>

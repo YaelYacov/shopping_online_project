@@ -13,10 +13,10 @@ const ProductsInCart = sequelize.define(
     //   type: Sequelize.INTEGER(11),
     //   foreignKey: true,
     // },
-    // CartId: {
-    //   type: Sequelize.INTEGER(11),
-    //   foreignKey: true,
-    // },
+    CartId: {
+      type: Sequelize.INTEGER(11),
+      foreignKey: true,
+    },
     // Product: {
     //   type: Sequelize.INTEGER(11),
     //   foreignKey: true,

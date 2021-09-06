@@ -17,11 +17,18 @@ export class AboutUsComponent implements OnInit {
   ) {
     this.ordersService._getOrders();
     this.productsService._getAllProducts();
-    if (this.usersServiceService._User) {
-      console.log(this.usersServiceService._User.CartID);
-      this.cartsService._getCartByID(this.usersServiceService._User.CartID);
+    if (this.usersServiceService._Users) {
+      console.log(this.usersServiceService._Users.CartID);
+      if (this.usersServiceService._Users.CartID) {
+        this.cartsService._getCartByID(this.usersServiceService._Users.CartID);
+      }
     }
+    // this.userCartStatus();
   }
 
   ngOnInit(): void {}
+
+  userCartStatus = () => {
+    this.cartsService._getCartByID();
+  };
 }

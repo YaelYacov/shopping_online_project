@@ -26,9 +26,10 @@ const app = express();
 Products.belongsTo(Categories); //, { foreignKey: "CategoryID", sourceKey: "ID" });
 
 // Products.hasOne(CartProduct);
-
-Users.belongsTo(Cart);
-
+// Users.belongsToMany(Cart, { through: Cart });
+Cart.belongsToMany(Users, { through: Cart });
+// Cart.hasMany(Users);
+// Users.belongsTo(Cart);
 // Users.hasOne(Cart);
 
 CartProduct.belongsTo(Cart);

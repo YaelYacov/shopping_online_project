@@ -21,7 +21,7 @@ export class LogInComponent implements OnInit {
     public ordersService: OrdersService
   ) {
     this.categoriesService._categories;
-    console.log(this.usersServiceService._getUser());
+    // console.log(this.usersServiceService._getUser());
     // console.log(this.usersServiceService._updateUserCart());
     // console.log(this.usersServiceService._createNewUser());
     // console.log(this.productsService._addNewProd());
@@ -39,35 +39,16 @@ export class LogInComponent implements OnInit {
     // console.log(this.prodInCartService._addNewProdInCart());
   }
 
-  getUserNCart = () => {
-    this.usersServiceService._getUser();
-    // if (this.usersServiceService._Users) {
-    //   console.log(this.usersServiceService._Users.ID);
-    //   this.startShopping = !this.usersServiceService._Users ? false : true;
-    //   console.log(this.usersServiceService._Users.CartID);
-    // }
-  };
+  getUserNCart = () => this.usersServiceService._getUser();
 
   findCart = () => {
     if (this.usersServiceService._Users) {
       let CartID = this.usersServiceService._Users.CartID;
-      if (this.usersServiceService._Users.CartID > 0) {
+      if (CartID > 0) {
         console.log(CartID);
         console.log(this.prodInCartService._getProdInCartByCartID(CartID));
       } else this.cartsService._addNewCart();
     }
-
-    // let parsingUsers = JSON.parse(this.usersServiceService._Users);
-    // let currentUserCart: number;
-    // console.log(stringifyUsers);
-    // let objectKeys = Object.values(this.usersServiceService._Users.find(user => user.CartID));
-    // console.log(objectKeys);
-    // this.usersServiceService._Users.CartID = currentUserCart ;
-    // let currentUser = { ...this.usersServiceService._Users };
-    // console.log(currentUser);
-    // this.usersServiceService._Users.CartID == null
-    //   ? console.log("there's no cart yet")
-    //   : console.log('cartID is: ', this.usersServiceService._User.CartID);
   };
 
   ngOnInit(): void {}

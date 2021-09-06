@@ -1,14 +1,18 @@
 const con = require("../utils/database");
 const User = require("../models/usersModel");
+const Cart = require("../models/cartModel");
 
 exports.getUserByMailNPass = async (req, res, next) => {
   let condition = {
-    Mail: req.body.Mail,
-    Password: req.body.Password,
+    where: {
+      Mail: req.body.Mail,
+      Password: req.body.Password,
+    },
   };
-  await User.findOne({
-    where: condition,
-  })
+
+  // let options = { include: Cart };
+  let options = { include: [{ model: Cart }] };
+  await User.findOne(condition, options)
     .then((result) => {
       console.log(result);
       res.send(result);

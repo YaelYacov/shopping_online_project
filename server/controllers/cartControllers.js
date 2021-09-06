@@ -1,12 +1,15 @@
 const con = require("../utils/database");
 const Cart = require("../models/cartModel");
+const Users = require("../models/usersModel");
 
 exports.getCartByID = async (req, res, next) => {
-  // let onlyActiveCarts = req.body
-  // let condition = req.body.AllCarts == "All" ? {} : { where: { ID: req.body.ID } };
-  let condition = req.body.AllCarts == "All" ? {} : { where: { ID: req.body.ID } };
+  let attributes = ["ID"];
+  // let condition = req.body.AllProds == "All" ? {} : { where: { CategoryID: req.body.CategoryID } };
+  // let options = { include: [{ model: categories, attributes: attributes }] };
+  let condition = req.body.AllCarts == "All" ? {} : { where: { ID: req.body.ID, userID: req.body.userID } };
+  let options = { include: [{ model: Users, as: "userID", attributes: attributes }] };
 
-  await Cart.findAll(condition)
+  await Cart.findAll(condition, options)
     .then((result) => {
       // console.log(result);
       res.send(result);

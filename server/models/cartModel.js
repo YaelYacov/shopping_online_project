@@ -9,7 +9,7 @@ const Cart = sequelize.define(
       autoIncrement: true,
       allowNull: false,
     },
-    // UserId: {
+    // userId: {
     //   type: Sequelize.INTEGER(11),
     //   foreignKey: true,
     // },

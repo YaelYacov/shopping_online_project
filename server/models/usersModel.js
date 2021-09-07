@@ -41,11 +41,11 @@ const Users = sequelize.define("users", {
     defaultValue: false,
   },
 
-  CartID: {
-    type: Sequelize.INTEGER(11),
-    foreignKey: true,
-    allowNull: true,
-  },
+  // CartID: {
+  //   type: Sequelize.INTEGER(11),
+  //   foreignKey: true,
+  //   allowNull: true,
+  // },
 });
 
 module.exports = Users;

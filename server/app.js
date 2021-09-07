@@ -27,7 +27,7 @@ Products.belongsTo(Categories); //, { foreignKey: "CategoryID", sourceKey: "ID" 
 
 // Products.hasOne(CartProduct);
 // Users.belongsToMany(Cart, { through: Cart });
-Cart.belongsToMany(Users, { through: Cart });
+Cart.belongsToMany(Users, { through: "UsersCART" });
 // Cart.hasMany(Users);
 // Users.belongsTo(Cart);
 // Users.hasOne(Cart);

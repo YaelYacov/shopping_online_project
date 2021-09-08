@@ -6,8 +6,8 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class CartsService {
-  // _cart: Array<Carts> = [];
-  _cart: any;
+  _cart: Array<Carts> = [];
+  // _cart: any;
 
   constructor(public apiService: ApiService) {}
 

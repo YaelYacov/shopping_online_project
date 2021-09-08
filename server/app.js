@@ -27,10 +27,18 @@ Products.belongsTo(Categories); //, { foreignKey: "CategoryID", sourceKey: "ID" 
 
 // Products.hasOne(CartProduct);
 // Users.belongsToMany(Cart, { through: Cart });
-Cart.belongsToMany(Users, { through: "UsersCART" });
+// Users.hasMany(Cart);
+// Cart.belongsTo(Users);
+// Cart.hasOne(Users, {
+//   foreignKey: {
+//     name: "userID",
+//   },
+// });
+// Cart.belongsToMany(Users, { through: "UsersCART" });
+// Cart.belongsToMany(Users, { through: Cart });
+Users.hasMany(Cart);
+Cart.belongsTo(Users);
 // Cart.hasMany(Users);
-// Users.belongsTo(Cart);
-// Users.hasOne(Cart);
 
 CartProduct.belongsTo(Cart);
 // Cart.hasMany(CartProduct);
@@ -91,6 +99,9 @@ app.use("/prodInCart", ProdInCartRoute);
 
 const OrdersRoute = require("./routes/ordersRoutes");
 app.use("/orders", OrdersRoute);
+
+// const UsersCart = require("./routes/UsersCartRoutes");
+// app.use("/usersCart", UsersCart);
 
 app.use((req, res) => {
   res.send("page not found!");

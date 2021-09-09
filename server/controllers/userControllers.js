@@ -49,7 +49,7 @@ exports.createNewUser = async (req, res, next) => {
 };
 
 exports.updateUserCart = async (req, res, next) => {
-  let values = { CartID: req.body.CartID };
+  let values = { values: req.body.values };
   let condition = { where: { ID: req.body.ID } };
 
   await User.update(values, condition)

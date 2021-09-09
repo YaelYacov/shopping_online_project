@@ -15,7 +15,7 @@ const Cart = sequelize.define(
     // },
     Status: {
       type: Sequelize.INTEGER(11),
-      defaultValue: true,
+      defaultValue: 0,
     },
   }
   // { timestamps: false }

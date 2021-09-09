@@ -18,9 +18,16 @@ export class AboutUsComponent implements OnInit {
     this.ordersService._getOrders();
     this.productsService._getAllProducts();
     if (this.usersServiceService._Users) {
-      console.log(this.usersServiceService._Users.CartID);
-      if (this.usersServiceService._Users.CartID) {
-        this.cartsService._getCartByID(this.usersServiceService._Users.CartID);
+      // console.log(this.usersServiceService._Users.CartID);
+      if (this.usersServiceService._Users.CartID != null) {
+        this.cartsService._getCartByID(
+          0,
+          this.usersServiceService._Users.CartID
+        );
+        this.cartsService._getCartByID(
+          1,
+          this.usersServiceService._currentUserID
+        );
       }
     }
     // this.userCartStatus();

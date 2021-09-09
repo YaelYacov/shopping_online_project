@@ -11,6 +11,7 @@ export class UsersServiceService {
   _User: User = new User();
   _currentUserID: any;
   _someArr: any;
+  _firstCart: boolean = true;
 
   constructor(public apiService: ApiService) {}
 
@@ -20,8 +21,6 @@ export class UsersServiceService {
       { Password: this._User.Password, Mail: this._User.Mail }
     )) as Array<User>;
     if (this._Users) {
-      // const { ID } = this._Users;
-      // name; // => 'Batman'
       this._currentUserID = this._Users.ID;
     }
   }

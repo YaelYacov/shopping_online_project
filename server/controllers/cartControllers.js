@@ -6,7 +6,7 @@ exports.getCartByID = async (req, res, next) => {
   let attributes = ["ID"];
   // let condition = req.body.AllProds == "All" ? {} : { where: { CategoryID: req.body.CategoryID } };
   // let options = { include: [{ model: categories, attributes: attributes }] };
-  let condition = req.body.AllCarts == "All" ? {} : { where: { ID: req.body.ID } };
+  let condition = req.body.AllCarts == "All" ? {} : { where: req.body.userID ? { userID: req.body.userID } : { ID: req.body.ID } };
   // let options = { include: [{ model: Users }] };
 
   await Cart.findAll(condition)

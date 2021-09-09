@@ -11,8 +11,9 @@ export class CartsService {
 
   constructor(public apiService: ApiService) {}
 
-  _getCartByID = async (ID?: number) => {
-    let getCart = !ID ? { AllCarts: 'All' } : { ID: ID, userID: 1 };
+  _getCartByID = async (type?: number, ID?: number) => {
+    let defType = type == 0 ? { ID: ID } : { userID: ID }; //type == 0 => cartID, type == 1 =userID
+    let getCart = !ID ? { AllCarts: 'All' } : defType;
     this._cart = (await this.apiService.createPostService(
       'cart/getCartByID',
       getCart

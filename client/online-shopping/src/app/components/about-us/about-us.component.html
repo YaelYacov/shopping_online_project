@@ -4,8 +4,13 @@
   Number of orders submitted in our store: {{ ordersService._orders.length }}
 </p>
 
-<!-- <p *ngIf="usersServiceService._Users && usersServiceService._Users.CartID">
-  You have open cart from{{
-    cartsService._getCartByID(this.usersServiceService._Users.CartID)
+<p *ngIf="isNewUser">Welcome to your new shopping 🤩</p>
+
+<p class="yellowBG" *ngIf="cartsService._cart.length > 0">
+  You have opened cart from
+  {{
+    cartsService._cart.length
+      ? findCurrentCart(usersServiceService._Users.CartID)
+      : null
   }}
-</p> -->
+</p>

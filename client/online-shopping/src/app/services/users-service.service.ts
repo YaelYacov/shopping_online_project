@@ -10,8 +10,7 @@ export class UsersServiceService {
   // _Users: Array<User> = [];
   _User: User = new User();
   _currentUserID: any;
-  _someArr: any;
-  _firstCart: boolean = true;
+  _currentCartID: any;
 
   constructor(public apiService: ApiService) {}
 
@@ -22,6 +21,9 @@ export class UsersServiceService {
     )) as Array<User>;
     if (this._Users) {
       this._currentUserID = this._Users.ID;
+      if (this._Users.CartID) {
+        this._currentCartID = this._Users.CartID;
+      }
     }
   }
 

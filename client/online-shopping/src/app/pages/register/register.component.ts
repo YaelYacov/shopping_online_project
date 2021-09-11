@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 
 @Component({
@@ -14,7 +15,10 @@ export class RegisterComponent implements OnInit {
   confirmMail: boolean = false;
   confirmMailSuccess: boolean = false;
 
-  constructor(public usersServiceService: UsersServiceService) {}
+  constructor(
+    public usersServiceService: UsersServiceService,
+    public settingsService: SettingsService
+  ) {}
 
   mailValidation = (e: any) => {
     this.confirmMail = true;

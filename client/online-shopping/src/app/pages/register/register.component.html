@@ -1,8 +1,6 @@
 <div class="container">
-  <div class="row"></div>
   <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
+    <div class="col-12">
       <form ngNativeValidate #form>
         <div class="mb-3">
           <label for="identification" class="form-label">Identification</label>
@@ -89,7 +87,22 @@
           }}
         </div>
 
+        <!-- [routerLink]="
+            confirmPasswordSuccess &&
+            confirmMailSuccess &&
+            confirmIdentificationSuccess
+              ? ['/registerPart2']
+              : []
+          " -->
+
         <button
+          type="submit"
+          class="btn btn-success"
+          (click)="settingsService._changeRegisterPB(true)"
+        >
+          Submit
+        </button>
+        <!-- <button
           type="submit"
           class="btn btn-success"
           [routerLink]="
@@ -101,18 +114,9 @@
           "
         >
           Submit
-          <!-- <a
-            *ngIf="
-              confirmPasswordSuccess &&
-              confirmMailSuccess &&
-              confirmIdentificationSuccess
-            "
-            routerLink="/registerPart2"
-          >
-          </a> -->
-        </button>
+
+        </button> -->
       </form>
     </div>
-    <div class="col-4"></div>
   </div>
 </div>

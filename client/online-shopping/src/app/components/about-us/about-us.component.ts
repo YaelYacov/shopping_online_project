@@ -10,7 +10,7 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./about-us.component.css'],
 })
 export class AboutUsComponent implements OnInit {
-  isNewUser: Boolean = false;
+  notNewUser: Boolean = true;
   // currentCartOb: Array<Carts> = [];
   currentCartOb: any;
 
@@ -33,11 +33,11 @@ export class AboutUsComponent implements OnInit {
           1,
           this.usersServiceService._currentUserID
         ); //gettin all carts that belongs to user
-        this.isNewUser = this.cartsService._cart.length > 1 ? false : true;
+        this.notNewUser = this.cartsService._cart.length > 1 ? false : true;
         if (this.cartsService._cart.length > 0) {
-          let status = this.findCurrentCart(
-            this.usersServiceService._Users.CartID
-          );
+          // let status = this.findCurrentCart(
+          //   this.usersServiceService._Users.CartID
+          // );
         }
       }
     }
@@ -51,6 +51,7 @@ export class AboutUsComponent implements OnInit {
     this.currentCartOb = this.cartsService._cart.find(
       (cart) => cart.ID == CartID
     );
+    this.notNewUser = true;
     console.log(this.currentCartOb);
     return this.currentCartOb.createdAt.slice(0, 10);
   };

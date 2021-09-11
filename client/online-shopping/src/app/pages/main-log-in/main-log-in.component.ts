@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-main-log-in',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-log-in.component.css'],
 })
 export class MainLogInComponent implements OnInit {
-  constructor() {}
+  constructor(public settingsService: SettingsService) {}
 
   ngOnInit(): void {}
 }

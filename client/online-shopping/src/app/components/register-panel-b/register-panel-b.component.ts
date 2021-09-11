@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 
 @Component({
@@ -7,7 +8,10 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./register-panel-b.component.css'],
 })
 export class RegisterPanelBComponent implements OnInit {
-  constructor(public usersServiceService: UsersServiceService) {}
+  constructor(
+    public usersServiceService: UsersServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 }

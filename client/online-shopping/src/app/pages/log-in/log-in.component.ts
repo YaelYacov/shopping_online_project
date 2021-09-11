@@ -39,7 +39,10 @@ export class LogInComponent implements OnInit {
     // console.log(this.prodInCartService._addNewProdInCart());
   }
 
-  getUserNCart = () => this.usersServiceService._getUser();
+  getUserNCart = () => {
+    this.usersServiceService._getUser();
+    // this.cartsService._cart.length > 0;
+  };
 
   findCart = () => {
     if (this.usersServiceService._Users) {

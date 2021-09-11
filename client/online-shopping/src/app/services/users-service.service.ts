@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/Usersmodel';
 import { ApiService } from './api.service';
+import { CartsService } from './carts.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,10 @@ export class UsersServiceService {
   _currentUserID: any;
   _currentCartID: any;
 
-  constructor(public apiService: ApiService) {}
+  constructor(
+    public apiService: ApiService,
+    public cartsService: CartsService
+  ) {}
 
   async _getUser() {
     this._Users = (await this.apiService.createPostService(
@@ -23,6 +27,8 @@ export class UsersServiceService {
       this._currentUserID = this._Users.ID;
       if (this._Users.CartID) {
         this._currentCartID = this._Users.CartID;
+        this.cartsService._getCartByID();
+        console.log(this.cartsService._cart);
       }
     }
   }

@@ -1,6 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col-4"><app-log-in></app-log-in></div>
+    <div class="col-4">
+      <app-log-in
+        *ngIf="!settingsService._isRegister && !settingsService._registerPanelB"
+      ></app-log-in>
+      <app-register
+        *ngIf="settingsService._isRegister && !settingsService._registerPanelB"
+      ></app-register>
+      <app-register-panel-b
+        *ngIf="settingsService._registerPanelB"
+      ></app-register-panel-b>
+    </div>
     <div class="col-4"><app-why-you-should-buy></app-why-you-should-buy></div>
     <div class="col-4"><app-about-us></app-about-us></div>
   </div>

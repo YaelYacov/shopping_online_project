@@ -10,6 +10,30 @@
       <app-register-panel-b
         *ngIf="settingsService._registerPanelB"
       ></app-register-panel-b>
+      <div
+        *ngIf="settingsService._registerPanelB || !settingsService._isRegister"
+        class="col-8"
+        (click)="findCart()"
+      >
+        <button
+          class="btn btn-primary"
+          [disabled]="!usersServiceService._Users"
+          [routerLink]="
+            !usersServiceService._Users
+              ? []
+              : usersServiceService._Users.ID > 0
+              ? ['/home']
+              : []
+          "
+        >
+          {{
+            !usersServiceService._Users ||
+            usersServiceService._Users.CartID == null
+              ? "Start New Shopping"
+              : "Go To Cart"
+          }}
+        </button>
+      </div>
     </div>
     <div class="col-4"><app-why-you-should-buy></app-why-you-should-buy></div>
     <div class="col-4"><app-about-us></app-about-us></div>

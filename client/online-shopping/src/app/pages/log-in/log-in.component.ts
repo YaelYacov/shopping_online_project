@@ -44,15 +44,15 @@ export class LogInComponent implements OnInit {
     // this.cartsService._cart.length > 0;
   };
 
-  findCart = () => {
-    if (this.usersServiceService._Users) {
-      let CartID = this.usersServiceService._Users.CartID;
-      if (CartID > 0) {
-        console.log(CartID);
-        console.log(this.prodInCartService._getProdInCartByCartID(CartID));
-      } else this.cartsService._addNewCart();
-    }
-  };
+  // findCart = () => {
+  //   if (this.usersServiceService._Users) {
+  //     let CartID = this.usersServiceService._Users.CartID;
+  //     if (CartID > 0) {
+  //       console.log(CartID);
+  //       console.log(this.prodInCartService._getProdInCartByCartID(CartID));
+  //     } else this.cartsService._addNewCart();
+  //   }
+  // };
 
   ngOnInit(): void {}
 }

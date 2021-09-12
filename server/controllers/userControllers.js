@@ -8,13 +8,13 @@ exports.getUserByMailNPass = async (req, res, next) => {
       Mail: req.body.Mail,
       Password: req.body.Password,
     },
+    include: [{ model: Cart }],
   };
-
   // let options = { include: Cart };
-  let options = { include: [{ model: Cart }] };
-  await User.findOne(condition, options)
+
+  await User.findOne(condition)
     .then((result) => {
-      console.log(result);
+      console.log(result, req.body, "option userssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
       res.send(result);
     })
     .catch((err) => {

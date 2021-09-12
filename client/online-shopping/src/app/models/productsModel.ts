@@ -3,6 +3,7 @@ export class Product {
   Name: string = '';
   Img: string = '';
   Price: number = 0;
+  description: string = '';
   CategoryID: number = 0;
   createdAt: string = '';
   updatedAt: string = '';
@@ -12,6 +13,7 @@ export class Product {
     Name?: string,
     Img?: string,
     Price?: number,
+    description?: string,
     CategoryID?: number,
     createdAt?: string,
     updatedAt?: string
@@ -20,6 +22,7 @@ export class Product {
     this.Name = Name || '';
     this.Img = Img || '';
     this.Price = Price || 0;
+    this.description = description || '';
     this.CategoryID = CategoryID || 0;
     this.createdAt = createdAt || '';
     this.updatedAt = updatedAt || '';

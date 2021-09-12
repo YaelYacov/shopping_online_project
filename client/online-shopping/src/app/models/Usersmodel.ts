@@ -1,3 +1,5 @@
+import { Carts } from './cartsModel';
+
 export class User {
   ID: number = 0;
   Fname: string = '';
@@ -8,7 +10,8 @@ export class User {
   City: string = '';
   Street: string = '';
   IsAdmin: string = '';
-  CartID: number;
+  CartID: number; //TODO: or null
+  Carts: Array<Carts> = [];
   createdAt: string = '';
   updatedAt: string = '';
 
@@ -23,6 +26,7 @@ export class User {
     Street?: string,
     IsAdmin?: string,
     CartID?: number,
+    Carts?: Array<Carts>,
     createdAt?: string,
     updatedAt?: string
   ) {
@@ -36,6 +40,7 @@ export class User {
     this.Street = Street || '';
     this.IsAdmin = IsAdmin || '';
     this.CartID = CartID || 0;
+    this.Carts = Carts || [];
     this.createdAt = createdAt || '';
     this.updatedAt = updatedAt || '';
   }

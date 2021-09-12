@@ -20,7 +20,7 @@ export class LogInComponent implements OnInit {
     public categoriesService: CategoriesService,
     public ordersService: OrdersService
   ) {
-    this.categoriesService._categories;
+    // this.categoriesService._categories;
     // console.log(this.usersServiceService._getUser());
     // console.log(this.usersServiceService._updateUserCart());
     // console.log(this.usersServiceService._createNewUser());
@@ -32,7 +32,7 @@ export class LogInComponent implements OnInit {
     // console.log(this.cartsService._updateCartStatus());
     // console.log(this.prodInCartService._getProdInCartByCartID());
     // console.log(this.categoriesService._getAllCategories());
-    // console.log(this.ordersService._getOrders());
+    console.log(this.ordersService._getOrders());
     // console.log(this.ordersService._updateOrder());
     // console.log(this.ordersService._addNewOrder());
     // console.log(this.prodInCartService._getProdInCartByCartID());
@@ -41,18 +41,29 @@ export class LogInComponent implements OnInit {
 
   getUserNCart = () => {
     this.usersServiceService._getUser();
-    // this.cartsService._cart.length > 0;
+    // console.log('login', this.usersServiceService._Users);
+    // if (
+    //   this.usersServiceService._Users &&
+    //   this.usersServiceService._Users.length > 0
+    // ) {
+    //   console.log(this.usersServiceService._Users);
+    //   console.log('sexx');
+    //   // this.cartsService._getCartByID(1, this.usersServiceService._Users.ID, 0);
+
+    //   // this.findCart();
+    // }
   };
 
-  // findCart = () => {
-  //   if (this.usersServiceService._Users) {
-  //     let CartID = this.usersServiceService._Users.CartID;
-  //     if (CartID > 0) {
-  //       console.log(CartID);
-  //       console.log(this.prodInCartService._getProdInCartByCartID(CartID));
-  //     } else this.cartsService._addNewCart();
-  //   }
-  // };
+  findCart = () => {
+    let CartID = this.usersServiceService._currentUser.CartID;
+    if (CartID > 0) {
+      console.log('sexxx');
+
+      console.log(CartID);
+      // console.log(this.prodInCartService._getProdInCartByCartID(CartID));
+    } else
+      this.cartsService._addNewCart(this.usersServiceService._currentUser.ID);
+  };
 
   ngOnInit(): void {}
 }

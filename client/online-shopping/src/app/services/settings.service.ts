@@ -12,9 +12,8 @@ export class SettingsService {
   _changeRegisterStatus = (isRegister: boolean) => {
     this._isRegister = isRegister;
     this._registerPanelB = false;
-
-    console.log(this._isRegister);
   };
+
   _changeRegisterPB = (registerPB: boolean) => {
     this._registerPanelB = registerPB;
     this._isRegister = false;

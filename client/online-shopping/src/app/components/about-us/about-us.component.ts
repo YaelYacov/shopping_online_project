@@ -10,7 +10,6 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./about-us.component.css'],
 })
 export class AboutUsComponent implements OnInit {
-  notNewUser: Boolean = true;
   // currentCartOb: Array<Carts> = [];
   currentCartOb: any;
 
@@ -20,43 +19,22 @@ export class AboutUsComponent implements OnInit {
     public cartsService: CartsService,
     public usersServiceService: UsersServiceService
   ) {
-    this.ordersService._getOrders();
-    this.productsService._getAllProducts();
-    if (this.usersServiceService._Users) {
-      // console.log(this.usersServiceService._Users.CartID);
-      if (this.usersServiceService._Users.CartID != null) {
-        // this.cartsService._getCartByID(
-        //   0,
-        //   this.usersServiceService._Users.CartID
-        // );
-        this.cartsService._getCartByID(
-          1,
-          this.usersServiceService._currentUserID
-        ); //gettin all carts that belongs to user
-        this.notNewUser = this.cartsService._cart.length > 1 ? false : true;
-        if (this.cartsService._cart.length > 0) {
-          // let status = this.findCurrentCart(
-          //   this.usersServiceService._Users.CartID
-          // );
-        }
-      }
-    }
-    // this.userCartStatus();
+    // this.ordersService._getOrders();
+    // this.productsService._getAllProducts();
+    // if (this.usersServiceService._Users) {
+    //   console.log(this.usersServiceService._Users);
+    // }
   }
 
   ngOnInit(): void {}
 
-  findCurrentCart = (CartID: number) => {
-    console.log(this.cartsService._cart);
-    this.currentCartOb = this.cartsService._cart.find(
-      (cart) => cart.ID == CartID
-    );
-    this.notNewUser = true;
-    console.log(this.currentCartOb);
-    return this.currentCartOb.createdAt.slice(0, 10);
-  };
-
-  userCartStatus = () => {
-    this.cartsService._getCartByID();
+  ifUsers = () => {
+    if (this.usersServiceService._Users) {
+      console.log(this.usersServiceService._Users.Carts);
+      return this.usersServiceService._Users.Carts.find(
+        (cart: any) => cart.Status == 0
+      ).createdAt.slice(0, 10);
+      // this.cartsService._getCartByID(1, this.usersServiceService._Users.ID, 0); //gettin all carts that belongs to user and cart status = 0
+    }
   };
 }

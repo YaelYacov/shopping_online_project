@@ -23,6 +23,10 @@ const Products = sequelize.define("Products", {
   Img: {
     type: Sequelize.STRING(50),
   },
+  description: {
+    type: Sequelize.STRING(50),
+    allowNull: true,
+  },
 });
 
 module.exports = Products;

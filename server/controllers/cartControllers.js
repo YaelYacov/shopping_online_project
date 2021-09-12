@@ -6,7 +6,7 @@ exports.getCartByID = async (req, res, next) => {
   let attributes = ["ID"];
   // let condition = req.body.AllProds == "All" ? {} : { where: { CategoryID: req.body.CategoryID } };
   // let options = { include: [{ model: categories, attributes: attributes }] };
-  let condition = req.body.AllCarts == "All" ? {} : { where: req.body.userID ? { userID: req.body.userID } : { ID: req.body.ID } };
+  let condition = req.body.AllCarts == "All" ? {} : { where: req.body.userID ? { userID: req.body.userID, Status: req.body.Status } : { ID: req.body.ID, Status: req.body.Status } };
   // let options = { include: [{ model: Users }] };
 
   await Cart.findAll(condition)
@@ -26,7 +26,7 @@ exports.addNewCart = async (req, res, next) => {
 
   await Cart.create(values)
     .then((result) => {
-      console.log(result);
+      console.log("valuessssssssssssssssssss", values);
       res.send(result);
     })
     .catch((err) => {

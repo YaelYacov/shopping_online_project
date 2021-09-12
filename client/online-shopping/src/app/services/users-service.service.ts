@@ -9,6 +9,7 @@ import { CartsService } from './carts.service';
 export class UsersServiceService {
   _Users: any;
   // _Users: Array<User> = [];
+  _currentUser: User = new User();
   _User: User = new User();
   _currentUserID: any;
   _currentCartID: any;
@@ -19,18 +20,40 @@ export class UsersServiceService {
   ) {}
 
   async _getUser() {
+    console.log(this._User);
     this._Users = (await this.apiService.createPostService(
       `users/getUserByMailNPass`,
       { Password: this._User.Password, Mail: this._User.Mail }
     )) as Array<User>;
-    if (this._Users) {
+
+    // this._currentUser = (await this.apiService.createPostService(
+    //   `users/getUserByMailNPass`,
+    //   { Password: this._User.Password, Mail: this._User.Mail }
+    // )) as User;
+    // console.log('1: ', this._currentUser);
+    console.log('1: ', this._Users);
+
+    // GOOD LUCK <30
+
+    if (this._Users && this._Users.CartID > 0) {
       this._currentUserID = this._Users.ID;
-      if (this._Users.CartID) {
-        this._currentCartID = this._Users.CartID;
-        this.cartsService._getCartByID();
-        console.log(this.cartsService._cart);
-      }
+      this._currentCartID = this._Users.CartID;
     }
+    // else {
+    // this.cartsService._getCartByID(); // TODO: send ID
+    // console.log(this.cartsService._cart);
+    // console.log('2: ', this._Users);
+    // }
+
+    // if (this._Users) {
+    //   this._currentUserID = this._Users.ID;
+    //   if (this._Users.CartID === 0) {
+    //     this._currentCartID = this._Users.CartID;
+    //     this.cartsService._getCartByID();
+    //     console.log(this.cartsService._cart);
+    //     console.log('2: ', this._Users);
+    //   }
+    // }
   }
 
   async _updateUserCart() {

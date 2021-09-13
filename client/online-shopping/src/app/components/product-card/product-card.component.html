@@ -11,7 +11,7 @@
       <div class="col-8">
         <p class="card-text">Description : {{ Product.description }}</p>
         <p class="card-text">Price : {{ Product.Price }}</p>
-        <p *ngIf class="card-text"></p>
+        <p *ngIf="!ProdType" class="card-text">Quantity : {{ Product.Qnt }}</p>
         <button (click)="addToCart()" class="btn btn-primary">
           Add To Cart
         </button>

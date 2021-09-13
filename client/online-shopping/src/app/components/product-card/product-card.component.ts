@@ -28,6 +28,7 @@ export class ProductCardComponent implements OnInit {
     console.log(this.prodInCartService._prodInCart);
   }
   @Input() Product: Product = new Product();
+  @Input() ProdType: boolean = true;
 
   addToCart = () => {};
 

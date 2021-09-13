@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     public settingsService: SettingsService
   ) {
+    this.productsService._getAllProducts();
+
     // console.log(usersServiceService._currentUserID);
     // console.log(this.router.url);
   }

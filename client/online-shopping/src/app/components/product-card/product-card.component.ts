@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ProdInCart } from 'src/app/models/prodInCartModel';
 import { Product } from 'src/app/models/productsModel';
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 
@@ -20,15 +21,20 @@ export class ProductCardComponent implements OnInit {
   ) {
     if (this.productsService._products.length == 0) {
       this.productsService._getAllProducts();
+      console.log(this.productsService._products);
     }
     // this.prodInCartService._getProdInCartByCartID(
     //   this.usersServiceService._Users.CartID
     // );
-    // console.log(this.productsService._products);
-    console.log(this.prodInCartService._prodInCart);
+    // this.prodInCartService._getProdInCartByCartID(
+    //   this.usersServiceService._Users.CartID
+    // );
+    // console.log(this.prodInCartService._prodInCart);
   }
+
   @Input() Product: Product = new Product();
-  @Input() ProdType: boolean = true;
+  // @Input() ProdInCart: ProdInCart = new ProdInCart();
+  // @Input() ProdType: boolean = true;
 
   addToCart = () => {};
 

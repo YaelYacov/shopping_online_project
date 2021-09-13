@@ -1,10 +1,4 @@
 <p>cart works!</p>
-<!-- <div
-  *ngFor="
-    let product of prodInCartService._getProdInCartByCartID(
-      usersServiceService._Users.CartID
-    )
-  "
->
-  <app-product-card></app-product-card>
-</div> -->
+<div *ngFor="let Product of prodInCartService._prodInCart">
+  <app-product-card [Product]="Product"></app-product-card>
+</div>

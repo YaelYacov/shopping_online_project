@@ -5,6 +5,7 @@ export class Product {
   Price: number = 0;
   description: string = '';
   CategoryID: number = 0;
+  Qnt: number = 1;
   createdAt: string = '';
   updatedAt: string = '';
 
@@ -15,6 +16,7 @@ export class Product {
     Price?: number,
     description?: string,
     CategoryID?: number,
+    Qnt?: number,
     createdAt?: string,
     updatedAt?: string
   ) {
@@ -24,6 +26,7 @@ export class Product {
     this.Price = Price || 0;
     this.description = description || '';
     this.CategoryID = CategoryID || 0;
+    this.Qnt = Qnt || 1;
     this.createdAt = createdAt || '';
     this.updatedAt = updatedAt || '';
   }

@@ -6,20 +6,20 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class ProdInCartService {
-  _prodInCart: any;
-  // _prodInCart: Array<Product> = [];
+  // _prodInCart: any;
+  _prodInCart: Array<Product> = [];
 
   constructor(public apiService: ApiService) {}
 
   _getProdInCartByCartID = async (CartID: number) => {
-    return (this._prodInCart = await this.apiService.createPostService(
+    this._prodInCart = (await this.apiService.createPostService(
       'prodInCart/getProdInCartByCartID',
       {
         CartID: CartID,
         // AllOrCartProds: 'All',
       }
-    ));
-    // console.log(this._prodInCart);
+    )) as Array<Product>;
+    console.log(this._prodInCart);
     // this._prodInCart;
   };
 

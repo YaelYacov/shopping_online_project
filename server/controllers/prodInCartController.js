@@ -11,7 +11,7 @@ exports.getProdInCartByCartID = async (req, res, next) => {
   // ({ include: [Actions],
 
   await productInCart
-    .findAll(options, condition)
+    .findAll(condition, options)
     .then((result) => {
       console.log(result);
       res.send(result);

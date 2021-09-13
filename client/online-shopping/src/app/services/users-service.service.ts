@@ -20,7 +20,6 @@ export class UsersServiceService {
   ) {}
 
   async _getUser() {
-    console.log(this._User);
     this._Users = (await this.apiService.createPostService(
       `users/getUserByMailNPass`,
       { Password: this._User.Password, Mail: this._User.Mail }
@@ -31,7 +30,7 @@ export class UsersServiceService {
     //   { Password: this._User.Password, Mail: this._User.Mail }
     // )) as User;
     // console.log('1: ', this._currentUser);
-    console.log('1: ', this._Users);
+    // console.log('1: ', this._Users);
 
     // GOOD LUCK <30
 

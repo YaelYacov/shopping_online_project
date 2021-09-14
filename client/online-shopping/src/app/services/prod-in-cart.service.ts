@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ProdInCart } from '../models/prodInCartModel';
 import { Product } from '../models/productsModel';
 import { ApiService } from './api.service';
 
@@ -7,7 +8,7 @@ import { ApiService } from './api.service';
 })
 export class ProdInCartService {
   // _prodInCart: any;
-  _prodInCart: Array<Product> = [];
+  _prodInCart: Array<ProdInCart> = [];
 
   constructor(public apiService: ApiService) {}
 
@@ -18,8 +19,8 @@ export class ProdInCartService {
         CartID: CartID,
         // AllOrCartProds: 'All',
       }
-    )) as Array<Product>;
-    console.log(this._prodInCart);
+    )) as Array<ProdInCart>;
+    console.log(this._prodInCart[0].Product.Name);
     // this._prodInCart;
   };
 

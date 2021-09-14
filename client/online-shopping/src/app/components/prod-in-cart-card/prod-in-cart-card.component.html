@@ -1,1 +1,43 @@
-<p>prod-in-cart-card works!</p>
+<!-- *ngFor="let ProdInCart.Product of productsService._products"
+-->
+<div class="container">
+  <div class="card-body" class="card" style="width: 18rem">
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <h5 class="card-title">
+          {{ ProdInCart.Product.Name }}
+        </h5>
+        <h5 class="card-title">
+          {{ ProdInCart.Product.TotalPrice }}
+        </h5>
+      </div>
+      <div class="col-4"></div>
+    </div>
+    <div class="row">
+      <img
+        src="https://www.planocritico.com/wp-content/uploads/2019/11/battlestar_galactica_a_minisserie_1_plano_critico.jpg"
+        class="card-img-top"
+        alt="..."
+      />
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <p class="card-text">
+          Description :
+          {{ ProdInCart.Product.description }}
+        </p>
+        <p class="card-text">Price : {{ ProdInCart.Product.Price }}</p>
+        <p>Quantity : {{ ProdInCart.Qnt }}</p>
+        <div class="row">
+          <div class="col-2"><i class="fas fa-plus"></i></div>
+          <div class="col-8"></div>
+          <div class="col-2">
+            <i class="fas fa-minus"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

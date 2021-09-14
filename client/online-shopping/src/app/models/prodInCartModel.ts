@@ -7,7 +7,7 @@ export class ProdInCart {
   Price: number = 0;
   CategoryID: number = 0;
   Qnt: number = 1;
-  Product: Array<Product> = [] as Array<Product>;
+  Product: any = { ID: 0, Name: '', description: '', Price: 0, Img: '' };
   createdAt: string = '';
   updatedAt: string = '';
   constructor(
@@ -17,7 +17,7 @@ export class ProdInCart {
     Price?: number,
     CategoryID?: number,
     Qnt?: number,
-    Product?: Array<Product>,
+    Product?: any,
     createdAt?: string,
     updatedAt?: string
   ) {
@@ -27,7 +27,7 @@ export class ProdInCart {
     this.Price = Price || 0;
     this.CategoryID = CategoryID || 0;
     this.Qnt = Qnt || 1;
-    this.Product = Product || ([] as Array<Product>);
+    this.Product = Product || {};
     this.createdAt = createdAt || '';
     this.updatedAt = updatedAt || '';
   }

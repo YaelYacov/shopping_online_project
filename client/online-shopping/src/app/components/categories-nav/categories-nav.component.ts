@@ -13,7 +13,7 @@ export class CategoriesNavComponent implements OnInit {
     public categoriesService: CategoriesService
   ) {
     this.categoriesService._getAllCategories();
-    // this.productsService._getAllProducts();
+    this.productsService._getAllProducts();
   }
 
   ngOnInit(): void {}

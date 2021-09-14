@@ -4,7 +4,10 @@
   </div>
   <div class="col-9">
     <div *ngFor="let Product of productsService._products">
-      <app-product-card [Product]="Product"></app-product-card>
+      <app-product-card
+        [ProdType]="true"
+        [Product]="Product"
+      ></app-product-card>
     </div>
   </div>
 </div>

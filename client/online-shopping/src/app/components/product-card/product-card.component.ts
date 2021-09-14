@@ -33,8 +33,8 @@ export class ProductCardComponent implements OnInit {
   }
 
   @Input() Product: Product = new Product();
-  // @Input() ProdInCart: ProdInCart = new ProdInCart();
-  // @Input() ProdType: boolean = true;
+  @Input() ProdInCart: ProdInCart = new ProdInCart();
+  @Input() ProdType: boolean = true;
 
   addToCart = () => {};
 

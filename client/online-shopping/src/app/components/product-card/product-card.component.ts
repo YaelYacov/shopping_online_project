@@ -38,5 +38,17 @@ export class ProductCardComponent implements OnInit {
 
   addToCart = () => {};
 
+  increaseOrDecreaseQnt = (
+    type: boolean,
+    ID: number,
+    Qnt: number,
+    CartID: number
+  ) => {
+    Qnt = type ? (Qnt += 1) : Qnt == 1 ? 1 : (Qnt -= 1);
+    Qnt == 1
+      ? (Qnt = 1)
+      : this.prodInCartService._updateProdInCart(ID, Qnt, CartID);
+    console.log(Qnt);
+  };
   ngOnInit(): void {}
 }

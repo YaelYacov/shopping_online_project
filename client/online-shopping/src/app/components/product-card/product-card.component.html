@@ -13,7 +13,7 @@
     </div>
     <div class="row">
       <img
-        src="https://www.planocritico.com/wp-content/uploads/2019/11/battlestar_galactica_a_minisserie_1_plano_critico.jpg"
+        src="https://res.feednews.com/assets/v2/bdcbeefd15297ea254af962c9093ba00?width=1280&height=720&quality=hq&category=us_Digital_Technology"
         class="card-img-top"
         alt="..."
       />
@@ -21,20 +21,59 @@
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
-        <p class="card-text">Description : {{ Product.description }}</p>
-        <p class="card-text">Price : {{ Product.Price }}</p>
-        <!-- <p *ngIf="!ProdType" class="card-text">
+        <p class="card-text">
+          Description :
+          {{ ProdType ? Product.description : ProdInCart.Product.description }}
+        </p>
+        <p class="card-text">
+          Price : {{ ProdType ? Product.Price : ProdInCart.Product.Price }}
+        </p>
+        <p *ngIf="!ProdType" class="card-text">
           Quantity : {{ ProdInCart.Qnt }}
-        </p> -->
+        </p>
         <div class="row">
-          <div class="col-2"><i class="fas fa-plus"></i></div>
+          <div class="col-2">
+            <i
+              (click)="
+                increaseOrDecreaseQnt(
+                  true,
+                  ProdInCart.ID,
+                  ProdInCart.Qnt,
+                  usersServiceService._Users.CartID
+                )
+              "
+              class="fas fa-plus"
+            ></i>
+          </div>
           <div class="col-8">
-            <button (click)="addToCart()" class="btn btn-primary">
+            <button
+              *ngIf="ProdType"
+              (click)="addToCart()"
+              class="btn btn-primary"
+            >
               Add To Cart
             </button>
+            <input
+              *ngIf="!ProdType"
+              type="text"
+              class="form-control"
+              name="password"
+              id="password"
+              [(ngModel)]="prodInCartService._singleProdInCart.Qnt"
+            />
           </div>
           <div class="col-2">
-            <i class="fas fa-minus"></i>
+            <i
+              class="fas fa-minus"
+              (click)="
+                increaseOrDecreaseQnt(
+                  false,
+                  ProdInCart.ID,
+                  ProdInCart.Qnt,
+                  usersServiceService._Users.CartID
+                )
+              "
+            ></i>
           </div>
         </div>
       </div>

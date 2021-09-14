@@ -27,7 +27,7 @@ export class ProductsService {
     console.log(this._products);
   };
 
-  async _addNewProd() {
+  _addNewProd = async () => {
     await this.apiService.createPostService('products/addNewProd', {
       Name: 'ff',
       Price: 76.8,
@@ -35,14 +35,14 @@ export class ProductsService {
     });
 
     this._getAllProducts();
-  }
+  };
 
-  async _editProd() {
+  _editProd = async () => {
     await this.apiService.createPostService('products/editProd', {
       ID: 1,
       editCol: { Name: 'White whine!', Price: 91.9 },
     });
 
     this._getAllProducts();
-  }
+  };
 }

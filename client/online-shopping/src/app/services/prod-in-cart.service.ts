@@ -9,6 +9,9 @@ import { ApiService } from './api.service';
 export class ProdInCartService {
   // _prodInCart: any;
   _prodInCart: Array<ProdInCart> = [];
+  _singleProdInCart: ProdInCart = new ProdInCart();
+
+  _qnt: number = 1;
 
   constructor(public apiService: ApiService) {}
 
@@ -20,7 +23,7 @@ export class ProdInCartService {
         // AllOrCartProds: 'All',
       }
     )) as Array<ProdInCart>;
-    console.log(this._prodInCart[0].Product.Name);
+    console.log(this._prodInCart);
     // this._prodInCart;
   };
 
@@ -33,6 +36,14 @@ export class ProdInCartService {
     });
     this._getProdInCartByCartID(CartID);
     // console.log(this._cart);
+  };
+
+  _updateProdInCart = async (ID: number, Qnt: number, CartID: number) => {
+    await this.apiService.createPostService('prodInCart/updateProdInCart', {
+      ID: ID,
+      Qnt: Qnt,
+    });
+    this._getProdInCartByCartID(CartID);
   };
 }
 

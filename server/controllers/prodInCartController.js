@@ -35,4 +35,20 @@ exports.addNewProdInCart = async (req, res, next) => {
     });
 };
 
+exports.updateProdInCart = async (req, res, next) => {
+  let values = { Qnt: req.body.Qnt };
+  let condition = { where: { ID: req.body.ID } };
+
+  await productInCart
+    .update(values, condition)
+    .then((result) => {
+      console.log(result);
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log("err getting Products in cart", err);
+      res.send("err getting Products in cart", err);
+    });
+};
+
 // `ID`, `Qnt`, `TotalPrice`, `createdAt`, `updatedAt`, `CartID`, `ProductID`;

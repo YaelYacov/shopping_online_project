@@ -21,7 +21,8 @@ export class CartComponent implements OnInit {
     this.prodInCartService._getProdInCartByCartID(
       this.usersServiceService._Users.CartID
     );
-    console.log(this.prodInCartService._prodInCart);
+    console.log('sex:', this.prodInCartService._prodInCart);
+    this.prodInCartService._calcTotalPrice();
   }
 
   ngOnInit(): void {}

@@ -11,6 +11,8 @@ export class ProdInCartService {
   _prodInCart: Array<ProdInCart> = [];
   _singleProdInCart: ProdInCart = new ProdInCart();
 
+  _totalPrice: number = 0;
+
   _qnt: number = 1;
 
   constructor(public apiService: ApiService) {}
@@ -23,18 +25,21 @@ export class ProdInCartService {
         // AllOrCartProds: 'All',
       }
     )) as Array<ProdInCart>;
+    this._calcTotalPrice();
+
     console.log(this._prodInCart);
-    // this._prodInCart;
   };
 
-  _addNewProdInCart = async (CartID: number) => {
+  _addNewProdInCart = async (CartID: number, ProductID: number) => {
+    console.log(CartID, ProductID);
     await this.apiService.createPostService('prodInCart/addNewProdInCart', {
-      Qnt: 2,
-      TotalPrice: 33,
-      CartID: CartID,
-      ProductID: 2,
+      values: {
+        CartID: CartID,
+        ProductID: ProductID,
+      },
     });
     this._getProdInCartByCartID(CartID);
+
     // console.log(this._cart);
   };
 
@@ -44,6 +49,18 @@ export class ProdInCartService {
       Qnt: Qnt,
     });
     this._getProdInCartByCartID(CartID);
+  };
+
+  _calcTotalPrice = () => {
+    // let totalPrice = this.totalPrice
+    this._totalPrice = 0;
+    this._prodInCart.map((prod) => {
+      this._totalPrice += prod.Qnt * prod.Product.Price;
+    });
+
+    console.log(this._totalPrice);
+    // this.prodInCartService._totalPrice = Qnt * Price;
+    // console.log(this.prodInCartService._totalPrice, '_totalPrice');
   };
 }
 

@@ -23,32 +23,58 @@ export class ProductCardComponent implements OnInit {
       this.productsService._getAllProducts();
       console.log(this.productsService._products);
     }
-    // this.prodInCartService._getProdInCartByCartID(
-    //   this.usersServiceService._Users.CartID
-    // );
-    // this.prodInCartService._getProdInCartByCartID(
-    //   this.usersServiceService._Users.CartID
-    // );
-    // console.log(this.prodInCartService._prodInCart);
+    if (this.prodInCartService._prodInCart.length == 0) {
+      this.prodInCartService._getProdInCartByCartID(
+        this.usersServiceService._Users.CartID
+      );
+
+      console.log('PRODINCART', this.prodInCartService._prodInCart);
+    }
+    console.log(this.usersServiceService._Users.CartID);
   }
 
   @Input() Product: Product = new Product();
   @Input() ProdInCart: ProdInCart = new ProdInCart();
   @Input() ProdType: boolean = true;
+  // totalPrice: number = 0
 
-  addToCart = () => {};
+  addToCart = (
+    ProductID: number, //
+    Qnt: number, //
+    ProdInCartID: number,
+    Price: number
+  ) => {
+    console.log('CArtIDddd', this.usersServiceService._Users.CartID);
+    let isProdInCart = this.prodInCartService._prodInCart.findIndex(
+      (prod) => prod.Product.ID == ProductID
+    );
+    console.log('isProdInCart', isProdInCart);
+
+    isProdInCart >= 1
+      ? this.increaseOrDecreaseQnt(true, ProdInCartID, Qnt, Price)
+      : this.prodInCartService._addNewProdInCart(
+          this.usersServiceService._Users.CartID,
+          ProductID
+        );
+  };
 
   increaseOrDecreaseQnt = (
     type: boolean,
     ID: number,
     Qnt: number,
-    CartID: number
+    Price: number
   ) => {
     Qnt = type ? (Qnt += 1) : Qnt == 1 ? 1 : (Qnt -= 1);
     Qnt == 1
       ? (Qnt = 1)
-      : this.prodInCartService._updateProdInCart(ID, Qnt, CartID);
-    console.log(Qnt);
+      : this.prodInCartService._updateProdInCart(
+          ID,
+          Qnt,
+          this.usersServiceService._Users.CartID
+        );
+    console.log('qnt', Qnt);
+    // this.calcTotalPrice(Qnt, Price);
   };
+
   ngOnInit(): void {}
 }

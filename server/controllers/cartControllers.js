@@ -26,7 +26,6 @@ exports.addNewCart = async (req, res, next) => {
 
   await Cart.create(values)
     .then((result) => {
-      console.log("valuessssssssssssssssssss", values);
       res.send(result);
     })
     .catch((err) => {

@@ -23,13 +23,21 @@ exports.getProdInCartByCartID = async (req, res, next) => {
 };
 
 exports.addNewProdInCart = async (req, res, next) => {
+  let values = req.body.values;
+  console.log("valuesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", values);
+
   await productInCart
-    .create({ Qnt: req.body.Qnt, TotalPrice: req.body.TotalPrice, CartID: req.body.CartID, ProductID: req.body.ProductID })
+
+    .create(values)
+    // .create({ Qnt: req.body.Qnt, TotalPrice: req.body.TotalPrice, CartID: req.body.CartID, ProductID: req.body.ProductID })
     .then((result) => {
       console.log(result);
+      console.log("valuesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", values);
       res.send(result);
     })
     .catch((err) => {
+      console.log("valuesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", values);
+
       console.log("err adding new products in cart", err);
       res.send("err adding new products in cart", err);
     });

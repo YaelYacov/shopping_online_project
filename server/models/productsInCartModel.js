@@ -26,6 +26,10 @@ const ProductsInCart = sequelize.define("ProductsInCart", {
   TotalPrice: {
     type: Sequelize.INTEGER(11),
   },
+  Deleted: {
+    type: Sequelize.INTEGER(11),
+    defaultValue: 1,
+  },
 });
 
 module.exports = ProductsInCart;

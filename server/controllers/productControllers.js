@@ -4,7 +4,7 @@ const categories = require("../models/categoriesModel");
 
 exports.getAllProducts = async (req, res, next) => {
   let attributes = ["Name"];
-  let condition = req.body.AllProds == "All" ? {} : { where: { CategoryID: req.body.CategoryID } };
+  let condition = req.body.AllProds == "All" ? {} : { where: { CategoryID: req.body.CategoryID, Deleted: 1 } };
   let options = { include: [{ model: categories, attributes: attributes }] };
   // console.log("condition", condition);
 

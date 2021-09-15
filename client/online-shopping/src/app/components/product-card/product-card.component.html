@@ -36,7 +36,12 @@
             <i
               class="fas fa-plus"
               (click)="
-                increaseOrDecreaseQnt(true, ProdInCart.ID, ProdInCart.Qnt)
+                increaseOrDecreaseQnt(
+                  true,
+                  Product.ID,
+                  ProdInCart.Qnt,
+                  ProdInCart.ID
+                )
               "
             ></i>
           </div>
@@ -61,7 +66,12 @@
             <i
               class="fas fa-minus"
               (click)="
-                increaseOrDecreaseQnt(false, ProdInCart.ID, ProdInCart.Qnt)
+                increaseOrDecreaseQnt(
+                  false,
+                  Product.ID,
+                  ProdInCart.Qnt,
+                  ProdInCart.ID
+                )
               "
             ></i>
           </div>

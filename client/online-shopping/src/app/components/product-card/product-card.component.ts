@@ -38,37 +38,46 @@ export class ProductCardComponent implements OnInit {
   @Input() ProdType: boolean = true;
   // totalPrice: number = 0
 
-  increaseOrDecreaseQnt = (type: boolean, ID: number, Qnt: number) => {
+  isProdInCart = (ProductID: number) => {
+    let IsProdInCart: any;
+    IsProdInCart = this.prodInCartService._prodInCart.find(
+      (prod) => prod.Product.ID == ProductID
+    );
+    return IsProdInCart;
+  };
+
+  increaseOrDecreaseQnt = (
+    type: boolean,
+    ProductID: number,
+    qnt: number,
+    prodInCurtID: number
+  ) => {
+    let Qnt = ProductID > 0 ? this.isProdInCart(ProductID).Qnt : qnt;
+
+    let ProdInCartID =
+      prodInCurtID > 0 ? prodInCurtID : this.isProdInCart(ProductID).ID;
     Qnt = type ? (Qnt += 1) : Qnt == 1 ? 1 : (Qnt -= 1);
     Qnt == 1
       ? Qnt
       : this.prodInCartService._updateProdInCart(
-          ID,
+          ProdInCartID,
           Qnt,
           this.usersServiceService._Users.CartID
         );
-    console.log('qnt', Qnt);
+
+    console.log('qnt', qnt, Qnt, this.isProdInCart(ProductID), ProductID);
   };
 
   addToCart = (
     ProductID: number //
   ) => {
-    // console.log('CArtIDddd', this.usersServiceService._Users.CartID);
-    let isProdInCart: any;
-
-    isProdInCart = this.prodInCartService._prodInCart.find(
-      (prod) => prod.Product.ID == ProductID
-    );
-    // console.log(
-    //   'isProdInCart',
-    //   isProdInCart,
-    //   ProductID,
-    //   isProdInCart.Qnt,
-    //   isProdInCart.ID
-    // );
-
-    isProdInCart?.ID > 0
-      ? this.increaseOrDecreaseQnt(true, isProdInCart.ID, isProdInCart.Qnt)
+    this.isProdInCart(ProductID).ID != 0
+      ? this.increaseOrDecreaseQnt(
+          true,
+          ProductID,
+          this.isProdInCart(ProductID).Qnt,
+          this.isProdInCart(ProductID).ID
+        )
       : this.prodInCartService._addNewProdInCart(
           this.usersServiceService._Users.CartID,
           ProductID

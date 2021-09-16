@@ -61,12 +61,14 @@ export class ProductCardComponent implements OnInit {
 
     let ProdInCartID =
       prodInCurtID > 0 ? prodInCurtID : this.isProdInCart(ProductID).ID;
-    Qnt = type ? (Qnt += 1) : (Qnt -= 1);
-    // Qnt = type ? (Qnt += 1) : Qnt == 1 ? 1 : (Qnt -= 1);
+    Qnt = !type ? Qnt - 1 : Qnt + 1;
+    // Qnt = type ? (Qnt += 1) : Qnt == -1 ? 0 : (Qnt -= 1);
+    // console.log('Qnt', Qnt == 0, 'ProdInCartID', ProdInCartID);
+
     Qnt == 0
       ? this.prodInCartService._updateProdInCart(
           ProdInCartID,
-          { Deleted: 1 },
+          { Deleted: 0 },
           this.usersServiceService._Users.CartID
         )
       : this.prodInCartService._updateProdInCart(
@@ -75,7 +77,7 @@ export class ProductCardComponent implements OnInit {
           this.usersServiceService._Users.CartID
         );
 
-    console.log('qnt', qnt, Qnt, this.isProdInCart(ProductID), ProductID);
+    // console.log('qnt', qnt, this.isProdInCart(ProductID), ProductID);
   };
   //FixMe: prodInCart array is not exist
   addToCart = (

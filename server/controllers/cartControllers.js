@@ -1,6 +1,6 @@
 const con = require("../utils/database");
 const Cart = require("../models/cartModel");
-const Users = require("../models/usersModel");
+const User = require("../models/usersModel");
 
 exports.getCartByID = async (req, res, next) => {
   let attributes = ["ID"];
@@ -11,7 +11,6 @@ exports.getCartByID = async (req, res, next) => {
 
   await Cart.findAll(condition)
     .then((result) => {
-      console.log(result);
       res.send(result);
     })
     .catch((err) => {
@@ -23,15 +22,29 @@ exports.getCartByID = async (req, res, next) => {
 exports.addNewCart = async (req, res, next) => {
   // models.Page.update(values, condition, options);
   let values = req.body.values;
+  let Result;
 
   await Cart.create(values)
     .then((result) => {
+      Result = result;
       res.send(result);
     })
     .catch((err) => {
       console.log("err adding new cart", err);
       res.send("err adding new cart", err);
     });
+  // console.log("resulttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt", Result);
+  if (Result && Result.ID) {
+    await User.update({ CartID: Result.ID }, { where: { ID: Result.userID } })
+      .then((result) => {
+        // console.log(result);
+        // res.send(result);
+      })
+      .catch((err) => {
+        console.log("err getting all users", err);
+        // res.send("err getting all users", err);
+      });
+  }
 };
 
 exports.updateCartStatus = async (req, res, next) => {

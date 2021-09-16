@@ -41,28 +41,6 @@ export class LogInComponent implements OnInit {
 
   getUserNCart = () => {
     this.usersServiceService._getUser();
-    // console.log('login', this.usersServiceService._Users);
-    // if (
-    //   this.usersServiceService._Users &&
-    //   this.usersServiceService._Users.length > 0
-    // ) {
-    //   console.log(this.usersServiceService._Users);
-    //   console.log('sexx');
-    //   // this.cartsService._getCartByID(1, this.usersServiceService._Users.ID, 0);
-
-    //   // this.findCart();
-    // }
-  };
-
-  findCart = () => {
-    let CartID = this.usersServiceService._currentUser.CartID;
-    if (CartID > 0) {
-      console.log('sexxx');
-
-      console.log(CartID);
-      // console.log(this.prodInCartService._getProdInCartByCartID(CartID));
-    } else
-      this.cartsService._addNewCart(this.usersServiceService._currentUser.ID);
   };
 
   ngOnInit(): void {}

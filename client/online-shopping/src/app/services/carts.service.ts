@@ -7,6 +7,7 @@ import { ApiService } from './api.service';
 })
 export class CartsService {
   _cart: Array<Carts> = [];
+  _addCart: any;
   // _cart: any;
 
   constructor(public apiService: ApiService) {}
@@ -24,11 +25,11 @@ export class CartsService {
   };
 
   _addNewCart = async (userID: number) => {
-    await this.apiService.createPostService('cart/addNewCart', {
+    this._addCart = await this.apiService.createPostService('cart/addNewCart', {
       values: { userID: userID },
     });
     this._getCartByID();
-    console.log(this._cart);
+    console.log(this._cart, 'this._addCart', this._addCart);
   };
 
   _updateCartStatus = async () => {

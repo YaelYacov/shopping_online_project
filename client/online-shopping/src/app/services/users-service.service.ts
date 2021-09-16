@@ -25,10 +25,6 @@ export class UsersServiceService {
       { Password: this._User.Password, Mail: this._User.Mail }
     )) as Array<User>;
 
-    // this._currentUser = (await this.apiService.createPostService(
-    //   `users/getUserByMailNPass`,
-    //   { Password: this._User.Password, Mail: this._User.Mail }
-    // )) as User;
     // console.log('1: ', this._currentUser);
     // console.log('1: ', this._Users);
 
@@ -38,29 +34,14 @@ export class UsersServiceService {
       this._currentUserID = this._Users.ID;
       this._currentCartID = this._Users.CartID;
     }
-    // else {
-    // this.cartsService._getCartByID(); // TODO: send ID
-    // console.log(this.cartsService._cart);
-    // console.log('2: ', this._Users);
-    // }
-
-    // if (this._Users) {
-    //   this._currentUserID = this._Users.ID;
-    //   if (this._Users.CartID === 0) {
-    //     this._currentCartID = this._Users.CartID;
-    //     this.cartsService._getCartByID();
-    //     console.log(this.cartsService._cart);
-    //     console.log('2: ', this._Users);
-    //   }
-    // }
   }
 
-  async _updateUserCart() {
-    (await this.apiService.createPostService(`users/updateUserCart`, {
-      ID: 2,
-      CartID: 2,
-    })) as Array<User>;
-    console.log(this._User);
+  async _updateUserCart(values: object) {
+    (await this.apiService.createPostService(
+      `users/updateUserCart`,
+      values
+    )) as Array<User>;
+    // console.log(this._User);
     this._getUser();
   }
 

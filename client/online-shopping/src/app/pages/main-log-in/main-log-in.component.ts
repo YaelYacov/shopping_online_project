@@ -17,16 +17,18 @@ export class MainLogInComponent implements OnInit {
     public productsService: ProductsService,
     public cartsService: CartsService,
     public prodInCartService: ProdInCartService
-  ) {}
+  ) {
+    this.cartsService._getCartByID();
+  }
+
   findCart = () => {
     // console.log(this.usersServiceService._Users);
     if (this.usersServiceService._Users) {
       let CartID = this.usersServiceService._Users.CartID;
       if (CartID > 0) {
-        // console.log('sex');
-        // console.log(CartID);
-        // console.log(this.prodInCartService._getProdInCartByCartID(CartID));
-      } else this.cartsService._addNewCart(this.usersServiceService._Users.ID);
+      } else {
+        this.cartsService._addNewCart(this.usersServiceService._Users.ID);
+      }
     }
   };
 

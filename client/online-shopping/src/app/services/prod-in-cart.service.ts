@@ -58,7 +58,7 @@ export class ProdInCartService {
       this._totalPrice += prod.Qnt * prod.Product.Price;
     });
 
-    console.log(this._totalPrice);
+    // console.log(this._totalPrice);
     // this.prodInCartService._totalPrice = Qnt * Price;
     // console.log(this.prodInCartService._totalPrice, '_totalPrice');
   };

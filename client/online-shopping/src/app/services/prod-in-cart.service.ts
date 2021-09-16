@@ -31,7 +31,7 @@ export class ProdInCartService {
   };
 
   _addNewProdInCart = async (CartID: number, ProductID: number) => {
-    console.log(CartID, ProductID);
+    console.log('Cart, product,ID', CartID, ProductID);
     await this.apiService.createPostService('prodInCart/addNewProdInCart', {
       values: {
         CartID: CartID,
@@ -43,10 +43,10 @@ export class ProdInCartService {
     // console.log(this._cart);
   };
 
-  _updateProdInCart = async (ID: number, Qnt: number, CartID: number) => {
+  _updateProdInCart = async (ID: number, values: object, CartID: number) => {
     await this.apiService.createPostService('prodInCart/updateProdInCart', {
       ID: ID,
-      Qnt: Qnt,
+      values: values,
     });
     this._getProdInCartByCartID(CartID);
   };

@@ -40,10 +40,15 @@ export class ProductCardComponent implements OnInit {
 
   isProdInCart = (ProductID: number) => {
     let IsProdInCart: any;
-    IsProdInCart = this.prodInCartService._prodInCart.find(
-      (prod) => prod.Product.ID == ProductID
-    );
-    return IsProdInCart;
+    if (this.prodInCartService._prodInCart.length > 0) {
+      IsProdInCart = this.prodInCartService._prodInCart.find(
+        (prod) => prod.Product.ID == ProductID
+      );
+      console.log(IsProdInCart);
+      return IsProdInCart;
+    } else {
+      return 0;
+    }
   };
 
   increaseOrDecreaseQnt = (
@@ -56,31 +61,45 @@ export class ProductCardComponent implements OnInit {
 
     let ProdInCartID =
       prodInCurtID > 0 ? prodInCurtID : this.isProdInCart(ProductID).ID;
-    Qnt = type ? (Qnt += 1) : Qnt == 1 ? 1 : (Qnt -= 1);
-    Qnt == 1
-      ? Qnt
+    Qnt = type ? (Qnt += 1) : (Qnt -= 1);
+    // Qnt = type ? (Qnt += 1) : Qnt == 1 ? 1 : (Qnt -= 1);
+    Qnt == 0
+      ? this.prodInCartService._updateProdInCart(
+          ProdInCartID,
+          { Deleted: 1 },
+          this.usersServiceService._Users.CartID
+        )
       : this.prodInCartService._updateProdInCart(
           ProdInCartID,
-          Qnt,
+          { Qnt: Qnt },
           this.usersServiceService._Users.CartID
         );
 
     console.log('qnt', qnt, Qnt, this.isProdInCart(ProductID), ProductID);
   };
-
+  //FixMe: prodInCart array is not exist
   addToCart = (
     ProductID: number //
   ) => {
-    this.isProdInCart(ProductID).ID != 0
-      ? this.increaseOrDecreaseQnt(
+    console.log(
+      this.isProdInCart(ProductID),
+      'ProductID',
+      ProductID,
+      ' this.usersServiceService._Users.CartID,',
+      this.usersServiceService._Users.CartID
+    );
+    this.isProdInCart(ProductID) == 0 ||
+    this.prodInCartService._prodInCart.length == 0 ||
+    this.isProdInCart(ProductID) == undefined
+      ? this.prodInCartService._addNewProdInCart(
+          this.usersServiceService._Users.CartID,
+          ProductID
+        )
+      : this.increaseOrDecreaseQnt(
           true,
           ProductID,
           this.isProdInCart(ProductID).Qnt,
           this.isProdInCart(ProductID).ID
-        )
-      : this.prodInCartService._addNewProdInCart(
-          this.usersServiceService._Users.CartID,
-          ProductID
         );
   };
 

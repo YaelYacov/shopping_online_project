@@ -7,7 +7,7 @@ exports.getProdInCartByCartID = async (req, res, next) => {
   let attributes = ["ID", "Name", "description", "Price", "Img"];
   //   let options = { include: [{ model: [Product], attribute: attributes }] };
   let options = { include: [{ model: Product, attributes: attributes }] };
-  let condition = AllOrCartProds == "All" ? {} : { where: { CartID: req.body.CartID }, include: [{ model: Product, attributes: attributes }] };
+  let condition = AllOrCartProds == "All" ? {} : { where: { CartID: req.body.CartID, Deleted: 1 }, include: [{ model: Product, attributes: attributes }] };
   // ({ include: [Actions],
 
   await productInCart
@@ -44,7 +44,8 @@ exports.addNewProdInCart = async (req, res, next) => {
 };
 
 exports.updateProdInCart = async (req, res, next) => {
-  let values = { Qnt: req.body.Qnt };
+  //   let values = { Qnt: req.body.Qnt };
+  let values = req.body.values;
   let condition = { where: { ID: req.body.ID } };
 
   await productInCart

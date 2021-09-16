@@ -30,10 +30,12 @@ export class AboutUsComponent implements OnInit {
 
   ifUsers = () => {
     if (this.usersServiceService._Users) {
-      // console.log(this.usersServiceService._Users.Carts);
-      return this.usersServiceService._Users.Carts.find(
-        (cart: any) => cart.Status == 0
-      ).createdAt.slice(0, 10);
+      if (this.usersServiceService._Users.Carts.length == 1) {
+        return this.usersServiceService._Users.Carts[0].createdAt.slice(0, 10);
+      } else
+        return this.usersServiceService._Users.Carts.find(
+          (cart: any) => cart.Status == 0
+        ).createdAt.slice(0, 10);
       // this.cartsService._getCartByID(1, this.usersServiceService._Users.ID, 0); //gettin all carts that belongs to user and cart status = 0
     }
   };

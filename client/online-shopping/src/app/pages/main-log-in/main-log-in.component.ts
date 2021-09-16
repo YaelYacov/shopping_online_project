@@ -22,7 +22,6 @@ export class MainLogInComponent implements OnInit {
   }
 
   findCart = () => {
-    // console.log(this.usersServiceService._Users);
     if (this.usersServiceService._Users) {
       let CartID = this.usersServiceService._Users.CartID;
       if (CartID > 0) {

@@ -21,16 +21,12 @@ export class ProductCardComponent implements OnInit {
   ) {
     if (this.productsService._products.length == 0) {
       this.productsService._getAllProducts();
-      console.log(this.productsService._products);
     }
     if (this.prodInCartService._prodInCart.length == 0) {
       this.prodInCartService._getProdInCartByCartID(
         this.usersServiceService._Users.CartID
       );
-
-      console.log('PRODINCART', this.prodInCartService._prodInCart);
     }
-    console.log(this.usersServiceService._Users.CartID);
   }
 
   @Input() Product: Product = new Product();
@@ -44,7 +40,6 @@ export class ProductCardComponent implements OnInit {
       IsProdInCart = this.prodInCartService._prodInCart.find(
         (prod) => prod.Product.ID == ProductID
       );
-      console.log(IsProdInCart);
       return IsProdInCart;
     } else {
       return 0;
@@ -62,8 +57,6 @@ export class ProductCardComponent implements OnInit {
     let ProdInCartID =
       prodInCurtID > 0 ? prodInCurtID : this.isProdInCart(ProductID).ID;
     Qnt = !type ? Qnt - 1 : Qnt + 1;
-    // Qnt = type ? (Qnt += 1) : Qnt == -1 ? 0 : (Qnt -= 1);
-    // console.log('Qnt', Qnt == 0, 'ProdInCartID', ProdInCartID);
 
     Qnt == 0
       ? this.prodInCartService._updateProdInCart(
@@ -76,20 +69,10 @@ export class ProductCardComponent implements OnInit {
           { Qnt: Qnt },
           this.usersServiceService._Users.CartID
         );
-
-    // console.log('qnt', qnt, this.isProdInCart(ProductID), ProductID);
   };
-  //FixMe: prodInCart array is not exist
   addToCart = (
     ProductID: number //
   ) => {
-    console.log(
-      this.isProdInCart(ProductID),
-      'ProductID',
-      ProductID,
-      ' this.usersServiceService._Users.CartID,',
-      this.usersServiceService._Users.CartID
-    );
     this.isProdInCart(ProductID) == 0 ||
     this.prodInCartService._prodInCart.length == 0 ||
     this.isProdInCart(ProductID) == undefined

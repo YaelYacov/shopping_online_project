@@ -27,11 +27,10 @@ export class ProdInCartService {
     )) as Array<ProdInCart>;
     this._calcTotalPrice();
 
-    console.log(this._prodInCart);
+    // console.log(this._prodInCart);
   };
 
   _addNewProdInCart = async (CartID: number, ProductID: number) => {
-    console.log('Cart, product,ID', CartID, ProductID);
     await this.apiService.createPostService('prodInCart/addNewProdInCart', {
       values: {
         CartID: CartID,
@@ -39,8 +38,6 @@ export class ProdInCartService {
       },
     });
     this._getProdInCartByCartID(CartID);
-
-    // console.log(this._cart);
   };
 
   _updateProdInCart = async (ID: number, values: object, CartID: number) => {
@@ -52,15 +49,10 @@ export class ProdInCartService {
   };
 
   _calcTotalPrice = () => {
-    // let totalPrice = this.totalPrice
     this._totalPrice = 0;
     this._prodInCart.map((prod) => {
       this._totalPrice += prod.Qnt * prod.Product.Price;
     });
-
-    // console.log(this._totalPrice);
-    // this.prodInCartService._totalPrice = Qnt * Price;
-    // console.log(this.prodInCartService._totalPrice, '_totalPrice');
   };
 }
 

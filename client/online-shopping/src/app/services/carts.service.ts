@@ -21,7 +21,7 @@ export class CartsService {
       getCart
     )) as Array<Carts>;
 
-    console.log(this._cart);
+    // console.log(this._cart);
   };
 
   _addNewCart = async (userID: number) => {
@@ -29,7 +29,6 @@ export class CartsService {
       values: { userID: userID },
     });
     this._getCartByID();
-    console.log(this._cart, 'this._addCart', this._addCart);
   };
 
   _updateCartStatus = async () => {
@@ -38,6 +37,6 @@ export class CartsService {
       Status: 2,
     });
     this._getCartByID();
-    console.log(this._cart);
+    // console.log(this._cart);
   };
 }

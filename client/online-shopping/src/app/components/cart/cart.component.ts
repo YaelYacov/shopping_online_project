@@ -17,11 +17,9 @@ export class CartComponent implements OnInit {
     public cartsService: CartsService,
     public prodInCartService: ProdInCartService
   ) {
-    // console.log(this.usersServiceService._Users.CartID);
     this.prodInCartService._getProdInCartByCartID(
       this.usersServiceService._Users.CartID
     );
-    console.log(this.prodInCartService._prodInCart);
     this.prodInCartService._calcTotalPrice();
   }
 

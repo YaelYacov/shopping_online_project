@@ -24,12 +24,7 @@ export class UsersServiceService {
       `users/getUserByMailNPass`,
       { Password: this._User.Password, Mail: this._User.Mail }
     )) as Array<User>;
-
-    // console.log('1: ', this._currentUser);
     // console.log('1: ', this._Users);
-
-    // GOOD LUCK <30
-
     if (this._Users && this._Users.CartID > 0) {
       this._currentUserID = this._Users.ID;
       this._currentCartID = this._Users.CartID;
@@ -46,7 +41,6 @@ export class UsersServiceService {
   }
 
   async _createNewUser() {
-    console.log(this._User);
     let register = await this.apiService.createPostService(
       'users/createNewUser',
       {

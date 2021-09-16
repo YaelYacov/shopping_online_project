@@ -24,7 +24,7 @@ export class ProductsService {
       getProds
     )) as Array<Product>;
     if (CategoryID) this._currentCategory = CategoryID;
-    console.log(this._products);
+    // console.log(this._products);
   };
 
   _addNewProd = async () => {

@@ -29,6 +29,8 @@ export class ProductCardComponent implements OnInit {
     }
   }
 
+  // Get the modal
+
   @Input() Product: Product = new Product();
   @Input() ProdInCart: ProdInCart = new ProdInCart();
   @Input() ProdType: boolean = true;
@@ -40,6 +42,7 @@ export class ProductCardComponent implements OnInit {
       IsProdInCart = this.prodInCartService._prodInCart.find(
         (prod) => prod.Product.ID == ProductID
       );
+      // console.log(IsProdInCart, ProductID);
       return IsProdInCart;
     } else {
       return 0;
@@ -50,29 +53,42 @@ export class ProductCardComponent implements OnInit {
     type: boolean,
     ProductID: number,
     qnt: number,
-    prodInCurtID: number
+    prodInCartID: number
   ) => {
-    let Qnt = ProductID > 0 ? this.isProdInCart(ProductID).Qnt : qnt;
+    // console.log(this.prodInCartService._prodInCart);
+    // console.log(type, ProductID, qnt, prodInCartID);
 
-    let ProdInCartID =
-      prodInCurtID > 0 ? prodInCurtID : this.isProdInCart(ProductID).ID;
-    Qnt = !type ? Qnt - 1 : Qnt + 1;
+    if (prodInCartID == 0 && this.isProdInCart(ProductID) == undefined) {
+      this.prodInCartService._addNewProdInCart( this.usersServiceService._Users.CartID,ProductID )
+    }else{
 
-    Qnt == 0
-      ? this.prodInCartService._updateProdInCart(
-          ProdInCartID,
-          { Deleted: 0 },
-          this.usersServiceService._Users.CartID
-        )
-      : this.prodInCartService._updateProdInCart(
-          ProdInCartID,
-          { Qnt: Qnt },
-          this.usersServiceService._Users.CartID
-        );
+      let ProdInCartID =
+        prodInCartID > 0 ? prodInCartID : this.isProdInCart(ProductID).ID;
+      let Qnt = ProductID > 0 ? this.isProdInCart(ProductID).Qnt : qnt;
+  
+      Qnt = !type ? Qnt - 1 : Qnt + 1;
+  
+  
+  
+      Qnt == 0
+        ? this.prodInCartService._updateProdInCart(
+            ProdInCartID,
+            { Deleted: 0 },
+            this.usersServiceService._Users.CartID
+          )
+        : this.prodInCartService._updateProdInCart(
+            ProdInCartID,
+            { Qnt: Qnt },
+            this.usersServiceService._Users.CartID
+          );
+    }
+  //   console.log(this.isProdInCart(ProductID), prodInCartID > 0);
   };
+
   addToCart = (
     ProductID: number //
   ) => {
+    console.log(this.isProdInCart(ProductID))
     this.isProdInCart(ProductID) == 0 ||
     this.prodInCartService._prodInCart.length == 0 ||
     this.isProdInCart(ProductID) == undefined

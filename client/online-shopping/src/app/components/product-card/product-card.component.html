@@ -34,6 +34,8 @@
         <div class="row">
           <div class="col-2">
             <i
+          [attr.disabled]="isProdInCart(Product.ID) == 0 ?true: false"
+
               class="fas fa-plus"
               (click)="
                 increaseOrDecreaseQnt(
@@ -47,6 +49,7 @@
           </div>
           <div class="col-8">
             <button
+              id="myBtn"
               *ngIf="ProdType"
               (click)="addToCart(Product.ID)"
               class="btn btn-primary"

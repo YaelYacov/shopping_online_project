@@ -55,10 +55,8 @@ export class ProductCardComponent implements OnInit {
     qnt: number,
     prodInCartID: number
   ) => {
-    // console.log(this.prodInCartService._prodInCart);
-    // console.log(type, ProductID, qnt, prodInCartID);
 
-    if (prodInCartID == 0 && this.isProdInCart(ProductID) == undefined) {
+    if (prodInCartID == 0 && this.isProdInCart(ProductID) == undefined ||prodInCartID == 0 && this.isProdInCart(ProductID) == 0 ) {
       this.prodInCartService._addNewProdInCart( this.usersServiceService._Users.CartID,ProductID )
     }else{
 
@@ -71,11 +69,7 @@ export class ProductCardComponent implements OnInit {
   
   
       Qnt == 0
-        ? this.prodInCartService._updateProdInCart(
-            ProdInCartID,
-            { Deleted: 0 },
-            this.usersServiceService._Users.CartID
-          )
+        ? this.prodInCartService._deleteProdInCart(ProdInCartID, this.usersServiceService._Users.CartID)
         : this.prodInCartService._updateProdInCart(
             ProdInCartID,
             { Qnt: Qnt },
@@ -104,5 +98,17 @@ export class ProductCardComponent implements OnInit {
         );
   };
 
+//   deleteProdInCart = (ProdInCartID: number) => {
+// this.prodInCartService._updateProdInCart(
+//             ProdInCartID,
+//             { Deleted: 0 },
+//             this.usersServiceService._Users.CartID
+//           )
+//   }
+
+
+
+
   ngOnInit(): void {}
 }
+

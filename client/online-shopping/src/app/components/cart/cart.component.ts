@@ -20,7 +20,12 @@ export class CartComponent implements OnInit {
     this.prodInCartService._getProdInCartByCartID(
       this.usersServiceService._Users.CartID
     );
-    this.prodInCartService._calcTotalPrice();
+    // this.prodInCartService._calcTotalPrice();
+  }
+
+    deleteAllProdsFromCart = (cartID:number) => {
+console.log(this.prodInCartService._prodInCart)
+this.prodInCartService._prodInCart.forEach(prod => this.prodInCartService._deleteProdInCart(prod.ID,  this.usersServiceService._Users.CartID))
   }
 
   ngOnInit(): void {}

@@ -54,6 +54,16 @@ export class ProdInCartService {
       this._totalPrice += prod.Qnt * prod.Product.Price;
     });
   };
+
+
+   _deleteProdInCart = (ProdInCartID: number, CartID:number) => {
+this._updateProdInCart(
+            ProdInCartID,
+            { Deleted: 0 },
+            CartID
+          )
+  }
+
 }
 
 // `ID`, `Qnt`, `TotalPrice`, `createdAt`, `updatedAt`, `CartID`, `ProductID`;

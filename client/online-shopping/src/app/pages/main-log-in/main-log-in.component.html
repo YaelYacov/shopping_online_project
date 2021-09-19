@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container flex">
   <div class="row">
     <div class="col-4">
       <app-log-in
@@ -41,5 +41,9 @@
 </div>
 
 
-<button type="button" class="btn btn-lg btn-danger m-5" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-<a tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+
+<div class="draggable-box" 
+  (mousedown)="draggableEl = $event.target" 
+  (document:mousemove)="onMouseMove($event)" 
+  (document:mouseup)="onMouseUp($event)">
+</div>

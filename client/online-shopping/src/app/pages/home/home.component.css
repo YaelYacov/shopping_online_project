@@ -1,0 +1,36 @@
+.sw{
+    width:15%
+}
+
+.bw{
+    width:85%
+}
+
+.borderR{
+    position: relative;
+    background-color: gray;
+    cursor: e-resize;
+    padding:0, 10px, 0, 0;
+
+
+}
+
+.borderCol{
+    background-color: white;
+    cursor: default;
+
+      
+}
+
+/* .productsDV{
+      position: absolute ;
+
+} */
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+
+            /* position: fixed; */
+}
+

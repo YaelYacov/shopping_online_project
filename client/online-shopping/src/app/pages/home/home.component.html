@@ -1,8 +1,18 @@
-<div class="row">
-  <div class="col-3">
+<div class="container flex">
+  <div class="row ">
+  <div class="sw flex">
+    <div id="cartRBorder" class="borderR"  
+ (mousedown)="draggableEl = $event.target" 
+  (document:mousemove)="onMouseMove($event)" 
+  (document:mouseup)="onMouseUp($event)">
+              <div class="borderCol">
     <app-cart></app-cart>
   </div>
-  <div class="col-9">
+    </div>
+
+  </div>
+
+  <div class="bw productsDV flex">
     <div *ngFor="let Product of productsService._products">
       <app-product-card
         [ProdType]="true"
@@ -11,3 +21,8 @@
     </div>
   </div>
 </div>
+
+
+</div>
+
+

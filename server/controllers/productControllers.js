@@ -1,6 +1,8 @@
 const con = require("../utils/database");
 const products = require("../models/productsModel");
 const categories = require("../models/categoriesModel");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.getAllProducts = async (req, res, next) => {
   let attributes = ["Name"];
@@ -22,6 +24,42 @@ exports.getAllProducts = async (req, res, next) => {
     });
 };
 
+
+
+
+exports.getProdByName = async (req, res, next) => {
+  // let attributes = ["Name"];
+  // let condition = req.body.AllProds == "All" ? {} : { where: { CategoryID: req.body.CategoryID } };
+  // let options = { include: [{ model: categories, attributes: attributes }] };
+  // console.log("condition", condition);
+
+  await products
+    .findAll({
+  where: {
+    Name: {
+      [Op.like]: `%${req.body.Name}%`
+    }
+  }
+})
+    // .findAll(condition, options)
+    .then((result) => {
+      // console.log(req.body.CategoryID);
+      res.send(result);
+    })
+    .catch((err) => {
+      // console.log("err shoeing products", err);
+      // console.log(req.body == true);
+      res.send(err);
+    });
+};
+
+// let data: Array<any> = await MyDataSequelizeAccess.findAll({
+//   where: {
+//     name: {
+//       [Op.like]: '%Bob%'
+//     }
+//   }
+// });
 exports.addNewProd = async (req, res, next) => {
   await products
     .create({ Name: req.body.Name, Price: req.body.Price, CategoryID: req.body.CategoryID })

@@ -16,6 +16,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { WhyYouShouldBuyComponent } from './components/why-you-should-buy/why-you-should-buy.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MainLogInComponent } from './pages/main-log-in/main-log-in.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MainLogInComponent } from './pages/main-log-in/main-log-in.component';
     WhyYouShouldBuyComponent,
     AboutUsComponent,
     MainLogInComponent,
+    OrdersComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

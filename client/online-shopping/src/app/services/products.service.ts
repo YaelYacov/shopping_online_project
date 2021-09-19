@@ -12,6 +12,7 @@ export class ProductsService {
   _products: Array<Product> = [];
   _filteredProds: Array<Product> = [];
   _currentCategory: any;
+  _ProdName : string = '';
 
   constructor(public apiService: ApiService) {}
 
@@ -26,6 +27,11 @@ export class ProductsService {
     if (CategoryID) this._currentCategory = CategoryID;
     // console.log(this._products);
   };
+
+  _getProdByName = async (Name: any) => {
+this._products = (await this.apiService.createPostService('products/getProdByName', {Name:Name})) as Array<Product>;
+console.log(this._products);
+  }
 
   _addNewProd = async () => {
     await this.apiService.createPostService('products/addNewProd', {

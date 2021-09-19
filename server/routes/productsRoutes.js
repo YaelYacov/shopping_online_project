@@ -7,4 +7,7 @@ router.post("/getAllProducts", productsControllers.getAllProducts);
 router.post("/addNewProd", productsControllers.addNewProd);
 router.post("/editProd", productsControllers.editProd);
 
+router.post("/getProdByName", productsControllers.getProdByName);
+
+
 module.exports = router;

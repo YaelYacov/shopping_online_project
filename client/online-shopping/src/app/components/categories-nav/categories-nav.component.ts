@@ -16,5 +16,9 @@ export class CategoriesNavComponent implements OnInit {
     this.productsService._getAllProducts();
   }
 
+  prodSearch = (e:any) => {
+    console.log()
+  }
+
   ngOnInit(): void {}
 }

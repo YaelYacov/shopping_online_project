@@ -12,4 +12,9 @@
       >{{ category.Name }}
     </a>
   </li>
+  <li>
+    <input  [(ngModel)]="productsService._ProdName" class="form-control me-2 w-25" type="search" placeholder="Product Name" aria-label="Search" >
+     <button class="btn btn-outline-success" type="button" (click)="productsService._getProdByName(productsService._ProdName)">Search</button>
+
+  </li>
 </ul>

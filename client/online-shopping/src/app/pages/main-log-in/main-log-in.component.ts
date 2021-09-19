@@ -19,6 +19,7 @@ export class MainLogInComponent implements OnInit {
     public prodInCartService: ProdInCartService
   ) {
     this.cartsService._getCartByID();
+    
   }
 
   findCart = () => {

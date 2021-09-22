@@ -1,0 +1,13 @@
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+      /* justify-content: flex-start */
+
+            /* position: fixed; */
+}
+
+.totalPP{
+    width: 50%;
+    display: inline-block;
+}

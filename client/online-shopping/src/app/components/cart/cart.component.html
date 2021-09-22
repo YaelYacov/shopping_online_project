@@ -1,7 +1,7 @@
 
 
-<i class="fa fa-trash" (click)="deleteAllProdsFromCart(usersServiceService._Users.CartID)" ></i>
-<div class="col-3" *ngFor="let ProdInCart of prodInCartService._prodInCart">
+<i class="fa fa-trash" (click)="deleteAllProdsFromCart()" ></i>
+<div class="col-12 col-md-6 col-lg-6" *ngFor="let ProdInCart of prodInCartService._prodInCart">
   <!-- <app-prod-in-cart-card [ProdInCart]="ProdInCart"></app-prod-in-cart-card> -->
   <app-product-card
     [ProdInCart]="ProdInCart"
@@ -11,5 +11,5 @@
 
 <hr />
 
-<p>Total: {{ prodInCartService._totalPrice }}</p>
+<p class="totalPP">Total: {{ prodInCartService._totalPrice }}</p>
 <button class="btn btn-primary" routerLink="/orders">Initiate Checkout</button>

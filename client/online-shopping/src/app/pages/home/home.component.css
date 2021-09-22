@@ -1,36 +1,53 @@
 .sw{
-    width:15%
+    width:15%;
+     align-self: auto 
 }
 
 .bw{
     width:85%
 }
 
-.borderR{
-    position: relative;
+.borderR > .borderCol {
+    /* position: relative; */
     background-color: gray;
     cursor: e-resize;
-    padding:0, 10px, 0, 0;
+    padding:0, 0, 10px, 10px;
+    margin: 0;
+    z-index: 1;
+    
 
 
 }
 
-.borderCol{
+	/* div:nth-child(1) */
+.borderCol :nth-child(1) {
     background-color: white;
-    cursor: default;
+    cursor: context-menu;
+    /* z-index: 4; */
+
+    /* flex-direction: column; */
 
       
 }
 
-/* .productsDV{
-      position: absolute ;
 
-} */
+.productsDV{
+    flex:5;
+}
 
 .flex{
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
+    /* align-content:space-around; */
+    justify-content:space-between;
+
+      /* justify-content: flex-start */
 
             /* position: fixed; */
+}
+
+.inline{
+    display: inline;
 }
 

@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
     // this.prodInCartService._calcTotalPrice();
   }
 
-    deleteAllProdsFromCart = (cartID:number) => {
+    deleteAllProdsFromCart = () => {
 console.log(this.prodInCartService._prodInCart)
 this.prodInCartService._prodInCart.forEach(prod => this.prodInCartService._deleteProdInCart(prod.ID,  this.usersServiceService._Users.CartID))
   }

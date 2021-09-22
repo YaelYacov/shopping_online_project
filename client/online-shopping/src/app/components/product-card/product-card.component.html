@@ -1,6 +1,6 @@
 <!-- *ngFor="let product of productsService._products"
 -->
-  <div class="card-body" class="card" style="width: 18rem">
+  <div class="card-body alignCenter" class="card" style="width: 18rem">
     <div class="row">
       <div class="col-4">
         <i class="fa fa-trash" *ngIf="!ProdType" (click)="prodInCartService._deleteProdInCart(ProdInCart.ID,usersServiceService._Users.CartID )" ></i>

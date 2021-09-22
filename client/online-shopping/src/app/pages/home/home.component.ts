@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
+import { UsersServiceService } from 'src/app/services/users-service.service';
+
 
 @Component({
   selector: 'app-home',
@@ -13,21 +15,23 @@ export class HomeComponent implements OnInit {
   // @Input() product = ''; // decorate the property with @Input()
 
   constructor(
+     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
     public prodInCartService: ProdInCartService
   ) {
     // console.log(this.prodInCartService._prodInCart);
+    this.prodInCartService._getProdInCartByCartID(
+      this.usersServiceService._Users.CartID
+    );
   }
 
 draggableEl: any;
 
 
  onMouseMove(event: MouseEvent) {
-    if(this.draggableEl) {
-      this.draggableEl.style.left = event.pageX + "px";
-      console.log(event.pageX)
-      console.log("onMouseMove")
-      // this.draggableEl.style.top = event.pageY + "px";
+    if(this.draggableEl && event.pageX>288) {
+      this.draggableEl.style.width = event.pageX + "px";      
+      // console.log(event.pageX)
     }
   }
 
@@ -39,17 +43,14 @@ draggableEl: any;
   //   this.draggableEl = true
   // }
 
+//     deleteAllProdsFromCart = () => {
+// console.log(this.prodInCartService._prodInCart)
+// this.prodInCartService._prodInCart.forEach(prod => this.prodInCartService._deleteProdInCart(prod.ID,  this.usersServiceService._Users.CartID))
+//   }
 
   resizeCart = () =>{
  let cartRBorder: any;
     cartRBorder = document.getElementById("cartRBorder");
-// cartRBorder.addEventListener("click", cartRBorder);
-
-// function handleClick() {
-//     console.log("Clicked!");
-//     this.removeEventListener("click", handleClick);
-// }
-
   }
 
   ngOnInit(): void {}

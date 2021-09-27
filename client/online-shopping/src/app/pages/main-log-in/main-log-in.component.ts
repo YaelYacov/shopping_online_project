@@ -1,4 +1,10 @@
-import { Component, OnInit, Renderer2, OnDestroy, ElementRef  } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  OnDestroy,
+  ElementRef,
+} from '@angular/core';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -18,23 +24,20 @@ export class MainLogInComponent implements OnInit {
     public cartsService: CartsService,
     public prodInCartService: ProdInCartService,
     private renderer2: Renderer2
-  ) {
-    this.cartsService._getCartByID();
-    
-  }
+  ) {}
 
-    draggableEl: any;
+  draggableEl: any;
 
-  onMouseMove(event: MouseEvent) {
-    if(this.draggableEl) {
-      this.draggableEl.style.left = event.pageX + "px";
-      this.draggableEl.style.top = event.pageY + "px";
-    }
-  }
+  // onMouseMove(event: MouseEvent) {
+  //   if (this.draggableEl) {
+  //     this.draggableEl.style.left = event.pageX + 'px';
+  //     this.draggableEl.style.top = event.pageY + 'px';
+  //   }
+  // }
 
-  onMouseUp(event: MouseEvent) {
-    this.draggableEl = null;
-  }
+  // onMouseUp(event: MouseEvent) {
+  //   this.draggableEl = null;
+  // }
 
   findCart = () => {
     if (this.usersServiceService._Users) {
@@ -45,9 +48,6 @@ export class MainLogInComponent implements OnInit {
       }
     }
   };
-
-
-  
 
   ngOnInit(): void {}
 }

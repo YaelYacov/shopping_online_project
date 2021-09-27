@@ -1,53 +1,80 @@
-.sw{
-    width:15%;
-     align-self: auto 
+.sw {
+  width: 15%;
+  align-self: auto;
 }
 
-.bw{
-    width:85%
+.bw {
+  width: 85%;
 }
 
-.borderR > .borderCol {
-    /* position: relative; */
-    background-color: gray;
-    cursor: e-resize;
-    padding:0, 0, 10px, 10px;
-    margin: 0;
-    z-index: 1;
-    
-
-
+.borderR {
+  background-color: gray;
+  cursor: e-resize;
+  border-right: gray 10px solid;
+  /* padding: 0, 0, 10px, 10px; */
+  /* padding-left: 10px; */
+  /* z-index: 0; */
+  width: 350px;
+  /* position: relative; */
+  /* flex-wrap: wrap; */
 }
 
-	/* div:nth-child(1) */
-.borderCol :nth-child(1) {
-    background-color: white;
-    cursor: context-menu;
-    /* z-index: 4; */
+/* div:nth-child(1) */
+.borderCol {
+  background-color: white;
+  cursor: context-menu;
+  /* position: relative; */
 
-    /* flex-direction: column; */
+  z-index: 900;
 
-      
+  /* flex-direction: column; */
 }
 
+/* .productsDV {
+  display: flex;
+  flex: 5;
+} */
 
-.productsDV{
-    flex:5;
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  /* align-content:space-around; */
+  justify-content: center;
+  column-gap: 20px;
+
+  /* justify-content: flex-start */
+
+  /* position: fixed; */
 }
 
-.flex{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    /* align-content:space-around; */
-    justify-content:space-between;
-
-      /* justify-content: flex-start */
-
-            /* position: fixed; */
+.justFlex {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.inline{
-    display: inline;
+.flexCol {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  z-index: 1;
+  /* justify-content:space-around; */
 }
 
+.inline {
+  display: inline;
+}
+
+.block {
+  display: block;
+}
+
+.totalPP {
+  width: 55%;
+  display: inline-block;
+}
+
+.con {
+  display: flex;
+  flex-wrap: wrap;
+}

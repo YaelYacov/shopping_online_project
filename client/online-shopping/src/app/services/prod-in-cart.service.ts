@@ -14,6 +14,7 @@ export class ProdInCartService {
   _totalPrice: number = 0;
 
   _qnt: number = 1;
+  _childEl: any;
 
   constructor(public apiService: ApiService) {}
 
@@ -55,15 +56,9 @@ export class ProdInCartService {
     });
   };
 
-
-   _deleteProdInCart = (ProdInCartID: number, CartID:number) => {
-this._updateProdInCart(
-            ProdInCartID,
-            { Deleted: 0 },
-            CartID
-          )
-  }
-
+  _deleteProdInCart = (ProdInCartID: number, CartID: number) => {
+    this._updateProdInCart(ProdInCartID, { Deleted: 0 }, CartID);
+  };
 }
 
 // `ID`, `Qnt`, `TotalPrice`, `createdAt`, `updatedAt`, `CartID`, `ProductID`;

@@ -1,25 +1,34 @@
 <!-- *ngFor="let product of productsService._products"
 -->
-  <div class="card-body alignCenter" class="card" style="width: 18rem">
+<!-- class="col-xl-3 col-lg-3 col-md-6 m-xl-3 m-lg-3 m-md-2" -->
+<!-- <div (mousedown)="prodInCartService._childEl = $event.target"> -->
+<div class="card alignCenter constSize">
+  <div class="card-body">
     <div class="row">
       <div class="col-4">
-        <i class="fa fa-trash" *ngIf="!ProdType" (click)="prodInCartService._deleteProdInCart(ProdInCart.ID,usersServiceService._Users.CartID )" ></i>
-
+        <i
+          class="fa fa-trash"
+          *ngIf="!ProdType"
+          (click)="
+            prodInCartService._deleteProdInCart(
+              ProdInCart.ID,
+              usersServiceService._Users.CartID
+            )
+          "
+        ></i>
       </div>
       <div class="col-4">
         <h5 class="card-title">
           {{ ProdType ? Product.Name : ProdInCart.Product.Name }}
         </h5>
       </div>
-      <div class="col-4">
-        
-      </div>
+      <div class="col-4"></div>
     </div>
     <div class="row">
       <img
-      src="https://res.feednews.com/assets/v2/bdcbeefd15297ea254af962c9093ba00?width=1280&height=720&quality=hq&category=us_Digital_Technology"
-      class="card-img-top"
-      alt="..."
+        src="https://res.feednews.com/assets/v2/bdcbeefd15297ea254af962c9093ba00?width=1280&height=720&quality=hq&category=us_Digital_Technology"
+        class="card-img-top"
+        alt="..."
       />
     </div>
     <div class="row">
@@ -38,53 +47,51 @@
         <div class="row">
           <div class="col-2">
             <i
-            [attr.disabled]="isProdInCart(Product.ID) == 0 ?true: false"
-            
-            class="fas fa-plus"
-            (click)="
-            increaseOrDecreaseQnt(
-              true,
-              Product.ID,
-              ProdInCart.Qnt,
-              ProdInCart.ID
-              )
+              class="fas fa-plus"
+              (click)="
+                increaseOrDecreaseQnt(
+                  true,
+                  Product.ID,
+                  ProdInCart.Qnt,
+                  ProdInCart.ID
+                )
               "
-              ></i>
-            </div>
-            <div class="col-8">
-              <button
+            ></i>
+          </div>
+          <div class="col-8">
+            <button
               id="myBtn"
               *ngIf="ProdType"
               (click)="addToCart(Product.ID)"
               class="btn btn-primary"
-              >
+            >
               Add To Cart
             </button>
-            <input
-            *ngIf="!ProdType"
-            type="text"
-            class="form-control"
-            name="password"
-            id="password"
-            [(ngModel)]="prodInCartService._singleProdInCart.Qnt"
-            />
+            <!-- <input
+              *ngIf="!ProdType"
+              type="text"
+              class="form-control"
+              name="password"
+              id="password"
+              [(ngModel)]="prodInCartService._singleProdInCart.Qnt"
+            /> -->
           </div>
           <div class="col-2">
             <i
-            class="fas fa-minus"
-            (click)="
-            increaseOrDecreaseQnt(
-              false,
-              Product.ID,
-              ProdInCart.Qnt,
-              ProdInCart.ID
-              )
+              class="fas fa-minus"
+              (click)="
+                increaseOrDecreaseQnt(
+                  false,
+                  Product.ID,
+                  ProdInCart.Qnt,
+                  ProdInCart.ID
+                )
               "
-              ></i>
-            </div>
+            ></i>
           </div>
         </div>
       </div>
     </div>
-  
-  
+  </div>
+</div>
+<!-- </div> -->

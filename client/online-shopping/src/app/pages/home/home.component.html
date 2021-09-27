@@ -1,22 +1,118 @@
+<!-- <div class=""> -->
+<!--  -->
+<!--  -->
+<!-- <div
+  id="cartRBorder"
+  class="row"
+  (mousedown)="draggableEl = $event.target"
+  (document:mousemove)="onMouseMove($event)"
+  (document:mouseup)="onMouseUp($event)"
+> -->
 
-  <!-- <div class=""> -->
-<div id="cartRBorder" class="borderR flex "  
- (mousedown)="draggableEl = $event.target" 
-  (document:mousemove)="onMouseMove($event)" 
-  (document:mouseup)="onMouseUp($event)">
-  <div class=" borderCol"> 
-    <app-cart></app-cart>
+<!-- </div> -->
+
+<!-- </div> -->
+
+<!-- [ngClass]="step == 'step1' ? 'my_class1' : 'my_class2'" -->
+<div class="row">
+  <div
+    class="cart"
+    [ngClass]="
+      third
+        ? 'col-xl-4 col-lg-4 col-md-4'
+        : half
+        ? 'col-xl-6 col-lg-6 col-md-6'
+        : twoOverThree
+        ? 'col-xl-8 col-lg-8 col-md-8'
+        : threeOverThree
+        ? 'col-xl-12 col-lg-12 col-md-12'
+        : 'col-xl-4 col-lg-4 col-md-4'
+    "
+  >
+    <div class="cartRow row">
+      <div
+        class="borderR"
+        (mousedown)="draggableEl = $event.target"
+        (mousedown)="isReSize = true"
+        (document:mousemove)="onMouseMove($event)"
+        (document:mouseup)="onMouseUp($event)"
+      >
+        <!-- <app-cart></app-cart> -->
+
+        <i class="fa fa-trash" (click)="deleteAllProdsFromCart()"></i>
+        <!-- col-xl-2 col-lg-2 col-md-6 -->
+        <div class="borderCol row">
+          <div
+            class="m-xl-2 m-lg-2 m-md-1"
+            [ngClass]="
+              third
+                ? 'col-xl-12 col-lg-12 col-md-12'
+                : half
+                ? 'col-xl-6 col-lg-6 col-md-6'
+                : twoOverThree
+                ? 'col-xl-4 col-lg-4 col-md-4'
+                : threeOverThree
+                ? 'col-xl-3 col-lg-3 col-md-3'
+                : 'col-xl-2 col-lg-2 col-md-2'
+            "
+            (mousedown)="childEl = $event.target"
+            (document:mousemove)="onMouseMove($event)"
+            *ngFor="let ProdInCart of prodInCartService._prodInCart"
+          >
+            <!-- <app-prod-in-cart-card [ProdInCart]="ProdInCart"></app-prod-in-cart-card> -->
+            <app-product-card
+              [ProdInCart]="ProdInCart"
+              [ProdType]="false"
+            ></app-product-card>
+          </div>
+        </div>
+
+        <hr />
+
+        <p class="totalPP">Total: {{ prodInCartService._totalPrice }}</p>
+        <button class="btn btn-primary" routerLink="/orders">
+          Initiate Checkout
+        </button>
+      </div>
+    </div>
   </div>
-    <!-- </div> -->
 
-  <div class=" productsDV flex">
-    <div *ngFor="let Product of productsService._products">
-      <app-product-card
-        [ProdType]="true"
-        [Product]="Product"
-      ></app-product-card>
+  <div
+    class="products"
+    [ngClass]="
+      third
+        ? 'col-xl-8 col-lg-8 col-md-8'
+        : half
+        ? 'col-xl-6 col-lg-6 col-md-6'
+        : twoOverThree
+        ? 'col-xl-4 col-lg-4 col-md-4'
+        : threeOverThree
+        ? 'col-xl-12 col-lg-12 col-md-12'
+        : 'col-xl-4 col-lg-4 col-md-4'
+    "
+  >
+    <div class="row prodsRow">
+      <!-- col-xl-3 col-lg-3 col-md-6 col-sm-12 -->
+      <div
+        class="m-xl-2 m-lg-2 m-md-2"
+        [ngClass]="
+          third
+            ? 'col-xl-3 col-lg-3 col-md-3'
+            : half
+            ? 'col-xl-4 col-lg-4 col-md-4'
+            : twoOverThree
+            ? 'col-xl-6 col-lg-6 col-md-6'
+            : threeOverThree
+            ? 'col-xl-12 col-lg-12 col-md-12'
+            : 'col-xl-3 col-lg-3 col-md-3'
+        "
+        *ngFor="let Product of productsService._products"
+      >
+        <app-product-card
+          [ProdType]="true"
+          [Product]="Product"
+        ></app-product-card>
+      </div>
     </div>
   </div>
 </div>
-
-

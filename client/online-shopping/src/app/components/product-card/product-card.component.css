@@ -1,3 +1,13 @@
-.alignCenter{
-    align-items: center;
+.alignCenter {
+  align-items: center;
+}
+
+.inBl {
+  display: inline-block;
+}
+
+.constSize {
+  overflow-y: scroll;
+  height: 390px;
+  width: 300px;
 }

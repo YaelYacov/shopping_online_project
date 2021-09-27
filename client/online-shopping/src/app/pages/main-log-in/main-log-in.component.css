@@ -1,14 +1,12 @@
-.flex{
-      display: flex;
+.flex {
+  display: flex;
 }
 
-.col{
-    width: 50%
+.col {
+  width: 50%;
 }
 
-
-
-.draggable-box {
+/* .draggable-box {
   position: absolute;
   top: 0;
   left: 0;
@@ -16,4 +14,4 @@
   cursor: grab;
   width: 48px;
   height: 48px;  
-}
+} */

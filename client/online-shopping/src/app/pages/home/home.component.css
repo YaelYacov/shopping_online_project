@@ -7,10 +7,10 @@
   width: 85%;
 }
 
-.borderR {
+.borderR > .borderCol {
   background-color: gray;
-  cursor: e-resize;
-  border-right: gray 10px solid;
+  /* cursor: e-resize; */
+  border-right: gray 15px solid;
   /* padding: 0, 0, 10px, 10px; */
   /* padding-left: 10px; */
   /* z-index: 0; */
@@ -20,10 +20,12 @@
 }
 
 /* div:nth-child(1) */
-.borderCol {
+.borderR > .borderCol {
   background-color: white;
   cursor: context-menu;
-  /* position: relative; */
+  width: 350px;
+
+  /* position: absolute; */
 
   z-index: 900;
 

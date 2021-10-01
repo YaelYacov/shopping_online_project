@@ -28,15 +28,22 @@ export class OrdersService {
     console.log(this._orders);
   };
 
-  _addNewOrder = async () => {
-    await this.apiService.createPostService('orders/addNewOrder', {
-      TotalPrice: 555,
-      City: "Rosh Haa'ain",
-      Street: 'Hachashmonaim',
-      LastDigitsOfCard: '2546',
-      userID: 2,
-    });
+  _addNewOrder = async (reqBody: object) => {
+    await this.apiService.createPostService(
+      'orders/addNewOrder',
+      //  {
+      //   TotalPrice: 555,
+      //   City: "Rosh Haa'ain",
+      //   Street: 'Hachashmonaim',
+      //   LastDigitsOfCard: '2546',
+      //   userID: 2,
+      // }
+      reqBody
+    );
     this._getOrders();
     console.log(this._orders);
   };
 }
+
+//create order only if client doesnt have an 'order in place  == 3' option
+//orderss in place: 0 = new order 1 = active 2= closed order

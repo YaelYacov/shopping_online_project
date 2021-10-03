@@ -10,6 +10,7 @@ import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { SettingsService } from 'src/app/services/settings.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
+// import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-main-log-in',
@@ -27,17 +28,6 @@ export class MainLogInComponent implements OnInit {
   ) {}
 
   draggableEl: any;
-
-  // onMouseMove(event: MouseEvent) {
-  //   if (this.draggableEl) {
-  //     this.draggableEl.style.left = event.pageX + 'px';
-  //     this.draggableEl.style.top = event.pageY + 'px';
-  //   }
-  // }
-
-  // onMouseUp(event: MouseEvent) {
-  //   this.draggableEl = null;
-  // }
 
   findCart = () => {
     if (this.usersServiceService._Users) {

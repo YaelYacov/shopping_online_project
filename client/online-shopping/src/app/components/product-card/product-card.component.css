@@ -7,7 +7,8 @@
 }
 
 .constSize {
-  overflow-y: scroll;
-  height: 390px;
-  width: 300px;
+  /* overflow-y: scroll; */
+  overflow-y: auto;
+  height: 400px;
+  width: 240px;
 }

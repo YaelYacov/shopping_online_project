@@ -4,6 +4,7 @@ import { ProductsService } from 'src/app/services/products.service';
 
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
+import { ResizeEvent } from 'angular-resizable-element';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,13 @@ export class HomeComponent implements OnInit {
   twoOverThree: boolean = false;
   threeOverThree: boolean = false;
 
+  //
+  oneFifths: boolean = true;
+  twoFifths: boolean = false;
+  threeFifths: boolean = false;
+  fourFifths: boolean = false;
+  fiveFifths: boolean = false;
+  //
   constructor(
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
@@ -33,24 +41,66 @@ export class HomeComponent implements OnInit {
     // this.draggableEl.style.width = 290+"px"
   }
 
-  // childOnMouseMove(event: MouseEvent) {
-  //   console.log(this.draggableEl, this.childEl);
-  //   if (this.childEl != undefined || this.childEl != null) {
-  //     this.draggableEl = null;
-  //     this.childEl = null;
+  public style: object = {};
 
-  //     // this.prodInCartService._childEl = null;
-  //   } else if (this.draggableEl && event.pageX > 350) {
-  //     this.draggableEl = this.draggableEl.style.width = event.pageX + 'px';
-  //     this.childEl = null;
-  //     this.prodInCartService._childEl = null;
-  //   }
-  // }
+  validate(event: ResizeEvent): boolean {
+    const MIN_DIMENSIONS_PX: number = screen.width / 5;
+    // console.log(event.rectangle);
+    if (
+      event.rectangle.width &&
+      event.rectangle.height &&
+      (event.rectangle.width < MIN_DIMENSIONS_PX ||
+        event.rectangle.width > (screen.width / 5) * 4)
+    ) {
+      return false;
+    }
+    return true;
+  }
 
-  // onMouseOver(event: any) {
-  //   if (this.draggableEl && event.path.length == 10)
-  //     this.draggableEl.style.cursor = 'e-resize';
-  // }
+  onResizeEnd(event: ResizeEvent): void {
+    console.log(event.rectangle.right);
+    this.style = {
+      position: 'relative',
+      left: `${event.rectangle.left}px`,
+      top: `20px`,
+      width: `${event.rectangle.width}px`,
+      height: `${event.rectangle.height}px`,
+    };
+    let relativeToScreenWidth: number = 1;
+    relativeToScreenWidth = screen.width / 5;
+
+    if (event.rectangle.right < relativeToScreenWidth) {
+      this.oneFifths = true;
+      this.twoFifths = false;
+      this.threeFifths = false;
+      this.fourFifths = false;
+      this.fiveFifths = false;
+    } else if (event.rectangle.right < relativeToScreenWidth * 2) {
+      this.oneFifths = false;
+      this.twoFifths = true;
+      this.threeFifths = false;
+      this.fourFifths = false;
+      this.fiveFifths = false;
+    } else if (event.rectangle.right < relativeToScreenWidth * 3) {
+      this.oneFifths = false;
+      this.twoFifths = false;
+      this.threeFifths = true;
+      this.fourFifths = false;
+      this.fiveFifths = false;
+    } else if (event.rectangle.right < relativeToScreenWidth * 4) {
+      this.oneFifths = false;
+      this.twoFifths = false;
+      this.threeFifths = false;
+      this.fourFifths = true;
+      this.fiveFifths = false;
+    } else {
+      this.oneFifths = false;
+      this.twoFifths = false;
+      this.threeFifths = false;
+      this.fourFifths = false;
+      this.fiveFifths = true;
+    }
+  }
 
   onMouseMove(event: any) {
     // console.log(event.target.classList.value);

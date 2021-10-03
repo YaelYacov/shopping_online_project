@@ -17,6 +17,10 @@ import { WhyYouShouldBuyComponent } from './components/why-you-should-buy/why-yo
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MainLogInComponent } from './pages/main-log-in/main-log-in.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ResizableModule } from 'angular-resizable-element';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,16 @@ import { OrdersComponent } from './pages/orders/orders.component';
     MainLogInComponent,
     OrdersComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    DragDropModule,
+    ResizableModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

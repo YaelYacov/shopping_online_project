@@ -41,3 +41,7 @@ mwlResizable {
 .resize-handle-right {
   right: 0;
 }
+
+.prodCol {
+  position: relative;
+}

@@ -1,5 +1,3 @@
-<!-- [ngClass]="step == 'step1' ? 'my_class1' : 'my_class2'" -->
-
 <div class="row">
   <div
     class="cartCol"
@@ -24,7 +22,14 @@
       [resizeSnapGrid]="{ left: 1, right: 1 }"
       (resizeEnd)="onResizeEnd($event)"
     >
-      <i class="fa fa-trash" (click)="deleteAllProdsFromCart()"></i>
+      <div class="row">
+        <div class="col-2">
+          <i class="fa fa-trash" (click)="deleteAllProdsFromCart()"></i>
+        </div>
+        <div class="col-8"></div>
+        <div class="col-2"></div>
+      </div>
+
       <div
         [ngClass]="
           oneFifths
@@ -81,6 +86,7 @@
     fffff
     <div class="row prodRow">
       <div
+        class="prodCol"
         [ngClass]="
           oneFifths
             ? 'col-xl-3 col-lg-3 col-md-3'
@@ -102,170 +108,3 @@
     </div>
   </div>
 </div>
-
-<!-- new try -->
-
-<!-- <div class="row"></div>
-<div class="row">
-  <div
-    class="rectangle"
-    [ngStyle]="style"
-    mwlResizable
-    [validateResize]="validate"
-    [enableGhostResize]="true"
-    [resizeSnapGrid]="{ left: 1, right: 1 }"
-    (resizeEnd)="onResizeEnd($event)"
-  >
-    Angular Resizable Element
-
-    <div class="col-1">
-      <div
-        class="resize-handle-left"
-        mwlResizeHandle
-        [resizeEdges]="{ left: true }"
-      ></div>
-    </div>
-    <div class="col-10">
-      <div
-        class="resize-handle-top"
-        mwlResizeHandle
-        [resizeEdges]="{ top: true }"
-      ></div>
-    </div>
-    <div class="col-1">
-      <div
-        class="resize-handle-right"
-        mwlResizeHandle
-        [resizeEdges]="{ right: true }"
-      ></div>
-    </div>
-  </div>
-  <div class="row">
-    <div
-      class="resize-handle-bottom"
-      mwlResizeHandle
-      [resizeEdges]="{ bottom: true }"
-    ></div>
-  </div> -->
-
-<!-- try -->
-
-<!-- 
-  <div class="row">
-    <div
-      class="rectangle"
-      [ngStyle]="style"
-      mwlResizable
-      [validateResize]="validate"
-      [enableGhostResize]="true"
-      [resizeSnapGrid]="{ left: 1, right: 1 }"
-      (resizeEnd)="onResizeEnd($event)"
-    >
-      <div
-        class="cart"
-        [ngClass]="
-          third
-            ? 'col-xl-4 col-lg-4 col-md-4'
-            : half
-            ? 'col-xl-6 col-lg-6 col-md-6'
-            : twoOverThree
-            ? 'col-xl-8 col-lg-8 col-md-8'
-            : threeOverThree
-            ? 'col-xl-12 col-lg-12 col-md-12'
-            : 'col-xl-4 col-lg-4 col-md-4'
-        "
-      >
-        <div class="borderCol row">
-          <i class="fa fa-trash" (click)="deleteAllProdsFromCart()"></i>
-          <div
-            class="m-xl-2 m-lg-2 m-md-1"
-            [ngClass]="
-              third
-                ? 'col-xl-12 col-lg-12 col-md-12'
-                : half
-                ? 'col-xl-6 col-lg-6 col-md-6'
-                : twoOverThree
-                ? 'col-xl-4 col-lg-4 col-md-4'
-                : threeOverThree
-                ? 'col-xl-3 col-lg-3 col-md-3'
-                : 'col-xl-4 col-lg-4 col-md-4'
-            "
-            *ngFor="let ProdInCart of prodInCartService._prodInCart"
-          >
-            <app-product-card
-              [ProdInCart]="ProdInCart"
-              [ProdType]="false"
-            ></app-product-card>
-          </div>
-        </div>
-
-        <hr />
-
-        <p class="totalPP">Total: {{ prodInCartService._totalPrice }}</p>
-        <button class="btn btn-primary" routerLink="/orders">
-          Initiate Checkout
-        </button>
-      </div>
-    </div>
-
-    <div
-      class="resize-handle-top"
-      mwlResizeHandle
-      [resizeEdges]="{ top: true }"
-    ></div>
-    <div
-      class="resize-handle-left"
-      mwlResizeHandle
-      [resizeEdges]="{ left: true }"
-    ></div>
-    <div
-      class="resize-handle-right"
-      mwlResizeHandle
-      [resizeEdges]="{ right: true }"
-    ></div>
-    <div
-      class="resize-handle-bottom"
-      mwlResizeHandle
-      [resizeEdges]="{ bottom: true }"
-    ></div>
-
-    <div
-      class="products"
-      [ngClass]="
-        third
-          ? 'col-xl-8 col-lg-8 col-md-8'
-          : half
-          ? 'col-xl-6 col-lg-6 col-md-6'
-          : twoOverThree
-          ? 'col-xl-4 col-lg-4 col-md-4'
-          : threeOverThree
-          ? 'col-xl-12 col-lg-12 col-md-12'
-          : 'col-xl-8 col-lg-8 col-md-8'
-      "
-    >
-      <div class="row prodsRow">
-        <div
-          class="m-xl-2 m-lg-2 m-md-2"
-          [ngClass]="
-            third
-              ? 'col-xl-3 col-lg-3 col-md-3'
-              : half
-              ? 'col-xl-4 col-lg-4 col-md-4'
-              : twoOverThree
-              ? 'col-xl-6 col-lg-6 col-md-6'
-              : threeOverThree
-              ? 'col-xl-4 col-lg-4 col-md-4'
-              : 'col-xl-3 col-lg-3 col-md-3'
-          "
-          *ngFor="let Product of productsService._products"
-        >
-          <app-product-card
-            [ProdType]="true"
-            [Product]="Product"
-          ></app-product-card>
-        </div>
-      </div>
-    </div>
-  </div> -->
-<!-- </div> -->
-<!-- </div> row -->

@@ -19,15 +19,18 @@
       mwlResizable
       [validateResize]="validate"
       [enableGhostResize]="true"
-      [resizeSnapGrid]="{ left: 1, right: 1 }"
+      [resizeSnapGrid]="{ right: 1 }"
       (resizeEnd)="onResizeEnd($event)"
     >
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-2">
-          <i class="fa fa-trash" (click)="deleteAllProdsFromCart()"></i>
         </div>
         <div class="col-8"></div>
         <div class="col-2"></div>
+      </div> -->
+
+      <div class="col-12">
+        <i class="fa fa-trash trash" (click)="deleteAllProdsFromCart()"></i>
       </div>
 
       <div
@@ -57,19 +60,21 @@
         Initiate Checkout
       </button>
 
-      Angular Resizable Element eee
       <div class="resize-handle-top"></div>
       <div class="resize-handle-left"></div>
       <div
+        id="resizeRight"
         class="resize-handle-right"
         mwlResizeHandle
         [resizeEdges]="{ right: true }"
+        (document:mousedown)="collusionTest($event)"
       ></div>
       <div class="resize-handle-bottom"></div>
     </div>
   </div>
 
   <div
+    id="prodCol"
     class="pageCol"
     [ngClass]="
       oneFifths
@@ -79,14 +84,14 @@
         : threeFifths
         ? 'col-xl-5 col-lg-5 col-md-5'
         : fourFifths
-        ? 'col-xl-3 col-lg-3 col-md-3'
-        : 'col-xl-3 col-lg-3 col-md-3'
+        ? 'col-xl-2 col-lg-2 col-md-2'
+        : 'col-xl-2 col-lg-2 col-md-2'
     "
   >
-    fffff
-    <div class="row prodRow">
+    <div class="row prodRow" id="prodRow">
       <div
         class="prodCol"
+        *ngFor="let Product of productsService._products"
         [ngClass]="
           oneFifths
             ? 'col-xl-3 col-lg-3 col-md-3'
@@ -98,7 +103,6 @@
             ? 'col-xl-12 col-lg-12 col-md-12'
             : 'col-xl-12 col-lg-12 col-md-12'
         "
-        *ngFor="let Product of productsService._products"
       >
         <app-product-card
           [ProdType]="true"

@@ -8,7 +8,8 @@
 
 .constSize {
   /* overflow-y: scroll; */
+  position: initial;
   overflow-y: auto;
-  height: 400px;
-  width: 240px;
+  height: 100%;
+  width: 250px;
 }

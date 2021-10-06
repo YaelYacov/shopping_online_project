@@ -38,19 +38,29 @@ export class HomeComponent implements OnInit {
       event.rectangle.width &&
       event.rectangle.height &&
       (event.rectangle.width < MIN_DIMENSIONS_PX - 5 ||
-        event.rectangle.width > (screen.width / 5) * 4 + 20)
+        event.rectangle.width > (screen.width / 5) * 4 + 30)
     ) {
       return false;
     }
     return true;
   }
 
-  onResizeEnd(event: ResizeEvent): void {
+  collusionTest = (event: any) => {
+    console.log(event);
+  };
+
+  onResizeEnd(event: any): void {
+    let prodRow: any;
+    let resizeRight: any;
+    prodRow = document.getElementById('prodRow');
+    resizeRight = document.getElementById('resizeRight');
+    console.log(prodRow.contains(resizeRight));
     console.log(event.rectangle.right);
     this.style = {
       position: 'relative',
       left: `${event.rectangle.left}px`,
       top: `20px`,
+      bottom: `20px`,
       width: `${event.rectangle.width}px`,
       height: `${event.rectangle.height}px`,
     };
@@ -58,6 +68,7 @@ export class HomeComponent implements OnInit {
     relativeToScreenWidth = screen.width / 5;
 
     if (event.rectangle.right < relativeToScreenWidth * 2) {
+      //
       this.oneFifths = true;
       this.twoFifths = false;
       this.threeFifths = false;

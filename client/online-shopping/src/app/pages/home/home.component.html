@@ -2,15 +2,7 @@
   <div
     class="cartCol"
     [ngClass]="
-      oneFifths
-        ? 'col-xl-3 col-lg-3 col-md-3'
-        : twoFifths
-        ? 'col-xl-5 col-lg-5 col-md-5'
-        : threeFifths
-        ? 'col-xl-7 col-lg-7 col-md-7'
-        : fourFifths
-        ? 'col-xl-9 col-lg-9 col-md-9'
-        : 'col-xl-9 col-lg-9 col-md-9'
+      resizable ? 'col-xl-1 col-lg-1 col-md-1' : 'col-xl-3 col-lg-3 col-md-3'
     "
   >
     <div
@@ -22,29 +14,12 @@
       [resizeSnapGrid]="{ right: 1 }"
       (resizeEnd)="onResizeEnd($event)"
     >
-      <!-- <div class="row">
-        <div class="col-2">
-        </div>
-        <div class="col-8"></div>
-        <div class="col-2"></div>
-      </div> -->
-
       <div class="col-12">
         <i class="fa fa-trash trash" (click)="deleteAllProdsFromCart()"></i>
       </div>
 
       <div
-        [ngClass]="
-          oneFifths
-            ? 'col-xl-12 col-lg-12 col-md-12'
-            : twoFifths
-            ? 'col-xl-6 col-lg-6 col-md-6'
-            : threeFifths
-            ? 'col-xl-4 col-lg-4 col-md-4'
-            : fourFifths
-            ? 'col-xl-3 col-lg-3 col-md-3'
-            : 'col-xl-3 col-lg-3 col-md-3'
-        "
+        [ngClass]="resizable ? 'col' : 'col-xl-12 col-lg-12 col-md-12'"
         *ngFor="let ProdInCart of prodInCartService._prodInCart"
       >
         <app-product-card
@@ -67,7 +42,6 @@
         class="resize-handle-right"
         mwlResizeHandle
         [resizeEdges]="{ right: true }"
-        (document:mousedown)="collusionTest($event)"
       ></div>
       <div class="resize-handle-bottom"></div>
     </div>
@@ -77,15 +51,7 @@
     id="prodCol"
     class="pageCol"
     [ngClass]="
-      oneFifths
-        ? 'col-xl-9 col-lg-9 col-md-9'
-        : twoFifths
-        ? 'col-xl-7 col-lg-7 col-md-7'
-        : threeFifths
-        ? 'col-xl-5 col-lg-5 col-md-5'
-        : fourFifths
-        ? 'col-xl-2 col-lg-2 col-md-2'
-        : 'col-xl-2 col-lg-2 col-md-2'
+      resizable ? 'col-xl-11 col-lg-11 col-md-11' : 'col-xl-9 col-lg-9 col-md-9'
     "
   >
     <div class="row prodRow" id="prodRow">
@@ -93,15 +59,9 @@
         class="prodCol"
         *ngFor="let Product of productsService._products"
         [ngClass]="
-          oneFifths
-            ? 'col-xl-3 col-lg-3 col-md-3'
-            : twoFifths
-            ? 'col-xl-4 col-lg-4 col-md-4'
-            : threeFifths
-            ? 'col-xl-6 col-lg-6 col-md-6'
-            : fourFifths
-            ? 'col-xl-12 col-lg-12 col-md-12'
-            : 'col-xl-12 col-lg-12 col-md-12'
+          resizable
+            ? 'col-xl-2 col-lg-2 col-md-2'
+            : 'col-xl-3 col-lg-3 col-md-3'
         "
       >
         <app-product-card

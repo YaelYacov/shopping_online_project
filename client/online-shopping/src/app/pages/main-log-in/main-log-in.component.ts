@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Renderer2,
-  OnDestroy,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -23,21 +17,22 @@ export class MainLogInComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
     public cartsService: CartsService,
-    public prodInCartService: ProdInCartService,
-    private renderer2: Renderer2
+    public prodInCartService: ProdInCartService
   ) {}
 
   draggableEl: any;
 
   findCart = () => {
     if (this.usersServiceService._Users) {
+      console.log(this.usersServiceService._Users);
       let CartID = this.usersServiceService._Users.CartID;
-      if (CartID > 0) {
-      } else {
+      localStorage.setItem('currentUser', this.usersServiceService._Users);
+      if (!CartID)
         this.cartsService._addNewCart(this.usersServiceService._Users.ID);
-      }
     }
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(window.location.pathname);
+  }
 }

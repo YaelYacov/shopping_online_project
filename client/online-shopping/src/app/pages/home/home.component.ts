@@ -12,11 +12,7 @@ import { ResizeEvent } from 'angular-resizable-element';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  oneFifths: boolean = true;
-  twoFifths: boolean = false;
-  threeFifths: boolean = false;
-  fourFifths: boolean = false;
-  fiveFifths: boolean = false;
+  resizable: boolean = false;
   constructor(
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
@@ -37,73 +33,31 @@ export class HomeComponent implements OnInit {
     if (
       event.rectangle.width &&
       event.rectangle.height &&
-      (event.rectangle.width < MIN_DIMENSIONS_PX - 5 ||
-        event.rectangle.width > (screen.width / 5) * 4 + 30)
+      event.rectangle.width > MIN_DIMENSIONS_PX
     ) {
       return false;
     }
     return true;
   }
 
-  collusionTest = (event: any) => {
-    console.log(event);
-  };
-
   onResizeEnd(event: any): void {
-    let prodRow: any;
-    let resizeRight: any;
-    prodRow = document.getElementById('prodRow');
-    resizeRight = document.getElementById('resizeRight');
-    console.log(prodRow.contains(resizeRight));
-    console.log(event.rectangle.right);
+    // console.log(event.rectangle.right);
+    // console.log(screen.width / 5 / 2);
     this.style = {
       position: 'relative',
       left: `${event.rectangle.left}px`,
       top: `20px`,
-      bottom: `20px`,
+      bottom: `10px`,
       width: `${event.rectangle.width}px`,
       height: `${event.rectangle.height}px`,
     };
-    let relativeToScreenWidth: number = 1;
-    relativeToScreenWidth = screen.width / 5;
+    this.resizable = true;
 
-    if (event.rectangle.right < relativeToScreenWidth * 2) {
-      //
-      this.oneFifths = true;
-      this.twoFifths = false;
-      this.threeFifths = false;
-      this.fourFifths = false;
-      this.fiveFifths = false;
-      this.style.width = `${relativeToScreenWidth}px`;
-    } else if (event.rectangle.right < relativeToScreenWidth * 3) {
-      this.oneFifths = false;
-      this.twoFifths = true;
-      this.threeFifths = false;
-      this.fourFifths = false;
-      this.fiveFifths = false;
-      this.style.width = `${relativeToScreenWidth * 2}px`;
-    } else if (event.rectangle.right < relativeToScreenWidth * 4) {
-      this.oneFifths = false;
-      this.twoFifths = false;
-      this.threeFifths = true;
-      this.fourFifths = false;
-      this.fiveFifths = false;
-      this.style.width = `${relativeToScreenWidth * 3}px`;
-    } else if (event.rectangle.right < relativeToScreenWidth * 5) {
-      this.oneFifths = false;
-      this.twoFifths = false;
-      this.threeFifths = false;
-      this.fourFifths = true;
-      this.fiveFifths = false;
-      this.style.width = `${relativeToScreenWidth * 4}px`;
-    } else {
-      this.oneFifths = false;
-      this.twoFifths = false;
-      this.threeFifths = false;
-      this.fourFifths = false;
-      this.fiveFifths = true;
-      this.style.width = `${relativeToScreenWidth * 5}px`;
-    }
+    if (
+      event.rectangle.right < screen.width / 5 &&
+      event.rectangle.right > screen.width / 5 / 3
+    )
+      this.resizable = false;
   }
 
   deleteAllProdsFromCart = () => {
@@ -116,5 +70,7 @@ export class HomeComponent implements OnInit {
     );
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(window.location.pathname);
+  }
 }

@@ -13,6 +13,7 @@ import { ResizeEvent } from 'angular-resizable-element';
 })
 export class HomeComponent implements OnInit {
   resizable: boolean = false;
+  openCart: boolean = false;
   constructor(
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
@@ -23,8 +24,6 @@ export class HomeComponent implements OnInit {
         this.usersServiceService._Users.CartID
       );
     }
-
-    // this.draggableEl.style.width = 290+"px"
   }
 
   public style: any;
@@ -43,11 +42,10 @@ export class HomeComponent implements OnInit {
   }
 
   onResizeEnd(event: any): void {
-    // console.log(event.rectangle.right);
-    // console.log(screen.width / 5 / 2);
+    console.log(event.rectangle.left);
     this.style = {
       position: 'relative',
-      left: `${event.rectangle.left}px`,
+      left: `0`,
       top: `20px`,
       bottom: `10px`,
       width: `${event.rectangle.width}px`,
@@ -72,7 +70,5 @@ export class HomeComponent implements OnInit {
     );
   };
 
-  ngOnInit(): void {
-    console.log(window.location.pathname);
-  }
+  ngOnInit(): void {}
 }

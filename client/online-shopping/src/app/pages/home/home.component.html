@@ -5,6 +5,20 @@
       resizable ? 'col-xl-1 col-lg-1 col-md-1' : 'col-xl-3 col-lg-3 col-md-3'
     "
   >
+    <div class="row">
+      <div class="col-2">
+        <i
+          *ngIf="usersServiceService._Users.IsAdmin == 1"
+          class="fas fa-plus bigger"
+        ></i>
+        <i
+          *ngIf="usersServiceService._Users.IsAdmin == 0"
+          class="fa fa-trash bigger"
+          (click)="deleteAllProdsFromCart()"
+        ></i>
+      </div>
+      <div class="col-10"></div>
+    </div>
     <div
       class="rectangle cartRow row"
       [ngStyle]="style"
@@ -14,18 +28,6 @@
       [resizeSnapGrid]="{ right: 1 }"
       (resizeEnd)="onResizeEnd($event)"
     >
-      <div class="col-12">
-        <i
-          *ngIf="usersServiceService._Users.IsAdmin == 1"
-          class="fas fa-plus"
-        ></i>
-        <i
-          *ngIf="usersServiceService._Users.IsAdmin == 0"
-          class="fa fa-trash trash"
-          (click)="deleteAllProdsFromCart()"
-        ></i>
-      </div>
-
       <div
         [ngClass]="resizable ? 'col' : 'col-xl-12 col-lg-12 col-md-12'"
         *ngFor="let ProdInCart of prodInCartService._prodInCart"

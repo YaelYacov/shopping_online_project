@@ -39,9 +39,5 @@ export class LogInComponent implements OnInit {
     // console.log(this.prodInCartService._addNewProdInCart());
   }
 
-  getUserNCart = () => {
-    this.usersServiceService._getUser();
-  };
-
   ngOnInit(): void {}
 }

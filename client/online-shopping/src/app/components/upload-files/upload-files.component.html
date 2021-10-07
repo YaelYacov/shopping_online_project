@@ -1,0 +1,17 @@
+<div class="mt-3 card">
+  <input
+    class="p-3"
+    id="img"
+    name="img"
+    type="file"
+    (change)="fileChangeEvent($event)"
+    multiple
+  />
+  <button
+    type="button"
+    class="btn btn-secondary btn-s m-2"
+    (click)="uploadFile()"
+  >
+    Upload img
+  </button>
+</div>

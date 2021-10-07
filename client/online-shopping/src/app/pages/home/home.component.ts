@@ -18,9 +18,11 @@ export class HomeComponent implements OnInit {
     public productsService: ProductsService,
     public prodInCartService: ProdInCartService
   ) {
-    this.prodInCartService._getProdInCartByCartID(
-      this.usersServiceService._Users.CartID
-    );
+    if (this.usersServiceService._Users.CartID > 0) {
+      this.prodInCartService._getProdInCartByCartID(
+        this.usersServiceService._Users.CartID
+      );
+    }
 
     // this.draggableEl.style.width = 290+"px"
   }

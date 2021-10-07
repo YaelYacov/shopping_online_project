@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ResizableModule } from 'angular-resizable-element';
+import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ResizableModule } from 'angular-resizable-element';
     AboutUsComponent,
     MainLogInComponent,
     OrdersComponent,
+    UploadFilesComponent,
   ],
   imports: [
     BrowserModule,

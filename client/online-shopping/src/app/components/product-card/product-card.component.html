@@ -25,11 +25,8 @@
       <div class="col-4"></div>
     </div>
     <div class="row">
-      <img
-        src="https://res.feednews.com/assets/v2/bdcbeefd15297ea254af962c9093ba00?width=1280&height=720&quality=hq&category=us_Digital_Technology"
-        class="card-img-top"
-        alt="..."
-      />
+      <img class="prodImg" src="{{ imgSrc(ProdType) }}" class="card-img-top" alt="..." />
+      <app-upload-files [Product]="Product"></app-upload-files>
     </div>
     <div class="row">
       <div class="col-2"></div>

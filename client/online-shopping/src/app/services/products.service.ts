@@ -6,13 +6,10 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class ProductsService {
-  // _products: <Array><Product>;
-  // _products : <Array><Products> = [];
-
   _products: Array<Product> = [];
   _filteredProds: Array<Product> = [];
   _currentCategory: any;
-  _ProdName : string = '';
+  _ProdName: string = '';
 
   constructor(public apiService: ApiService) {}
 
@@ -29,9 +26,12 @@ export class ProductsService {
   };
 
   _getProdByName = async (Name: any) => {
-this._products = (await this.apiService.createPostService('products/getProdByName', {Name:Name})) as Array<Product>;
-console.log(this._products);
-  }
+    this._products = (await this.apiService.createPostService(
+      'products/getProdByName',
+      { Name: Name }
+    )) as Array<Product>;
+    console.log(this._products);
+  };
 
   _addNewProd = async () => {
     await this.apiService.createPostService('products/addNewProd', {
@@ -43,10 +43,10 @@ console.log(this._products);
     this._getAllProducts();
   };
 
-  _editProd = async () => {
+  _editProd = async (ID: number, editCol: object) => {
     await this.apiService.createPostService('products/editProd', {
-      ID: 1,
-      editCol: { Name: 'White whine!', Price: 91.9 },
+      ID: ID,
+      editCol: editCol,
     });
 
     this._getAllProducts();

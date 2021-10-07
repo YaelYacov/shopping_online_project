@@ -12,7 +12,10 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent implements OnInit {
-  // @Input() product:
+  @Input() Product: Product = new Product();
+  @Input() ProdInCart: ProdInCart = new ProdInCart();
+  @Input() ProdType: boolean = true;
+  imgName: string = '';
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -28,13 +31,6 @@ export class ProductCardComponent implements OnInit {
       );
     }
   }
-
-  // Get the modal
-
-  @Input() Product: Product = new Product();
-  @Input() ProdInCart: ProdInCart = new ProdInCart();
-  @Input() ProdType: boolean = true;
-  // totalPrice: number = 0
 
   isProdInCart = (ProductID: number) => {
     let IsProdInCart: any;
@@ -55,34 +51,39 @@ export class ProductCardComponent implements OnInit {
     qnt: number,
     prodInCartID: number
   ) => {
-
-    if (prodInCartID == 0 && this.isProdInCart(ProductID) == undefined ||prodInCartID == 0 && this.isProdInCart(ProductID) == 0 ) {
-      this.prodInCartService._addNewProdInCart( this.usersServiceService._Users.CartID,ProductID )
-    }else{
-
+    if (
+      (prodInCartID == 0 && this.isProdInCart(ProductID) == undefined) ||
+      (prodInCartID == 0 && this.isProdInCart(ProductID) == 0)
+    ) {
+      this.prodInCartService._addNewProdInCart(
+        this.usersServiceService._Users.CartID,
+        ProductID
+      );
+    } else {
       let ProdInCartID =
         prodInCartID > 0 ? prodInCartID : this.isProdInCart(ProductID).ID;
       let Qnt = ProductID > 0 ? this.isProdInCart(ProductID).Qnt : qnt;
-  
+
       Qnt = !type ? Qnt - 1 : Qnt + 1;
-  
-  
-  
+
       Qnt == 0
-        ? this.prodInCartService._deleteProdInCart(ProdInCartID, this.usersServiceService._Users.CartID)
+        ? this.prodInCartService._deleteProdInCart(
+            ProdInCartID,
+            this.usersServiceService._Users.CartID
+          )
         : this.prodInCartService._updateProdInCart(
             ProdInCartID,
             { Qnt: Qnt },
             this.usersServiceService._Users.CartID
           );
     }
-  //   console.log(this.isProdInCart(ProductID), prodInCartID > 0);
+    //   console.log(this.isProdInCart(ProductID), prodInCartID > 0);
   };
 
   addToCart = (
     ProductID: number //
   ) => {
-    console.log(this.isProdInCart(ProductID))
+    console.log(this.isProdInCart(ProductID));
     this.isProdInCart(ProductID) == 0 ||
     this.prodInCartService._prodInCart.length == 0 ||
     this.isProdInCart(ProductID) == undefined
@@ -98,17 +99,16 @@ export class ProductCardComponent implements OnInit {
         );
   };
 
-//   deleteProdInCart = (ProdInCartID: number) => {
-// this.prodInCartService._updateProdInCart(
-//             ProdInCartID,
-//             { Deleted: 0 },
-//             this.usersServiceService._Users.CartID
-//           )
-//   }
-
-
-
+  imgSrc = (type: boolean) => {
+    //type tru => product, false => prodInCart
+    if (type) {
+      return this.Product.Img;
+    } else if (!type) {
+      return this.ProdInCart.Product.Img;
+    } else {
+      return 'https://res.feednews.com/assets/v2/bdcbeefd15297ea254af962c9093ba00?width=1280&height=720&quality=hq&category=us_Digital_Technology';
+    }
+  };
 
   ngOnInit(): void {}
 }
-

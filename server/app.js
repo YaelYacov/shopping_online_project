@@ -19,35 +19,27 @@ const Sequelize = require("sequelize");
 
 const app = express();
 
-// Products.belongsToMany(Categories, { through: "products", foreignKey: "ID", sourceKey: "ID" });
-
-// Categories.hasMany(Products);
-
-Products.belongsTo(Categories); //, { foreignKey: "CategoryID", sourceKey: "ID" });
-
-// Products.hasOne(CartProduct);
-// Users.belongsToMany(Cart, { through: Cart });
-// Users.hasMany(Cart);
-// Cart.belongsTo(Users);
-// Cart.hasOne(Users, {
-//   foreignKey: {
-//     name: "userID",
-//   },
-// });
-// Cart.belongsToMany(Users, { through: "UsersCART" });
-// Cart.belongsToMany(Users, { through: Cart });
+Products.belongsTo(Categories);
 Users.hasMany(Cart);
 Cart.belongsTo(Users);
-// Cart.hasMany(Users);
-
 CartProduct.belongsTo(Cart);
-// Cart.hasMany(CartProduct);
-
 Products.hasMany(CartProduct);
 CartProduct.belongsTo(Products);
-
 Orders.belongsTo(Users);
-// Cart.hasMany(Orders);
+
+app.use(express.static(path.join(__dirname, "uploads")));
+
+let storage = multer.diskStorage({
+  // destination
+  destination: (req, file, cb) => {
+    cb(null, "./uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+let upload = multer({ storage: storage });
 
 app.use(
   bodyParser.urlencoded({
@@ -61,24 +53,6 @@ const corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
 };
-
-// app.use(function (req, res, next) {
-//   // Website you wish to allow to connect
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-
-//   // Request methods you wish to allow
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-
-//   // Request headers you wish to allow
-//   res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type");
-
-//   // Set to true if you need the website to include cookies in the requests sent
-//   // to the API (e.g. in case you use sessions)
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-
-//   // Pass to next layer of middleware
-//   next();
-// });
 
 app.use(cors(corsOptions));
 
@@ -100,40 +74,14 @@ app.use("/prodInCart", ProdInCartRoute);
 const OrdersRoute = require("./routes/ordersRoutes");
 app.use("/orders", OrdersRoute);
 
-// const UsersCart = require("./routes/UsersCartRoutes");
-// app.use("/usersCart", UsersCart);
+app.post("/upload", upload.array("uploads[]", 12), (req, res) => {
+  console.log("files", req.files);
+  res.send(req.files);
+});
 
 app.use((req, res) => {
   res.send("page not found!");
 });
-
-// app.use((err, req, res) => {
-//   console.error(err.stack);
-//   res.status(500).send("Something broke!");
-// });
-
-//uploads file
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "uploads/");
-//   },
-
-//   filename: function (req, file, cb) {
-//     cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
-//   },
-// });
-
-// var upload = multer({ storage: storage });
-
-// app.get("/", (req, res) => {
-//   res.sendFile(__dirname + "/index.html");
-// });
-
-// app.get("/", upload.array("multi-files"), (req, res) => {
-//   res.redirect("/");
-// });
-
-//uploads file
 
 sequelize
   .sync()

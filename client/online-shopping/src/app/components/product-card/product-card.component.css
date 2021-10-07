@@ -11,10 +11,14 @@
   position: initial;
   overflow-y: auto;
   height: 100%;
-  width: 90%;
+  width: 100%;
 }
 
 .prodImg {
   width: 230px;
   height: 200px;
+}
+
+.card-title {
+  text-align: center;
 }

@@ -1,7 +1,7 @@
 <div class="card alignCenter constSize">
   <div class="card-body">
     <div class="row">
-      <div class="col-4">
+      <div class="col-2">
         <i
           class="fa fa-trash"
           *ngIf="usersServiceService._Users.IsAdmin == 0 && !ProdType"
@@ -13,7 +13,7 @@
           "
         ></i>
       </div>
-      <div class="col-4">
+      <div class="col-6">
         <h3 class="card-title">
           {{ ProdType ? Product.Name : ProdInCart.Product.Name }}
         </h3>
@@ -21,14 +21,18 @@
       <div class="col-4"></div>
     </div>
     <div class="row">
-      <img
-        src="{{ imgSrc(ProdType) }}"
-        class="card-img-top prodImg"
-        alt="..."
-      />
+      <div class="col-11">
+        <img
+          src="{{ imgSrc(ProdType) }}"
+          class="card-img-top prodImg"
+          alt="..."
+        />
+      </div>
     </div>
+    <div class="col-1"></div>
+
     <div *ngIf="usersServiceService._Users.IsAdmin == 1" class="row">
-      <div class="col-12">
+      <div class="col-12 pt-2">
         <app-upload-files [Product]="Product"></app-upload-files>
       </div>
     </div>

@@ -1,14 +1,10 @@
-<!-- *ngFor="let product of productsService._products"
--->
-<!-- class="col-xl-3 col-lg-3 col-md-6 m-xl-3 m-lg-3 m-md-2" -->
-<!-- <div (mousedown)="prodInCartService._childEl = $event.target"> -->
 <div class="card alignCenter constSize">
   <div class="card-body">
     <div class="row">
       <div class="col-4">
         <i
           class="fa fa-trash"
-          *ngIf="!ProdType"
+          *ngIf="usersServiceService._Users.IsAdmin == 0 && !ProdType"
           (click)="
             prodInCartService._deleteProdInCart(
               ProdInCart.ID,
@@ -18,15 +14,23 @@
         ></i>
       </div>
       <div class="col-4">
-        <h5 class="card-title">
+        <h3 class="card-title">
           {{ ProdType ? Product.Name : ProdInCart.Product.Name }}
-        </h5>
+        </h3>
       </div>
       <div class="col-4"></div>
     </div>
     <div class="row">
-      <img class="prodImg" src="{{ imgSrc(ProdType) }}" class="card-img-top" alt="..." />
-      <app-upload-files [Product]="Product"></app-upload-files>
+      <img
+        src="{{ imgSrc(ProdType) }}"
+        class="card-img-top prodImg"
+        alt="..."
+      />
+    </div>
+    <div *ngIf="usersServiceService._Users.IsAdmin == 1" class="row">
+      <div class="col-12">
+        <app-upload-files [Product]="Product"></app-upload-files>
+      </div>
     </div>
     <div class="row">
       <div class="col-2"></div>
@@ -41,7 +45,7 @@
         <p *ngIf="!ProdType" class="card-text">
           Quantity : {{ ProdInCart.Qnt }}
         </p>
-        <div class="row">
+        <div *ngIf="usersServiceService._Users.IsAdmin == 0" class="row">
           <div class="col-2">
             <i
               class="fas fa-plus"
@@ -64,14 +68,6 @@
             >
               Add To Cart
             </button>
-            <!-- <input
-              *ngIf="!ProdType"
-              type="text"
-              class="form-control"
-              name="password"
-              id="password"
-              [(ngModel)]="prodInCartService._singleProdInCart.Qnt"
-            /> -->
           </div>
           <div class="col-2">
             <i
@@ -91,4 +87,3 @@
     </div>
   </div>
 </div>
-<!-- </div> -->

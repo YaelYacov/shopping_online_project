@@ -15,7 +15,15 @@
       (resizeEnd)="onResizeEnd($event)"
     >
       <div class="col-12">
-        <i class="fa fa-trash trash" (click)="deleteAllProdsFromCart()"></i>
+        <i
+          *ngIf="usersServiceService._Users.IsAdmin == 1"
+          class="fas fa-plus"
+        ></i>
+        <i
+          *ngIf="usersServiceService._Users.IsAdmin == 0"
+          class="fa fa-trash trash"
+          (click)="deleteAllProdsFromCart()"
+        ></i>
       </div>
 
       <div
@@ -28,12 +36,14 @@
         ></app-product-card>
       </div>
 
-      <hr />
+      <div *ngIf="usersServiceService._Users.IsAdmin == 0" class="ifNotAdmin">
+        <hr />
 
-      <p class="totalPP">Total: {{ prodInCartService._totalPrice }}</p>
-      <button class="btn btn-primary" routerLink="/orders">
-        Initiate Checkout
-      </button>
+        <p class="totalPP">Total: {{ prodInCartService._totalPrice }}</p>
+        <button class="btn btn-primary" routerLink="/orders">
+          Initiate Checkout
+        </button>
+      </div>
 
       <div class="resize-handle-top"></div>
       <div class="resize-handle-left"></div>
@@ -68,9 +78,7 @@
           [ProdType]="true"
           [Product]="Product"
         ></app-product-card>
-        
       </div>
     </div>
   </div>
 </div>
-

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../models/Usersmodel';
 import { ApiService } from './api.service';
 import { CartsService } from './carts.service';
@@ -16,7 +17,8 @@ export class UsersServiceService {
 
   constructor(
     public apiService: ApiService,
-    public cartsService: CartsService
+    public cartsService: CartsService,
+    private router: Router
   ) {}
 
   async _getUser() {
@@ -28,6 +30,9 @@ export class UsersServiceService {
     if (this._Users && this._Users.CartID > 0) {
       this._currentUserID = this._Users.ID;
       this._currentCartID = this._Users.CartID;
+    }
+    if (this._Users && this._Users.IsAdmin == 1) {
+      this.router.navigate(['home']);
     }
   }
 

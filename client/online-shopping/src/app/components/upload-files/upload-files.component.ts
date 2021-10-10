@@ -13,6 +13,7 @@ export class UploadFilesComponent implements OnInit {
   test: boolean = true;
   newImgName: string = '';
   @Input() Product: Product = new Product();
+  // @Input() isAdding: boolean = false;
 
   constructor(
     public apiService: ApiService,
@@ -48,28 +49,16 @@ export class UploadFilesComponent implements OnInit {
       endOfImageName == 'jpeg' ||
       endOfImageName == '.gif'
     ) {
-      //   if (this.test) {
-      console.log(`http://www.localhost:5000/${res[0].originalname}`);
-      this.productsService._editProd(this.Product.ID, {
-        Img: `http://www.localhost:5000/${res[0].originalname}`,
-      });
-      this.productsService._getAllProducts();
-      // this.
-
-      ////////
-
-      //   let getAllVacations = await GetAllVacations.getData();
-      //   if (getAllVacations) {
-      //     this.props.updateVacations([...getAllVacations.data]);
-      //   }
-      // } else {
-      //   console.log('else');
-      //   this.props.updateNewImgName(
-      //     `http://www.localhost:5292/${res.data[0].filename}`
-      //   );
-      ////
+      // console.log(`http://www.localhost:5000/${res[0].originalname}`);
+      if (this.productsService._isAdding)
+        this.productsService._product.Img = `http://www.localhost:5000/${res[0].originalname}`;
+      else {
+        this.productsService._editProd(this.Product.ID, {
+          Img: `http://www.localhost:5000/${res[0].originalname}`,
+        });
+        this.productsService._getAllProducts();
+      }
     }
-    // }
   };
   ngOnInit(): void {}
 }

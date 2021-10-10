@@ -6,14 +6,15 @@
     "
   >
     <div class="row">
-      <div class="col-2">
+      <div class="col-2 pt-2">
         <i
           *ngIf="usersServiceService._Users.IsAdmin == 1"
-          class="fas fa-plus bigger"
+          class="fas fa-plus bigger float"
+          (click)="changePlusStatus()"
         ></i>
         <i
           *ngIf="usersServiceService._Users.IsAdmin == 0"
-          class="fa fa-trash bigger"
+          class="fa fa-trash bigger float"
           (click)="deleteAllProdsFromCart()"
         ></i>
       </div>
@@ -28,11 +29,15 @@
       [resizeSnapGrid]="{ right: 1 }"
       (resizeEnd)="onResizeEnd($event)"
     >
+      <div *ngIf="adminEdit || productsService._isEditing" class="adminEdit">
+        <app-admin-form></app-admin-form>
+      </div>
       <div
         [ngClass]="resizable ? 'col' : 'col-xl-12 col-lg-12 col-md-12'"
         *ngFor="let ProdInCart of prodInCartService._prodInCart"
       >
         <app-product-card
+          *ngIf="usersServiceService._Users.IsAdmin == 0"
           [ProdInCart]="ProdInCart"
           [ProdType]="false"
         ></app-product-card>

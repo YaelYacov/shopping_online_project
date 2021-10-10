@@ -14,6 +14,7 @@ import { ResizeEvent } from 'angular-resizable-element';
 export class HomeComponent implements OnInit {
   resizable: boolean = false;
   openCart: boolean = false;
+  adminEdit: boolean = false;
   constructor(
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
@@ -68,6 +69,14 @@ export class HomeComponent implements OnInit {
         this.usersServiceService._Users.CartID
       )
     );
+  };
+
+  changePlusStatus = () => {
+    this.adminEdit = !this.adminEdit ? true : false;
+    this.productsService._isAdding = !this.productsService._isAdding
+      ? true
+      : false;
+    console.log(this.productsService._isAdding);
   };
 
   ngOnInit(): void {}

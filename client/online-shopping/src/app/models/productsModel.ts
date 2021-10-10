@@ -8,6 +8,7 @@ export class Product {
   Qnt: number = 1;
   createdAt: string = '';
   updatedAt: string = '';
+  isAdminEdit: boolean = false;
 
   constructor(
     ID?: number,
@@ -18,7 +19,8 @@ export class Product {
     CategoryID?: number,
     Qnt?: number,
     createdAt?: string,
-    updatedAt?: string
+    updatedAt?: string,
+    isAdminEdit?: boolean
   ) {
     this.ID = ID || 0;
     this.Name = Name || '';
@@ -29,6 +31,7 @@ export class Product {
     this.Qnt = Qnt || 1;
     this.createdAt = createdAt || '';
     this.updatedAt = updatedAt || '';
+    this.isAdminEdit = isAdminEdit || false;
   }
 }
 // `ID`, `Name`, `Price`, `Img`, `createdAt`, `updatedAt`, `CategoryID`;

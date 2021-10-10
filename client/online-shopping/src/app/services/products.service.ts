@@ -7,9 +7,14 @@ import { ApiService } from './api.service';
 })
 export class ProductsService {
   _products: Array<Product> = [];
-  _filteredProds: Array<Product> = [];
+  // _filteredProds: Array<Product> = [];
+  _product: Product = new Product();
   _currentCategory: any;
   _ProdName: string = '';
+  _isAdding: boolean = false; //or edit
+  _isEditing: boolean = false;
+  _currentProdId: number = 0;
+  // _imgUrl: string = '';
 
   constructor(public apiService: ApiService) {}
 
@@ -21,6 +26,7 @@ export class ProductsService {
       'products/getAllProducts',
       getProds
     )) as Array<Product>;
+    this._products.map((prod) => (prod.isAdminEdit = false));
     if (CategoryID) this._currentCategory = CategoryID;
     // console.log(this._products);
   };
@@ -33,13 +39,8 @@ export class ProductsService {
     console.log(this._products);
   };
 
-  _addNewProd = async () => {
-    await this.apiService.createPostService('products/addNewProd', {
-      Name: 'ff',
-      Price: 76.8,
-      CategoryID: 1,
-    });
-
+  _addNewProd = async (addProdOB: object) => {
+    await this.apiService.createPostService('products/addNewProd', addProdOB);
     this._getAllProducts();
   };
 

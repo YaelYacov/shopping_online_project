@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row p-3">
+    <!-- <input type="text" [value]="Name" /> -->
+
+    <label class="input-group-text" for="Name">Name:</label>
+
+    <input
+      id="Name"
+      type="text"
+      class="form-control"
+      [value]="Name"
+      [(ngModel)]="productsService._product.Name"
+    />
+  </div>
+  <div class="row p-3">
+    <div class="col-12 pt-2">
+      <app-upload-files></app-upload-files>
+    </div>
+  </div>
+  <div class="row p-3">
+    <button class="btn btn-primary" (click)="IsNewCat()">
+      {{ newCat ? "Close New Category From" : "add new category" }}
+    </button>
+
+    <div class="newCat mt-2" *ngIf="newCat">
+      <label class="input-group-text mt-2" for="NewCat"
+        >Add New Category:</label
+      >
+
+      <input
+        id="NewCat"
+        type="text"
+        class="form-control mt-3"
+        placeholder="Category Name"
+        [(ngModel)]="categoriesService._newCat"
+      />
+
+      <button
+        type="button"
+        class="btn btn-primary mt-2"
+        (click)="categoriesService._addNewCat()"
+      >
+        Add New Category
+      </button>
+    </div>
+  </div>
+  <div class="row p-3">
+    <select
+      class="form-select"
+      [(ngModel)]="productsService._product.CategoryID"
+    >
+      <option selected>Category ID</option>
+      <option
+        ngDefaultControl
+        *ngFor="let category of categoriesService._categories; index as i"
+        value="{{ category.ID }}"
+      >
+        {{ category.Name }}
+      </option>
+    </select>
+  </div>
+  <div class="row p-3">
+    <label class="input-group-text" for="description">Description:</label>
+
+    <input
+      id="description"
+      type="text"
+      class="form-control"
+      placeholder="Product Description"
+      [(ngModel)]="productsService._product.description"
+    />
+  </div>
+  <div class="row p-3">
+    <label class="input-group-text" for="Price">Price:</label>
+
+    <input
+      id="Price"
+      type="number"
+      class="form-control"
+      placeholder="Product Price"
+      [(ngModel)]="productsService._product.Price"
+    />
+  </div>
+  <div class="row p-3">
+    <button type="button" class="btn btn-primary" (click)="saveChangesBTN()">
+      Save
+    </button>
+  </div>
+</div>

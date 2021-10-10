@@ -16,6 +16,7 @@ export class ProductCardComponent implements OnInit {
   @Input() ProdInCart: ProdInCart = new ProdInCart();
   @Input() ProdType: boolean = true;
   imgName: string = '';
+  // isAdminEdit: boolean = false;
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -108,6 +109,24 @@ export class ProductCardComponent implements OnInit {
     } else {
       return 'https://res.feednews.com/assets/v2/bdcbeefd15297ea254af962c9093ba00?width=1280&height=720&quality=hq&category=us_Digital_Technology';
     }
+  };
+
+  editBTN = (prodID: number) => {
+    console.log(prodID);
+    this.productsService._currentProdId = prodID;
+    console.log(this.productsService._currentProdId);
+    this.productsService._isEditing = !this.productsService._isEditing
+      ? true
+      : false;
+    // let foundProd: any = this.productsService._products.find(
+    //   (prod) => prod.ID === prodID
+    // );
+    // foundProd.isAdminEdit == false
+    //   ? (foundProd.isAdminEdit = true)
+    //   : (foundProd.isAdminEdit = false);
+    //   ? true
+    //   : false;
+    // console.log(foundProd.isAdminEdit);
   };
 
   ngOnInit(): void {}

@@ -48,3 +48,11 @@ mwlResizable {
 .bigger {
   font-size: x-large;
 }
+
+.float {
+  float: right;
+}
+
+/* .marginAuto {
+  padding-top: 100px;
+} */

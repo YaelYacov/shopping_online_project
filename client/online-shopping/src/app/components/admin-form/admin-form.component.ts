@@ -3,7 +3,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 import { Product } from 'src/app/models/productsModel';
 import { CategoriesService } from 'src/app/services/categories.service';
-import { FormControl } from '@angular/forms';
+// import { FormControl } from '@angular/forms';
 // import { MatInputModule } from '@angular/material/input';
 
 @Component({
@@ -14,11 +14,12 @@ import { FormControl } from '@angular/forms';
 export class AdminFormComponent implements OnInit {
   @Input() Product: Product = new Product();
   newCat: boolean = false;
-  firstNameControl = new FormControl();
+  // firstNameControl = new FormControl();
   Name: string = '';
   description: string = '';
   Price: number = 0;
   CategoryID: number = 0;
+  editProd: any = {};
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -29,60 +30,36 @@ export class AdminFormComponent implements OnInit {
     // this.categoriesService._categories[0].Name;
   }
 
-  IsNewCat = () => {
-    this.newCat = !this.newCat ? true : false;
-    console.log(this.newCat);
-  };
+  IsNewCat = () => (this.newCat = !this.newCat ? true : false);
 
-  // defaultValues = () => {
-  //   return this.productsService._products.find(
-  //     (prod) => prod.ID === this.productsService._currentProdId
-  //   );
-  // };
+  saveChangesBTN = (isEditing: boolean) => {
+    // isEditing ? this.productsService._editProd({})
 
-  defaultValues = () => {
-    let foundProd: any = this.productsService._products.find(
-      (prod) => prod.ID === this.productsService._currentProdId
-    );
-    if (this.productsService._isAdding) {
-      this.Name = '';
-      this.description = '';
-      this.Price = 0;
-      this.CategoryID = 0;
+    if (!isEditing) {
+      this.productsService._addNewProd({
+        Name: this.productsService._product.Name,
+        description: this.productsService._product.description,
+        Price: this.productsService._product.Price,
+        Img: this.productsService._product.Img,
+        CategoryID: this.productsService._product.CategoryID,
+      });
     } else {
-      this.Name = foundProd?.Name;
-      this.description = foundProd?.description;
-      this.Price = foundProd?.Price;
-      this.CategoryID = foundProd?.CategoryID;
+      if (this.productsService._product.Name != '')
+        this.editProd.Name = this.productsService._product.Name;
+      if (this.productsService._product.description != '')
+        this.editProd.description = this.productsService._product.description;
+      if (this.productsService._product.Price != 0)
+        this.editProd.Price = this.productsService._product.Price;
+      if (this.productsService._product.CategoryID != 0)
+        this.editProd.CategoryID = this.productsService._product.CategoryID;
+      this.productsService._editProd(
+        this.productsService._currentProdId,
+        this.editProd
+      );
     }
-  };
-
-  saveChangesBTN = () => {
-    // .create({ Name: req.body.Name, Price: req.body.Price, CategoryID: req.body.CategoryID })
-    this.productsService._addNewProd({
-      Name: this.productsService._product.Name,
-      description: this.productsService._product.description,
-      Price: this.productsService._product.Price,
-      Img: this.productsService._product.Img,
-      CategoryID: this.productsService._product.CategoryID,
-    });
+    this.productsService._product = new Product();
   };
   ngOnInit(): void {
-    // this.defaultValues.
-
-    this.defaultValues();
-    // if (this.productsService._isAdding) {
-    //   this.Name = '';
-    // } else {
-    //   this.defaultValues()?.Name;
-    // }
-
-    // if (this.productsService._isAdding) {
-    //   null;
-    // } else {
-    //   this.defaultValues()?.Name;
-    //   this.defaultValues()?.description;
-    //   this.defaultValues()?.Price;
-    // }
+    // this.defaultValues();
   }
 }

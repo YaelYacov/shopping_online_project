@@ -14,7 +14,7 @@ export class ProductsService {
   _isAdding: boolean = false; //or edit
   _isEditing: boolean = false;
   _currentProdId: number = 0;
-  // _imgUrl: string = '';
+  Name: string = '';
 
   constructor(public apiService: ApiService) {}
 
@@ -36,7 +36,7 @@ export class ProductsService {
       'products/getProdByName',
       { Name: Name }
     )) as Array<Product>;
-    console.log(this._products);
+    // console.log(this._products);
   };
 
   _addNewProd = async (addProdOB: object) => {
@@ -51,5 +51,31 @@ export class ProductsService {
     });
 
     this._getAllProducts();
+  };
+
+  _editOrAddIcons = (isPlus: boolean, prodEditID?: number) => {
+    if (isPlus && !this._isAdding) {
+      this._isAdding = true;
+      this._isEditing = false;
+      this._currentProdId = 0;
+      // console.log('once from plus: ', this._currentProdId);
+    } else if (
+      (!isPlus && !this._isEditing) ||
+      (!isPlus &&
+        this._isEditing &&
+        this._currentProdId != 0 &&
+        this._currentProdId != prodEditID)
+    ) {
+      this._isAdding = false;
+      this._isEditing = true;
+      prodEditID = this._currentProdId;
+      // console.log('once from edit or sec or more edit: ', this._currentProdId);
+    } else if ((isPlus && this._isAdding) || (!isPlus && this._isEditing)) {
+      this._isAdding = false;
+      this._isEditing = false;
+      this._currentProdId = 0;
+
+      // console.log('sec from plus or edit : ', this._currentProdId);
+    }
   };
 }

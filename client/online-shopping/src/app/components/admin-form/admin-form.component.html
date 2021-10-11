@@ -1,24 +1,27 @@
 <div class="container">
+  <div *ngIf="productsService._isEditing" class="row p-3">
+    <p>{{ productsService.Name }}</p>
+  </div>
+
   <div class="row p-3">
     <!-- <input type="text" [value]="Name" /> -->
-
     <label class="input-group-text" for="Name">Name:</label>
 
     <input
       id="Name"
       type="text"
       class="form-control"
-      [value]="Name"
+      placeholder="Product Name"
       [(ngModel)]="productsService._product.Name"
     />
   </div>
   <div class="row p-3">
-    <div class="col-12 pt-2">
+    <div class="col-12 pt-2 card">
       <app-upload-files></app-upload-files>
     </div>
   </div>
   <div class="row p-3">
-    <button class="btn btn-primary" (click)="IsNewCat()">
+    <button class="btn btn-secondary" (click)="IsNewCat()">
       {{ newCat ? "Close New Category From" : "add new category" }}
     </button>
 
@@ -37,7 +40,7 @@
 
       <button
         type="button"
-        class="btn btn-primary mt-2"
+        class="btn btn-secondary mt-2"
         (click)="categoriesService._addNewCat()"
       >
         Add New Category
@@ -82,7 +85,11 @@
     />
   </div>
   <div class="row p-3">
-    <button type="button" class="btn btn-primary" (click)="saveChangesBTN()">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="saveChangesBTN(productsService._isEditing)"
+    >
       Save
     </button>
   </div>

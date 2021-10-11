@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ProdInCart } from 'src/app/models/prodInCartModel';
 import { Product } from 'src/app/models/productsModel';
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
-
 import { ProductsService } from 'src/app/services/products.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 
@@ -15,8 +14,6 @@ export class ProductCardComponent implements OnInit {
   @Input() Product: Product = new Product();
   @Input() ProdInCart: ProdInCart = new ProdInCart();
   @Input() ProdType: boolean = true;
-  imgName: string = '';
-  // isAdminEdit: boolean = false;
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -84,7 +81,7 @@ export class ProductCardComponent implements OnInit {
   addToCart = (
     ProductID: number //
   ) => {
-    console.log(this.isProdInCart(ProductID));
+    // console.log(this.isProdInCart(ProductID));
     this.isProdInCart(ProductID) == 0 ||
     this.prodInCartService._prodInCart.length == 0 ||
     this.isProdInCart(ProductID) == undefined
@@ -112,21 +109,16 @@ export class ProductCardComponent implements OnInit {
   };
 
   editBTN = (prodID: number) => {
-    console.log(prodID);
+    this.productsService._editOrAddIcons(false, prodID);
+    let foundProd: any = this.productsService._products.find(
+      (prod) => prod.ID === prodID
+    );
+    if (this.productsService._currentProdId != prodID) {
+      this.productsService.Name = foundProd?.Name;
+    }
+    this.productsService.Name =
+      this.productsService._currentProdId != prodID ? foundProd?.Name : '';
     this.productsService._currentProdId = prodID;
-    console.log(this.productsService._currentProdId);
-    this.productsService._isEditing = !this.productsService._isEditing
-      ? true
-      : false;
-    // let foundProd: any = this.productsService._products.find(
-    //   (prod) => prod.ID === prodID
-    // );
-    // foundProd.isAdminEdit == false
-    //   ? (foundProd.isAdminEdit = true)
-    //   : (foundProd.isAdminEdit = false);
-    //   ? true
-    //   : false;
-    // console.log(foundProd.isAdminEdit);
   };
 
   ngOnInit(): void {}

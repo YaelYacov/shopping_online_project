@@ -11,7 +11,6 @@ import { Product } from 'src/app/models/productsModel';
 export class UploadFilesComponent implements OnInit {
   filesToUpload: any;
   test: boolean = true;
-  newImgName: string = '';
   @Input() Product: Product = new Product();
   // @Input() isAdding: boolean = false;
 
@@ -20,9 +19,9 @@ export class UploadFilesComponent implements OnInit {
     public productsService: ProductsService
   ) {}
 
-  fileChangeEvent = (fileInput: any) => {
+  fileChangeEvent = async (fileInput: any) => {
     this.filesToUpload = fileInput.target.files;
-    console.log(this.filesToUpload);
+    // console.log(this.filesToUpload);
   };
 
   uploadFile = async () => {
@@ -36,12 +35,10 @@ export class UploadFilesComponent implements OnInit {
       }
     }
     res = await this.apiService.createPostService('upload', formData);
-    // console.log(res[0].originalname);
     let endOfImageName = res
       ? res.map((result: any) => `${result.originalname.substr(-4)}`)[0]
       : alert('some went wrong!, Please reload the page');
-    // console.log(`http://www.localhost:5000/${res[0].originalname}`);
-    console.log(res);
+
     if (!res[0].originalname) alert('error load image, please reload');
     else if (
       endOfImageName == '.png' ||

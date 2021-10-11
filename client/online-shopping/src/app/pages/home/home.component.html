@@ -10,7 +10,7 @@
         <i
           *ngIf="usersServiceService._Users.IsAdmin == 1"
           class="fas fa-plus bigger float"
-          (click)="changePlusStatus()"
+          (click)="productsService._editOrAddIcons(true)"
         ></i>
         <i
           *ngIf="usersServiceService._Users.IsAdmin == 0"
@@ -29,7 +29,10 @@
       [resizeSnapGrid]="{ right: 1 }"
       (resizeEnd)="onResizeEnd($event)"
     >
-      <div *ngIf="adminEdit || productsService._isEditing" class="adminEdit">
+      <div
+        *ngIf="productsService._isAdding || productsService._isEditing"
+        class="adminEdit"
+      >
         <app-admin-form></app-admin-form>
       </div>
       <div

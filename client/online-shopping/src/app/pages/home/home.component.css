@@ -6,13 +6,10 @@ mwlResizable {
   position: relative;
   top: 0;
   display: flex;
-  /* align-items: center; */
   justify-content: flex-start;
-  width: 80%;
+  width: 90%;
   height: 100%;
-  /* margin: 0; */
-  border-radius: 30px;
-  font-size: 25px;
+  /* font-size: 25px; */
   font-weight: bold;
 }
 .resize-handle-top,
@@ -30,20 +27,14 @@ mwlResizable {
   position: absolute;
   height: 100%;
   cursor: col-resize;
-  width: 2px;
+  width: 0;
+  right: 0;
   background-color: gray;
 }
 
 .resize-handle-left {
   left: 0;
 }
-.resize-handle-right {
-  right: 0;
-}
-
-/* .overflow {
-  overflow-y: auto;
-} */
 
 .bigger {
   font-size: x-large;
@@ -52,7 +43,3 @@ mwlResizable {
 .float {
   float: right;
 }
-
-/* .marginAuto {
-  padding-top: 100px;
-} */

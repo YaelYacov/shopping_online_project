@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   }
 
   onResizeEnd(event: any): void {
-    console.log(event.rectangle.left);
+    // console.log(event.rectangle);
     this.style = {
       position: 'relative',
       left: `0`,
@@ -55,28 +55,19 @@ export class HomeComponent implements OnInit {
     this.resizable = true;
 
     if (
-      event.rectangle.right < screen.width / 5 &&
+      event.rectangle.right < screen.width / 5 + 20 &&
       event.rectangle.right > screen.width / 5 / 3
     )
       this.resizable = false;
   }
 
   deleteAllProdsFromCart = () => {
-    console.log(this.prodInCartService._prodInCart);
     this.prodInCartService._prodInCart.forEach((prod) =>
       this.prodInCartService._deleteProdInCart(
         prod.ID,
         this.usersServiceService._Users.CartID
       )
     );
-  };
-
-  changePlusStatus = () => {
-    this.adminEdit = !this.adminEdit ? true : false;
-    this.productsService._isAdding = !this.productsService._isAdding
-      ? true
-      : false;
-    console.log(this.productsService._isAdding);
   };
 
   ngOnInit(): void {}

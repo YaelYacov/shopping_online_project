@@ -1,18 +1,21 @@
 <div class="container">
-  <div *ngIf="productsService._isEditing" class="row p-3">
+  <div *ngIf="productsService._isEditing" class="row p-2">
     <p>{{ productsService.Name }}</p>
   </div>
-
   <div class="row p-3">
-    <!-- <input type="text" [value]="Name" /> -->
-    <label class="input-group-text" for="Name">Name:</label>
-
+    <label class="input-group-text" for="Name">Name: </label>
     <input
       id="Name"
       type="text"
       class="form-control"
-      placeholder="Product Name"
-      [(ngModel)]="productsService._product.Name"
+      placeholder=" {{
+        !productsService._isAdding ? productsService.Name : 'Product Name'
+      }} "
+      [(ngModel)]="
+        productsService._isAdding
+          ? productsService._product.Name
+          : productsService.Name
+      "
     />
   </div>
   <div class="row p-3">
@@ -49,10 +52,15 @@
   </div>
   <div class="row p-3">
     <select
+      [(ngModel)]="
+        productsService._isAdding
+          ? productsService._product.CategoryID
+          : productsService.CategoryID
+      "
       class="form-select"
-      [(ngModel)]="productsService._product.CategoryID"
+      aria-label="Default select example"
     >
-      <option selected>Category ID</option>
+      <option selected>go f yourself</option>
       <option
         ngDefaultControl
         *ngFor="let category of categoriesService._categories; index as i"
@@ -69,8 +77,16 @@
       id="description"
       type="text"
       class="form-control"
-      placeholder="Product Description"
-      [(ngModel)]="productsService._product.description"
+      placeholder=" {{
+        !productsService._isAdding
+          ? productsService.description
+          : 'Product description'
+      }} "
+      [(ngModel)]="
+        productsService._isAdding
+          ? productsService._product.description
+          : productsService.description
+      "
     />
   </div>
   <div class="row p-3">
@@ -80,8 +96,11 @@
       id="Price"
       type="number"
       class="form-control"
-      placeholder="Product Price"
-      [(ngModel)]="productsService._product.Price"
+      [(ngModel)]="
+        productsService._isAdding
+          ? productsService._product.Price
+          : productsService.Price
+      "
     />
   </div>
   <div class="row p-3">

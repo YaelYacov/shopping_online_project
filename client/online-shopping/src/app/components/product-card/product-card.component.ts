@@ -115,6 +115,9 @@ export class ProductCardComponent implements OnInit {
     );
     if (this.productsService._currentProdId != prodID) {
       this.productsService.Name = foundProd?.Name;
+      this.productsService.description = foundProd?.description;
+      this.productsService.Price = foundProd?.Price;
+      this.productsService.CategoryID = foundProd?.CategoryID;
     }
     this.productsService.Name =
       this.productsService._currentProdId != prodID ? foundProd?.Name : '';

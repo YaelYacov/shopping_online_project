@@ -15,6 +15,9 @@ export class ProductsService {
   _isEditing: boolean = false;
   _currentProdId: number = 0;
   Name: string = '';
+  description: string = '';
+  Price: number = 0;
+  CategoryID: number = 0;
 
   constructor(public apiService: ApiService) {}
 
@@ -69,6 +72,7 @@ export class ProductsService {
       this._isAdding = false;
       this._isEditing = true;
       prodEditID = this._currentProdId;
+
       // console.log('once from edit or sec or more edit: ', this._currentProdId);
     } else if ((isPlus && this._isAdding) || (!isPlus && this._isEditing)) {
       this._isAdding = false;

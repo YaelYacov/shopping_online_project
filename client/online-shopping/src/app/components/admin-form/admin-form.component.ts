@@ -44,22 +44,21 @@ export class AdminFormComponent implements OnInit {
         CategoryID: this.productsService._product.CategoryID,
       });
     } else {
-      if (this.productsService._product.Name != '')
-        this.editProd.Name = this.productsService._product.Name;
-      if (this.productsService._product.description != '')
-        this.editProd.description = this.productsService._product.description;
-      if (this.productsService._product.Price != 0)
-        this.editProd.Price = this.productsService._product.Price;
-      if (this.productsService._product.CategoryID != 0)
-        this.editProd.CategoryID = this.productsService._product.CategoryID;
+      if (this.productsService.Name != '')
+        this.editProd.Name = this.productsService.Name;
+      if (this.productsService.description != '')
+        this.editProd.description = this.productsService.description;
+      if (this.productsService.Price != 0)
+        this.editProd.Price = this.productsService.Price;
+      if (this.productsService.CategoryID != 0)
+        this.editProd.CategoryID = this.productsService.CategoryID;
       this.productsService._editProd(
         this.productsService._currentProdId,
         this.editProd
       );
+      console.log(this.productsService.CategoryID, this.productsService.Name);
     }
     this.productsService._product = new Product();
   };
-  ngOnInit(): void {
-    // this.defaultValues();
-  }
+  ngOnInit(): void {}
 }

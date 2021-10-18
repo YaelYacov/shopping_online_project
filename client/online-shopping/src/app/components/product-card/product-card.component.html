@@ -44,12 +44,26 @@
         </span>
       </h1> -->
 
-      <div class="some" *ngIf="prodInCartService._fromOrders">
-        <app-searched-span
-          [Name]="ProdInCart.Product.Name"
-   
-        ></app-searched-span>
-      </div>
+      <!-- <div class="some" *ngIf="prodInCartService._fromOrders">
+        <app-searched-span [Name]="ProdInCart.Product.Name"></app-searched-span>
+      </div> -->
+
+      <!-- check new thing -->
+      <h1 *ngIf="prodInCartService._fromOrders && !prodInCartService._shit">
+        {{ ProdInCart.Product.Name }}
+      </h1>
+
+      <h1 *ngIf="prodInCartService._fromOrders && prodInCartService._shit">
+        {{ getName(ProdInCart.Product.Name) }}
+        <span
+          *ngFor="let str of nameLenArr; index as i"
+          [ngClass]="!str.isSearched ? 'regularBG' : 'yellowBG'"
+        >
+          {{ nameLenArr[i].letter }}</span
+        >
+      </h1>
+
+      <!-- check new thing -->
 
       <div class="col-4"></div>
     </div>

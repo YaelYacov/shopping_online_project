@@ -11,7 +11,7 @@
   <span
     *ngFor="let nm of prodInCartService._namesArr; index as i"
     [ngClass]="!nm.isSearched ? 'regularBG' : 'yellowBG'"
-    >{{ prodInCartService._nameStr }}</span
+    >{{ prodInCartService._nameStr(prodInCartService._namesArr[i]) }}</span
   >
 </h1> -->
 <h1 *ngIf="prodInCartService._shit">

@@ -30,23 +30,6 @@ export class SearchedSpanComponent implements OnInit {
   @Input() Name: any;
   str: string = 'someWord';
   strArr: Array<object> | any = [];
-  // public span: HTMLElement | any;
-  // isMatched: boolean = false;
-  // htmlStr: string = ' <strong class="yellowBG">Bold Text Example</strong>';
-  // public item: HTMLElement | any;
-
-  // public copyItem(row: HTMLElement): void {
-  //   this.item = row;
-  //   //this is how you get inner HTML
-  //   row.innerHTML = '';
-  //   row.innerHTML +=
-  //     '<div class="yellowBG">' +
-  //     this.prodInCartService._prodInCartSearch +
-  //     '</div>';
-  //   console.log(row.innerHTML);
-  //   //this is to get inner text
-  //   console.log(row.innerText);
-  // }
 
   constructor(public prodInCartService: ProdInCartService) {
     // this.strArr = [...this.str.split('')];
@@ -69,6 +52,7 @@ export class SearchedSpanComponent implements OnInit {
     // }
 
     for (let i = 0; i < this.prodInCartService._str.length; i++) {
+      console.log(this.prodInCartService.strArr);
       this.prodInCartService.strArr.push({
         letter: this.prodInCartService._str[i],
         isSearched: false,
@@ -81,6 +65,7 @@ export class SearchedSpanComponent implements OnInit {
       (prod) => prod.Product.Name
     );
     // for (let i = 0; i < Names.length; i++) {
+
     this.prodInCartService._namesArr.push({
       name: this.Name,
       word: {
@@ -88,6 +73,6 @@ export class SearchedSpanComponent implements OnInit {
         isSearched: false,
       },
     });
-    console.log(this.prodInCartService._namesArr);
+    //   console.log(this.prodInCartService._namesArr);
   }
 }

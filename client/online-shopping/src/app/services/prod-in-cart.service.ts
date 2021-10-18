@@ -69,47 +69,18 @@ export class ProdInCartService {
   _returnName = (letter: string, i: number) => {
     let Names = this._prodInCart.map((prod) => prod.Product.Name);
     // console.log(Names, letter, i);
-    for (let i = 0; i < Names.length; i++) {
-      const element = Names[i];
-    }
-    return letter;
-  };
+    let elLength;
+    // for (let i = 0; i < Names.length; i++) {
+    // const element = Names[i];
+    // console.log(element.length);
+    // }
 
-  _nameStr = () => {
-    // name: 'Bread';
-    // word: isSearched: false;
-    // letters: (5)[('B', 'r', 'e', 'a', 'd')];
-    // console.log(this._namesArr);
-    let element: string = '';
-    for (let i = 0; i < this._namesArr.length; i++) {
-      element = this._namesArr[i];
-      console.log(element);
-    }
-    return element;
+    return letter;
   };
 
   _changeItemBG = (event: any) => {
     this._shit = true;
     this._shit = this._prodInCartSearch == '' ? false : true;
-
-    console.log(this._prodInCartSearch);
-
-    // let Names = this._prodInCart.map((prod) => prod.Product.Name);
-    let splitted = [...this._prodInCartSearch.split('')];
-    console.log(splitted);
-    // if (event.key == 'Backspace') {
-    //   splitted.pop();
-    // }
-    this.strArr.map((item: { letter: string; isSearched: boolean }) => {
-      for (let i = 0; i < splitted.length; i++) {
-        console.log(splitted[i], item.letter);
-        if (splitted[i].includes(item.letter)) {
-          item.isSearched = true;
-        }
-        // item.isSearched = splitted[i].includes(item.letter) ? true : false;
-      }
-    });
-    console.log(this.strArr);
   };
 }
 

@@ -15,6 +15,9 @@ export class ProductCardComponent implements OnInit {
   @Input() ProdInCart: ProdInCart = new ProdInCart();
   @Input() ProdType: number = 1; //0= prodInCart, 1= product, 2= orders
   // @Input() ProdType: boolean = true;
+  searchStr: string = '';
+  prodNameStr: string = '';
+  nameLenArr: Array<string> | any = [];
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -128,14 +131,71 @@ export class ProductCardComponent implements OnInit {
     this.productsService._currentProdId = prodID;
   };
 
-  returnName = (Name: string) => {
-    // for (let i = 0; i < Name.length; i++) {
-    this.prodInCartService.strArr.push({
-      letter: Name.split(''),
-      isSearched: false,
-    });
-    console.log(this.prodInCartService.strArr);
-    // return;
+  getName = (Name: string | any) => {
+    for (let i = 0; i < Name.length; i++) {
+      if (this.nameLenArr.length < i + 1) {
+        this.nameLenArr.push({ letter: Name[i], isSearched: false });
+      }
+    }
+    this.prodInCartService.strArr = this.nameLenArr;
+    // this.prodInCartService.strArr.length > 0 ?? console.log('sex');
+
+    let splitted = [...this.prodInCartService._prodInCartSearch.split('')];
+    console.log(splitted[splitted.length - 1]);
+    console.log(Name.includes(this.prodInCartService._prodInCartSearch));
+    let markedArr = this.prodInCartService.strArr.filter(
+      (item: { letter: string; isSearched: boolean }) => item.isSearched == true
+    );
+    console.log(markedArr);
+
+    this.prodInCartService.strArr.map(
+      (item: { letter: string; isSearched: boolean }, i: number) => {
+        for (let i = 0; i < splitted.length; i++) {
+          console.log(splitted[i], item.letter);
+
+          if (this.prodInCartService._prodInCartSearch.includes(item.letter)) {
+            item.isSearched = true;
+            if (!Name.includes(this.prodInCartService._prodInCartSearch)) {
+              let idx = this.prodInCartService.strArr.findIndex(
+                (item: { letter: string; isSearched: boolean }) =>
+                  item.isSearched == true
+              );
+              this.prodInCartService.strArr[idx].isSearched = false;
+            }
+            ///////////////////////////
+            // if (splitted.length > markedArr.length) {
+            //   let idx = this.prodInCartService.strArr.findIndex(
+            //     (item: { letter: string; isSearched: boolean }) =>
+            //       item.isSearched == true &&
+            //       item.letter ==
+            //         this.prodInCartService._prodInCartSearch[
+            //           splitted.length - 1
+            //         ]
+            //   );
+
+            //   console.log(idx, markedArr);
+
+            //   this.prodInCartService.strArr[idx].isSearched = false;
+            // }
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            // if (splitted.length > 1) {
+            //   let idx = this.prodInCartService.strArr.findIndex(
+            //     (item: { letter: string; isSearched: boolean }) =>
+            //       item.isSearched == true
+            //   );
+            //   console.log(idx, idx + 1);
+            //   this.prodNameStr =
+            //     this.prodInCartService.strArr[idx].letter +
+            //     this.prodInCartService.strArr[idx + 1].letter;
+            //   if (Name.includes(this.prodInCartService._prodInCartSearch)) {
+            //     this.prodInCartService.strArr[idx].isSearched = true;
+            //     this.prodInCartService.strArr[idx + 1].isSearched = true;
+            //   }
+            // }
+          }
+        }
+      }
+    );
   };
 
   ngOnInit(): void {}

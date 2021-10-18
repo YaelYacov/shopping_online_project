@@ -9,7 +9,7 @@
         ></i>
         <i
           class="fa fa-trash"
-          *ngIf="usersServiceService._Users.IsAdmin == 0 && !ProdType"
+          *ngIf="usersServiceService._Users.IsAdmin == 0 && ProdType != 2"
           (click)="
             prodInCartService._deleteProdInCart(
               ProdInCart.ID,
@@ -19,10 +19,38 @@
         ></i>
       </div>
       <div class="col-6">
-        <h3 class="card-title">
-          {{ ProdType ? Product.Name : ProdInCart.Product.Name }}
+        <h3 class="card-title" *ngIf="ProdType != 2">
+          {{
+            ProdType == 1
+              ? Product.Name
+              : ProdType == 0
+              ? ProdInCart.Product.Name
+              : null
+          }}
         </h3>
+        <!-- [ngClass]="
+            ProdType == 2 && prodInCartService._bgSearchMatch
+              ? 'yellowBG'
+              : 'null'
+          " -->
       </div>
+      <!-- <div *ngIf="prodInCartService._fromOrders">
+        {{ ProdInCart.Product.Name }}
+      </div>
+
+      <h1 *ngIf="prodInCartService._fromOrders">
+        <span *ngFor="let nm of prodInCartService.strArr">
+          {{ prodInCartService._returnName(nm) }}
+        </span>
+      </h1> -->
+
+      <div class="some" *ngIf="prodInCartService._fromOrders">
+        <app-searched-span
+          [Name]="ProdInCart.Product.Name"
+   
+        ></app-searched-span>
+      </div>
+
       <div class="col-4"></div>
     </div>
     <div class="row">
@@ -40,15 +68,20 @@
       <div class="col-8">
         <p class="card-text">
           Description :
-          {{ ProdType ? Product.description : ProdInCart.Product.description }}
+          {{
+            ProdType == 1 ? Product.description : ProdInCart.Product.description
+          }}
         </p>
         <p class="card-text">
-          Price : {{ ProdType ? Product.Price : ProdInCart.Product.Price }}
+          Price : {{ ProdType == 1 ? Product.Price : ProdInCart.Product.Price }}
         </p>
-        <p *ngIf="!ProdType" class="card-text">
+        <p *ngIf="ProdType != 1" class="card-text">
           Quantity : {{ ProdInCart.Qnt }}
         </p>
-        <div *ngIf="usersServiceService._Users.IsAdmin == 0" class="row">
+        <div
+          *ngIf="usersServiceService._Users.IsAdmin == 0 && ProdType != 2"
+          class="row"
+        >
           <div class="col-2">
             <i
               class="fas fa-plus"
@@ -65,7 +98,7 @@
           <div class="col-8">
             <button
               id="myBtn"
-              *ngIf="ProdType"
+              *ngIf="ProdType == 1"
               (click)="addToCart(Product.ID)"
               class="btn btn-primary"
             >

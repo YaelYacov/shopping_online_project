@@ -17,15 +17,10 @@ export class CartComponent implements OnInit {
     public cartsService: CartsService,
     public prodInCartService: ProdInCartService
   ) {
-    this.prodInCartService._getProdInCartByCartID(
-      this.usersServiceService._Users.CartID
-    );
+    // this.prodInCartService._getProdInCartByCartID(
+    //   this.usersServiceService._Users.CartID
+    // );
     // this.prodInCartService._calcTotalPrice();
-  }
-
-    deleteAllProdsFromCart = () => {
-console.log(this.prodInCartService._prodInCart)
-this.prodInCartService._prodInCart.forEach(prod => this.prodInCartService._deleteProdInCart(prod.ID,  this.usersServiceService._Users.CartID))
   }
 
   ngOnInit(): void {}

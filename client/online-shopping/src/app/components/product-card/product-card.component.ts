@@ -13,7 +13,8 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
 export class ProductCardComponent implements OnInit {
   @Input() Product: Product = new Product();
   @Input() ProdInCart: ProdInCart = new ProdInCart();
-  @Input() ProdType: boolean = true;
+  @Input() ProdType: number = 1; //0= prodInCart, 1= product, 2= orders
+  // @Input() ProdType: boolean = true;
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -23,7 +24,10 @@ export class ProductCardComponent implements OnInit {
     if (this.productsService._products.length == 0) {
       this.productsService._getAllProducts();
     }
-    if (this.prodInCartService._prodInCart.length == 0) {
+    if (
+      this.prodInCartService._prodInCart.length == 0 &&
+      this.usersServiceService._Users
+    ) {
       this.prodInCartService._getProdInCartByCartID(
         this.usersServiceService._Users.CartID
       );
@@ -97,11 +101,11 @@ export class ProductCardComponent implements OnInit {
         );
   };
 
-  imgSrc = (type: boolean) => {
+  imgSrc = (type: number) => {
     //type tru => product, false => prodInCart
-    if (type) {
+    if (type == 1) {
       return this.Product.Img;
-    } else if (!type) {
+    } else if (type == 0 || type == 2) {
       return this.ProdInCart.Product.Img;
     } else {
       return 'https://res.feednews.com/assets/v2/bdcbeefd15297ea254af962c9093ba00?width=1280&height=720&quality=hq&category=us_Digital_Technology';
@@ -122,6 +126,16 @@ export class ProductCardComponent implements OnInit {
     this.productsService.Name =
       this.productsService._currentProdId != prodID ? foundProd?.Name : '';
     this.productsService._currentProdId = prodID;
+  };
+
+  returnName = (Name: string) => {
+    // for (let i = 0; i < Name.length; i++) {
+    this.prodInCartService.strArr.push({
+      letter: Name.split(''),
+      isSearched: false,
+    });
+    console.log(this.prodInCartService.strArr);
+    // return;
   };
 
   ngOnInit(): void {}

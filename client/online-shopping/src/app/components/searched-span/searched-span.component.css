@@ -1,0 +1,12 @@
+.yellowBG {
+  background-color: yellow;
+}
+
+.highlight {
+  background-color: violet;
+  font-weight: bold;
+}
+
+.inline {
+  display: inline;
+}

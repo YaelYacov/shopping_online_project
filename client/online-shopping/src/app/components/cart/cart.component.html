@@ -1,14 +1,2 @@
-<i class="fa fa-trash" (click)="deleteAllProdsFromCart()"></i>
-<div class="flex" *ngFor="let ProdInCart of prodInCartService._prodInCart">
-  <!-- <app-prod-in-cart-card [ProdInCart]="ProdInCart"></app-prod-in-cart-card> -->
-  <app-product-card
-    class="margin"
-    [ProdInCart]="ProdInCart"
-    [ProdType]="false"
-  ></app-product-card>
-</div>
-
-<hr />
-
-<p class="totalPP">Total: {{ prodInCartService._totalPrice }}</p>
-<button class="btn btn-primary" routerLink="/orders">Initiate Checkout</button>
+<p>cart is working like a madafaca</p>
+<app-product-card></app-product-card>

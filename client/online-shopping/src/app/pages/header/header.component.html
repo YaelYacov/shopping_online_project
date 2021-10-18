@@ -30,9 +30,22 @@
             >Log In</a
           >
         </li>
-        <div class="isUserID" *ngIf="usersServiceService._currentUserID > 0">
+        <div
+          class="isUserID"
+          *ngIf="
+            usersServiceService._currentUserID > 0 && !ordersService._isOrdering
+          "
+        >
           <app-categories-nav></app-categories-nav>
         </div>
+        <li class="orderSearch" *ngIf="ordersService._isOrdering">
+          <input
+            [(ngModel)]="prodInCartService._prodInCartSearch"
+            class="form-control me-2 w-md-25 orderSearchInput"
+            placeholder="Cart Item Name"
+            (keyup)="prodInCartService._changeItemBG($event)"
+          />
+        </li>
       </ul>
     </div>
   </div>

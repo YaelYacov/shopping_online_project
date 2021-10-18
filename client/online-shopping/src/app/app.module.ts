@@ -23,6 +23,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ResizableModule } from 'angular-resizable-element';
 import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 import { AdminFormComponent } from './components/admin-form/admin-form.component';
+import { OrdersFormComponent } from './components/orders-form/orders-form.component';
+import { SearchedSpanComponent } from './components/searched-span/searched-span.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { AdminFormComponent } from './components/admin-form/admin-form.component
     OrdersComponent,
     UploadFilesComponent,
     AdminFormComponent,
+    OrdersFormComponent,
+    SearchedSpanComponent,
   ],
   imports: [
     BrowserModule,

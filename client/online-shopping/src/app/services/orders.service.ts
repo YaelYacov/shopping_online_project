@@ -7,6 +7,8 @@ import { ApiService } from './api.service';
 })
 export class OrdersService {
   _orders: Array<Orders> = [];
+  _order: Orders = new Orders();
+  _isOrdering: boolean = false;
 
   constructor(public apiService: ApiService) {}
 

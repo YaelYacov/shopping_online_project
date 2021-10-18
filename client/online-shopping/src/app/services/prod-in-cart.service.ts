@@ -10,11 +10,17 @@ export class ProdInCartService {
   // _prodInCart: any;
   _prodInCart: Array<ProdInCart> = [];
   _singleProdInCart: ProdInCart = new ProdInCart();
-
   _totalPrice: number = 0;
-
-  _qnt: number = 1;
-  _childEl: any;
+  _prodInCartSearch: string = '';
+  _bgSearchMatch: boolean = false;
+  _fromOrders: boolean = false;
+  strArr: Array<object> | any = [];
+  _str: string = '';
+  _namesArr: Array<object> | any = [];
+  newName: string = '';
+  _shit: boolean = false;
+  key: string | any = '';
+  _currentProdId: number = 0;
 
   constructor(public apiService: ApiService) {}
 
@@ -58,6 +64,52 @@ export class ProdInCartService {
 
   _deleteProdInCart = (ProdInCartID: number, CartID: number) => {
     this._updateProdInCart(ProdInCartID, { Deleted: 0 }, CartID);
+  };
+
+  _returnName = (letter: string, i: number) => {
+    let Names = this._prodInCart.map((prod) => prod.Product.Name);
+    // console.log(Names, letter, i);
+    for (let i = 0; i < Names.length; i++) {
+      const element = Names[i];
+    }
+    return letter;
+  };
+
+  _nameStr = () => {
+    // name: 'Bread';
+    // word: isSearched: false;
+    // letters: (5)[('B', 'r', 'e', 'a', 'd')];
+    // console.log(this._namesArr);
+    let element: string = '';
+    for (let i = 0; i < this._namesArr.length; i++) {
+      element = this._namesArr[i];
+      console.log(element);
+    }
+    return element;
+  };
+
+  _changeItemBG = (event: any) => {
+    this._shit = true;
+    this._shit = this._prodInCartSearch == '' ? false : true;
+
+    console.log(this._prodInCartSearch);
+
+    // let Names = this._prodInCart.map((prod) => prod.Product.Name);
+    let splitted = [...this._prodInCartSearch.split('')];
+    console.log(splitted);
+    // if (event.key == 'Backspace') {
+    //   splitted.pop();
+    // }
+    this.strArr.map((item: { letter: string; isSearched: boolean }) => {
+      for (let i = 0; i < splitted.length; i++) {
+        console.log(splitted[i], item.letter);
+        if (splitted[i].includes(item.letter)) {
+          item.isSearched = true;
+        }
+        // item.isSearched = splitted[i].includes(item.letter) ? true : false;
+      }
+    });
+    console.log(this.strArr);
   };
 }
 

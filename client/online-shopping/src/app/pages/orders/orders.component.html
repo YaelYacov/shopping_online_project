@@ -1,1 +1,16 @@
-<p>orders works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div id="myCart" class="col-6">
+      <div *ngFor="let ProdInCart of prodInCartService._prodInCart">
+        <app-product-card
+          [ProdInCart]="ProdInCart"
+          [ProdType]="2"
+        ></app-product-card>
+      </div>
+      <p class="totalPP">Total: {{ prodInCartService._totalPrice }}</p>
+    </div>
+    <div id="orderForm" class="col-6">
+      <app-orders-form></app-orders-form>
+    </div>
+  </div>
+</div>

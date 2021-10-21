@@ -18,6 +18,8 @@ export class ProductCardComponent implements OnInit {
   searchStr: string = '';
   prodNameStr: string = '';
   nameLenArr: Array<string> | any = [];
+  secondaryProdNameArr: Array<any> = [];
+  searchArr: Array<any> = [];
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -131,72 +133,224 @@ export class ProductCardComponent implements OnInit {
     this.productsService._currentProdId = prodID;
   };
 
-  getName = (Name: string | any) => {
-    for (let i = 0; i < Name.length; i++) {
-      if (this.nameLenArr.length < i + 1) {
-        this.nameLenArr.push({ letter: Name[i], isSearched: false });
-      }
-    }
-    this.prodInCartService.strArr = this.nameLenArr;
-    // this.prodInCartService.strArr.length > 0 ?? console.log('sex');
-
-    let splitted = [...this.prodInCartService._prodInCartSearch.split('')];
-    console.log(splitted[splitted.length - 1]);
-    console.log(Name.includes(this.prodInCartService._prodInCartSearch));
-    let markedArr = this.prodInCartService.strArr.filter(
-      (item: { letter: string; isSearched: boolean }) => item.isSearched == true
-    );
-    console.log(markedArr);
-
+  deleteAll = () => {
     this.prodInCartService.strArr.map(
-      (item: { letter: string; isSearched: boolean }, i: number) => {
-        for (let i = 0; i < splitted.length; i++) {
-          console.log(splitted[i], item.letter);
-
-          if (this.prodInCartService._prodInCartSearch.includes(item.letter)) {
-            item.isSearched = true;
-            if (!Name.includes(this.prodInCartService._prodInCartSearch)) {
-              let idx = this.prodInCartService.strArr.findIndex(
-                (item: { letter: string; isSearched: boolean }) =>
-                  item.isSearched == true
-              );
-              this.prodInCartService.strArr[idx].isSearched = false;
-            }
-            ///////////////////////////
-            // if (splitted.length > markedArr.length) {
-            //   let idx = this.prodInCartService.strArr.findIndex(
-            //     (item: { letter: string; isSearched: boolean }) =>
-            //       item.isSearched == true &&
-            //       item.letter ==
-            //         this.prodInCartService._prodInCartSearch[
-            //           splitted.length - 1
-            //         ]
-            //   );
-
-            //   console.log(idx, markedArr);
-
-            //   this.prodInCartService.strArr[idx].isSearched = false;
-            // }
-            ////////////////////////////////////////////////////////////////////////////////////////////////
-            // if (splitted.length > 1) {
-            //   let idx = this.prodInCartService.strArr.findIndex(
-            //     (item: { letter: string; isSearched: boolean }) =>
-            //       item.isSearched == true
-            //   );
-            //   console.log(idx, idx + 1);
-            //   this.prodNameStr =
-            //     this.prodInCartService.strArr[idx].letter +
-            //     this.prodInCartService.strArr[idx + 1].letter;
-            //   if (Name.includes(this.prodInCartService._prodInCartSearch)) {
-            //     this.prodInCartService.strArr[idx].isSearched = true;
-            //     this.prodInCartService.strArr[idx + 1].isSearched = true;
-            //   }
-            // }
-          }
-        }
+      (item: {
+        letter: string;
+        isSearched: boolean;
+        isChangeable: boolean;
+        Idx: number;
+      }) => {
+        item.isSearched = false;
+        item.isChangeable = true;
       }
     );
   };
+
+  getName = (Name: string | any) => {
+    let splittedSearch: Array<string> = [
+      ...this.prodInCartService._prodInCartSearch.split(''),
+    ];
+
+    for (let i = 0; i < Name.length; i++) {
+      if (this.nameLenArr.length < i + 1) {
+        this.nameLenArr.push({
+          letter: Name[i],
+          isSearched: false,
+          isChangeable: true,
+          Idx: i,
+        });
+      }
+    }
+    this.prodInCartService.strArr = [...this.nameLenArr];
+
+    for (let i = 0; i < splittedSearch.length; i++) {
+      if (i > 0 || splittedSearch.length < i + 1)
+        this.searchArr.push({
+          letter: splittedSearch[splittedSearch.length - 1],
+          isUsed: false,
+        });
+    }
+
+    console.log(this.searchArr.length, this.searchArr);
+
+    if (this.prodInCartService._prodInCartSearch.length > 0) {
+      // console.log(splittedSearch.length, this.prodInCartService.strArr);
+
+      // let samLettersInArr = this.prodInCartService.strArr.filter(
+      //   (
+      //     item: {
+      //       letter: string;
+      //       isSearched: boolean;
+      //       isChangeable: boolean;
+      //     },
+      //     i: number
+      //   ) =>
+      //     item.letter ==
+      //     this.prodInCartService._prodInCartSearch[
+      //       this.prodInCartService._prodInCartSearch.length - 1
+      //     ]
+      // );
+      // console.log(samLettersInArr);
+
+      // let mappedFilter = [...this.prodInCartService.strArr];
+      // mappedFilter.filter(
+      //   (
+      //     item: {
+      //       letter: string;
+      //       isSearched: boolean;
+      //       isChangeable: boolean;
+      //       Idx: number;
+      //     },
+      //     i: number
+      //   ) => IdxOfSecLett > -1
+      // );
+      // console.log(mappedFilter);
+
+      let markedArr = this.prodInCartService.strArr.filter(
+        (item: { letter: string; isSearched: boolean }) =>
+          item.isSearched == true
+      );
+      console.log(markedArr);
+
+      let IdxOfSearchedInName = this.prodInCartService.strArr.findIndex(
+        (
+          item: {
+            letter: string;
+            isSearched: boolean;
+            isChangeable: boolean;
+            Idx: number;
+          },
+          i: number
+        ) => {
+          // console.log(i, item.Idx, item.letter);
+          return (
+            this.prodInCartService._prodInCartSearch[
+              this.prodInCartService._prodInCartSearch.length - 1
+            ] == item.letter &&
+            item.isChangeable == true &&
+            markedArr.length + 1 == splittedSearch.length
+          );
+        }
+      );
+
+      if (
+        IdxOfSearchedInName > -1 &&
+        this.prodInCartService.strArr[IdxOfSearchedInName].isChangeable == true
+      ) {
+        // if (markedArr.length == splittedSearch.length) {
+        this.prodInCartService.strArr[IdxOfSearchedInName].isSearched = true;
+        if (
+          markedArr.length == splittedSearch.length ||
+          markedArr.length == 0
+        ) {
+          this.prodInCartService.strArr.map(
+            (
+              item: {
+                letter: string;
+                isSearched: boolean;
+                isChangeable: boolean;
+              },
+              i: number
+            ) => {
+              if (i < IdxOfSearchedInName + 1) item.isChangeable = false;
+
+              // if(samLettersInArr.length >1 && samLettersInArr[0].letter == item.letter&& item.isSearched == true){
+              //   item.isSearched = false;
+              //   item.isChangeable = true
+              // }
+            }
+          );
+        }
+
+        // }
+      } else this.deleteAll();
+    } else this.deleteAll();
+  };
+
+  // getName = (Name: string | any) => {
+  //   //  this._moreThanOne;
+  //   // console.log(
+  //   //   this.prodInCartService._isLettInStrMulti(
+  //   //     this.prodInCartService._prodInCartSearch,
+  //   //     Name
+  //   //   )
+  //   // );
+
+  //   let splittedSearch = [
+  //     ...this.prodInCartService._prodInCartSearch.split(''),
+  //   ];
+  //   let splittedName = [...Name.split('')];
+  //   for (let i = 0; i < Name.length; i++) {
+  //     if (this.nameLenArr.length < i + 1) {
+  //       this.nameLenArr.push({
+  //         letter: Name[i],
+  //         isSearched: false,
+  //         isChangeable: true,
+  //       });
+  //     }
+  //     this.prodInCartService.strArr = [...this.nameLenArr];
+
+  //     let markedArr = this.prodInCartService.strArr.filter(
+  //       (item: { letter: string; isSearched: boolean }) =>
+  //         item.isSearched == true
+  //     );
+
+  //     this.prodInCartService.strArr.map(
+  //       (item: { letter: string; isSearched: boolean }, index: number) => {
+  //         if (splittedSearch.length == 0) item.isSearched = false; //everything is false
+  //         for (let i = 0; i < splittedSearch.length; i++) {
+  //           // console.log(item.letter == splittedSearch[i]);
+  //           let idxOfFstLett = Name.indexOf(splittedSearch[i]);
+  //           let IdxOfSecLett = Name.indexOf(
+  //             splittedSearch[i],
+  //             idxOfFstLett + 1
+  //           );
+  //           console.log(IdxOfSecLett, idxOfFstLett);
+  //           let findSearchedIdx = this.prodInCartService.strArr.findIndex(
+  //             (item: { letter: string; isSearched: boolean }) =>
+  //               item.isSearched &&
+  //               !this.prodInCartService._prodInCartSearch.includes(item.letter)
+  //           ); //item.search true, but not on _prodInCartSearch
+
+  //           if (IdxOfSecLett > -1) {
+  //             /////////////////
+  //             if (
+  //               this.prodInCartService._isLettInStrMulti(
+  //                 this.prodInCartService._prodInCartSearch,
+  //                 Name
+  //               )
+  //             )
+  //               this.prodInCartService.strArr[idxOfFstLett].isSearched = true;
+  //             this.prodInCartService.strArr[IdxOfSecLett].isSearched = false;
+  //           } else if (
+  //             this.prodInCartService._prodInCartSearch.includes(item.letter) &&
+  //             idxOfFstLett > -1 &&
+  //             IdxOfSecLett == -1
+  //           ) {
+  //             item.isSearched = true;
+  //             if (!Name.includes(this.prodInCartService._prodInCartSearch)) {
+  //               let idx = this.prodInCartService.strArr.findIndex(
+  //                 (item: { letter: string; isSearched: boolean }) =>
+  //                   item.isSearched == true
+  //               );
+  //               this.prodInCartService.strArr[idx].isSearched = false;
+  //             }
+  //           }
+  //           if (splittedSearch.length < markedArr.length) {
+  //             // this.prodInCartService._ifLettInArrayMoreThanOnce(
+  //             //   this.prodInCartService.strArr,
+  //             //   Name
+  //             // );
+  //             if (findSearchedIdx > 0)
+  //               this.prodInCartService.strArr[findSearchedIdx].isSearched =
+  //                 false;
+  //           }
+  //         }
+  //       }
+  //     );
+  //   }
+  // };
 
   ngOnInit(): void {}
 }

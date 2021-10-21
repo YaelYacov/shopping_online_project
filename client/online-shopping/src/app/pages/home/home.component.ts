@@ -5,6 +5,7 @@ import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 import { ResizeEvent } from 'angular-resizable-element';
 import { OrdersService } from 'src/app/services/orders.service';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
     public prodInCartService: ProdInCartService,
-    public ordersService: OrdersService
+    public ordersService: OrdersService,
+    public searchService: SearchService
   ) {
     if (this.usersServiceService._Users.CartID > 0) {
       this.prodInCartService._getProdInCartByCartID(
@@ -94,5 +96,7 @@ export class HomeComponent implements OnInit {
     // }
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searchService._fn('beer');
+  }
 }

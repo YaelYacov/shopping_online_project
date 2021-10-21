@@ -5,32 +5,19 @@
   >
 </h3> -->
 
-<h1 *ngIf="!prodInCartService._shit">{{ Name }}</h1>
+<!-- <h1 *ngIf="!prodInCartService._isSearching">{{ Name }}</h1> -->
 
-<!-- <h1 *ngIf="prodInCartService._shit">
+<!-- <h1 *ngIf="prodInCartService._isSearching">
   <span
     *ngFor="let nm of prodInCartService._namesArr; index as i"
     [ngClass]="!nm.isSearched ? 'regularBG' : 'yellowBG'"
     >{{ prodInCartService._nameStr(prodInCartService._namesArr[i]) }}</span
   >
 </h1> -->
-<h1 *ngIf="prodInCartService._shit">
+<!-- <h1 *ngIf="prodInCartService._isSearching">
   <span
     *ngFor="let nm of prodInCartService.strArr; index as i"
     [ngClass]="!nm.isSearched ? 'regularBG' : 'yellowBG'"
-    >{{ prodInCartService._returnName(nm.letter, i) }}</span
-  >
-</h1>
-
-<!-- <h1>
-  <span
-    *ngFor="let nm of prodInCartService._namesArr; index as i"
-    [ngClass]="!nm.isSearched ? 'regularBG' : 'yellowBG'"
-    >{{ replaceIrrelevant(nm.letter) }}</span
+    >{{ nm.letter }}</span
   >
 </h1> -->
-
-<!-- <h6 class="" [innerHTML]=" prodInCartService._prodInCartSearch"></h6> -->
-<!-- <h6 class="">{{ Name }}</h6> -->
-
-<!-- <p [innerHTML]="pet.description | highlightSearch: Search"></p> -->

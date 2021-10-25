@@ -135,12 +135,7 @@ export class ProductCardComponent implements OnInit {
 
   deleteAll = () => {
     this.prodInCartService.strArr.map(
-      (item: {
-        letter: string;
-        isSearched: boolean;
-        isChangeable: boolean;
-        Idx: number;
-      }) => {
+      (item: { isSearched: boolean; isChangeable: boolean }) => {
         item.isSearched = false;
         item.isChangeable = true;
       }
@@ -164,193 +159,43 @@ export class ProductCardComponent implements OnInit {
     }
     this.prodInCartService.strArr = [...this.nameLenArr];
 
-    for (let i = 0; i < splittedSearch.length; i++) {
-      if (i > 0 || splittedSearch.length < i + 1)
-        this.searchArr.push({
-          letter: splittedSearch[splittedSearch.length - 1],
-          isUsed: false,
-        });
+    if (
+      splittedSearch.length > 0 &&
+      this.searchArr.length < splittedSearch.length
+    )
+      this.searchArr.push({
+        letter: splittedSearch[splittedSearch.length - 1],
+        isUsed: false,
+      });
+    else if (this.searchArr.length > splittedSearch.length)
+      this.searchArr.pop();
+
+    if (this.prodInCartService._prodInCartSearch.length == 0) {
+      this.deleteAll();
+      this.searchArr = [];
+    } else if (this.prodInCartService._prodInCartSearch.length > 0) {
+      this.deleteAll();
+      let idxOfSearchInName = Name.indexOf(
+        this.prodInCartService._prodInCartSearch
+      );
+      if (idxOfSearchInName == -1) {
+        this.deleteAll();
+      } else if (idxOfSearchInName > -1) {
+        for (let i = 0; i < this.searchArr.length; i++) {
+          if (
+            this.prodInCartService.strArr[idxOfSearchInName + i].letter ==
+            this.searchArr[i].letter
+          ) {
+            this.prodInCartService.strArr[idxOfSearchInName + i].isSearched =
+              true;
+            this.prodInCartService.strArr[idxOfSearchInName + i].isChangeable =
+              false;
+            this.searchArr[i].isUsed = true;
+          }
+        }
+      }
     }
-
-    console.log(this.searchArr.length, this.searchArr);
-
-    if (this.prodInCartService._prodInCartSearch.length > 0) {
-      // console.log(splittedSearch.length, this.prodInCartService.strArr);
-
-      // let samLettersInArr = this.prodInCartService.strArr.filter(
-      //   (
-      //     item: {
-      //       letter: string;
-      //       isSearched: boolean;
-      //       isChangeable: boolean;
-      //     },
-      //     i: number
-      //   ) =>
-      //     item.letter ==
-      //     this.prodInCartService._prodInCartSearch[
-      //       this.prodInCartService._prodInCartSearch.length - 1
-      //     ]
-      // );
-      // console.log(samLettersInArr);
-
-      // let mappedFilter = [...this.prodInCartService.strArr];
-      // mappedFilter.filter(
-      //   (
-      //     item: {
-      //       letter: string;
-      //       isSearched: boolean;
-      //       isChangeable: boolean;
-      //       Idx: number;
-      //     },
-      //     i: number
-      //   ) => IdxOfSecLett > -1
-      // );
-      // console.log(mappedFilter);
-
-      let markedArr = this.prodInCartService.strArr.filter(
-        (item: { letter: string; isSearched: boolean }) =>
-          item.isSearched == true
-      );
-      console.log(markedArr);
-
-      let IdxOfSearchedInName = this.prodInCartService.strArr.findIndex(
-        (
-          item: {
-            letter: string;
-            isSearched: boolean;
-            isChangeable: boolean;
-            Idx: number;
-          },
-          i: number
-        ) => {
-          // console.log(i, item.Idx, item.letter);
-          return (
-            this.prodInCartService._prodInCartSearch[
-              this.prodInCartService._prodInCartSearch.length - 1
-            ] == item.letter &&
-            item.isChangeable == true &&
-            markedArr.length + 1 == splittedSearch.length
-          );
-        }
-      );
-
-      if (
-        IdxOfSearchedInName > -1 &&
-        this.prodInCartService.strArr[IdxOfSearchedInName].isChangeable == true
-      ) {
-        // if (markedArr.length == splittedSearch.length) {
-        this.prodInCartService.strArr[IdxOfSearchedInName].isSearched = true;
-        if (
-          markedArr.length == splittedSearch.length ||
-          markedArr.length == 0
-        ) {
-          this.prodInCartService.strArr.map(
-            (
-              item: {
-                letter: string;
-                isSearched: boolean;
-                isChangeable: boolean;
-              },
-              i: number
-            ) => {
-              if (i < IdxOfSearchedInName + 1) item.isChangeable = false;
-
-              // if(samLettersInArr.length >1 && samLettersInArr[0].letter == item.letter&& item.isSearched == true){
-              //   item.isSearched = false;
-              //   item.isChangeable = true
-              // }
-            }
-          );
-        }
-
-        // }
-      } else this.deleteAll();
-    } else this.deleteAll();
   };
-
-  // getName = (Name: string | any) => {
-  //   //  this._moreThanOne;
-  //   // console.log(
-  //   //   this.prodInCartService._isLettInStrMulti(
-  //   //     this.prodInCartService._prodInCartSearch,
-  //   //     Name
-  //   //   )
-  //   // );
-
-  //   let splittedSearch = [
-  //     ...this.prodInCartService._prodInCartSearch.split(''),
-  //   ];
-  //   let splittedName = [...Name.split('')];
-  //   for (let i = 0; i < Name.length; i++) {
-  //     if (this.nameLenArr.length < i + 1) {
-  //       this.nameLenArr.push({
-  //         letter: Name[i],
-  //         isSearched: false,
-  //         isChangeable: true,
-  //       });
-  //     }
-  //     this.prodInCartService.strArr = [...this.nameLenArr];
-
-  //     let markedArr = this.prodInCartService.strArr.filter(
-  //       (item: { letter: string; isSearched: boolean }) =>
-  //         item.isSearched == true
-  //     );
-
-  //     this.prodInCartService.strArr.map(
-  //       (item: { letter: string; isSearched: boolean }, index: number) => {
-  //         if (splittedSearch.length == 0) item.isSearched = false; //everything is false
-  //         for (let i = 0; i < splittedSearch.length; i++) {
-  //           // console.log(item.letter == splittedSearch[i]);
-  //           let idxOfFstLett = Name.indexOf(splittedSearch[i]);
-  //           let IdxOfSecLett = Name.indexOf(
-  //             splittedSearch[i],
-  //             idxOfFstLett + 1
-  //           );
-  //           console.log(IdxOfSecLett, idxOfFstLett);
-  //           let findSearchedIdx = this.prodInCartService.strArr.findIndex(
-  //             (item: { letter: string; isSearched: boolean }) =>
-  //               item.isSearched &&
-  //               !this.prodInCartService._prodInCartSearch.includes(item.letter)
-  //           ); //item.search true, but not on _prodInCartSearch
-
-  //           if (IdxOfSecLett > -1) {
-  //             /////////////////
-  //             if (
-  //               this.prodInCartService._isLettInStrMulti(
-  //                 this.prodInCartService._prodInCartSearch,
-  //                 Name
-  //               )
-  //             )
-  //               this.prodInCartService.strArr[idxOfFstLett].isSearched = true;
-  //             this.prodInCartService.strArr[IdxOfSecLett].isSearched = false;
-  //           } else if (
-  //             this.prodInCartService._prodInCartSearch.includes(item.letter) &&
-  //             idxOfFstLett > -1 &&
-  //             IdxOfSecLett == -1
-  //           ) {
-  //             item.isSearched = true;
-  //             if (!Name.includes(this.prodInCartService._prodInCartSearch)) {
-  //               let idx = this.prodInCartService.strArr.findIndex(
-  //                 (item: { letter: string; isSearched: boolean }) =>
-  //                   item.isSearched == true
-  //               );
-  //               this.prodInCartService.strArr[idx].isSearched = false;
-  //             }
-  //           }
-  //           if (splittedSearch.length < markedArr.length) {
-  //             // this.prodInCartService._ifLettInArrayMoreThanOnce(
-  //             //   this.prodInCartService.strArr,
-  //             //   Name
-  //             // );
-  //             if (findSearchedIdx > 0)
-  //               this.prodInCartService.strArr[findSearchedIdx].isSearched =
-  //                 false;
-  //           }
-  //         }
-  //       }
-  //     );
-  //   }
-  // };
 
   ngOnInit(): void {}
 }

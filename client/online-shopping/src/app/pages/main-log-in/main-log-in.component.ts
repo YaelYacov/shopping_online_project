@@ -4,6 +4,8 @@ import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { SettingsService } from 'src/app/services/settings.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
+import { OrdersService } from 'src/app/services/orders.service';
+
 // import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -17,6 +19,7 @@ export class MainLogInComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
     public cartsService: CartsService,
+    public ordersService: OrdersService,
     public prodInCartService: ProdInCartService
   ) {}
 
@@ -33,5 +36,6 @@ export class MainLogInComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(window.location.pathname);
+    this.ordersService._isOrdering = false;
   }
 }

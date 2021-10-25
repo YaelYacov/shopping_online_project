@@ -24,7 +24,6 @@ import { ResizableModule } from 'angular-resizable-element';
 import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 import { AdminFormComponent } from './components/admin-form/admin-form.component';
 import { OrdersFormComponent } from './components/orders-form/orders-form.component';
-import { SearchedSpanComponent } from './components/searched-span/searched-span.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { SearchedSpanComponent } from './components/searched-span/searched-span.
     UploadFilesComponent,
     AdminFormComponent,
     OrdersFormComponent,
-    SearchedSpanComponent,
   ],
   imports: [
     BrowserModule,

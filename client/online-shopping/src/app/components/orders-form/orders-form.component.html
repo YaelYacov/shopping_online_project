@@ -1,1 +1,87 @@
-<p>orders-form works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <label for="city" class="form-label">City:</label>
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      id="city"
+      required
+      (dblclick)="chooseDefault(0)"
+      [(ngModel)]="ordersService._order.City"
+    >
+      <option selected>Open this select menu</option>
+      <option value="Jerusalem">Jerusalem</option>
+      <option value="Tel Aviv">Tel Aviv</option>
+      <option value="Haifa">Haifa</option>
+      <option value="Ashdod">Ashdod</option>
+      <option value="Rishon LeZiyyon">Rishon LeZiyyon</option>
+      <option value="Petah Tikva">Petah Tikva</option>
+      <option value="Beersheba">Beersheba</option>
+      <option value="Netanya">Netanya</option>
+      <option value="Holon">Holon</option>
+      <option value="Bnei Brak">Bnei Brak</option>
+      <option value="Rehovot">Rehovot</option>
+      <option value="Bat Yam">Bat Yam</option>
+    </select>
+  </div>
+  <div class="row">
+    <label for="street" class="form-label">Street:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="street"
+      aria-describedby="emailHelp"
+      required
+      [(ngModel)]="ordersService._order.Street"
+      [ngModelOptions]="{ standalone: true }"
+      required
+      (dblclick)="chooseDefault(1)"
+    />
+  </div>
+  <div class="row">
+    <label for="myDate" class="form-label">Date:</label>
+
+    <select
+      [(ngModel)]="ordersService._order.ShippingDate"
+      class="form-select"
+      aria-label="Default select example"
+      id="myDate"
+      required
+    >
+      <option selected>Open this select menu</option>
+      <option
+        *ngFor="let date of dates"
+        value="{{ date }} "
+        [disabled]="!returnFiltered(date) ? null : 'disabled'"
+        [ngClass]="!returnFiltered(date) ? 'regularText' : 'redText'"
+      >
+        {{ date }}
+      </option>
+    </select>
+  </div>
+  <div class="row">
+    <label for="LastDigitsOfCard" class="form-label"
+      >Last Digits Of Card:</label
+    >
+
+    <input
+      #LastDigitsOfCard
+      class="form-control"
+      type="number"
+      [(ngModel)]="ordersService._order.LastDigitsOfCard"
+      required
+    />
+  </div>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <button
+        class="btn btn-secondary"
+        (click)="ordersService._addNewOrder(ordersService._order)"
+      >
+        Order
+      </button>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>

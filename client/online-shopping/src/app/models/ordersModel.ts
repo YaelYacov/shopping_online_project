@@ -7,9 +7,10 @@ export class Orders {
   LastDigitsOfCard: string = '';
   OrderInPlace: boolean = false;
   TotalPrice: number = 0;
-  user: Array<User> = [];
+  userID: Array<User> = [];
   createdAt: string = '';
   updatedAt: string = '';
+  ShippingDate: string = '';
   constructor(
     ID?: number,
     City?: string,
@@ -17,9 +18,10 @@ export class Orders {
     LastDigitsOfCard?: string,
     OrderInPlace?: boolean,
     TotalPrice?: number,
-    user?: Array<User>,
+    userID?: Array<User>,
     createdAt?: string,
-    updatedAt?: string
+    updatedAt?: string,
+    ShippingDate?: string
   ) {
     this.ID = ID || 0;
     this.City = City || '';
@@ -27,9 +29,10 @@ export class Orders {
     this.LastDigitsOfCard = LastDigitsOfCard || '';
     this.OrderInPlace = OrderInPlace || false;
     this.TotalPrice = TotalPrice || 0;
-    this.user = user || [];
+    this.userID = userID || [];
     this.createdAt = createdAt || '';
     this.updatedAt = updatedAt || '';
+    this.ShippingDate = ShippingDate || '';
   }
 }
 
@@ -41,10 +44,10 @@ export class Orders {
 // TotalPrice: 33
 // createdAt: null
 // updatedAt: null
-// user: {ID: 1, Fname: "Yoshi", Lname: "Yosh", Mail: "yoshi@gmail.com ", Password: "111", …}
-// userID: 1
+// userID: {ID: 1, Fname: "Yoshi", Lname: "Yosh", Mail: "yoshi@gmail.com ", Password: "111", …}
+// userIDID: 1
 
-// user: CartID: null;
+// userID: CartID: null;
 // City: 'Bnei Brak';
 // Fname: 'Yoshi';
 // ID: 1;

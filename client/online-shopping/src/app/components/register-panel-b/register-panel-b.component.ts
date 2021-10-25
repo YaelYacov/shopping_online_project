@@ -8,10 +8,7 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./register-panel-b.component.css'],
 })
 export class RegisterPanelBComponent implements OnInit {
-  constructor(
-    public usersServiceService: UsersServiceService,
-    private router: Router
-  ) {}
+  constructor(public usersServiceService: UsersServiceService) {}
 
   ngOnInit(): void {}
 }

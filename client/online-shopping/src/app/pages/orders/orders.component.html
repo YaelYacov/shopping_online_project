@@ -1,6 +1,12 @@
 <div class="container-fluid">
   <div class="row">
     <div id="myCart" class="col-6">
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6">
+          <a routerLink="/home"> Back to Shope </a>
+        </div>
+      </div>
       <div *ngFor="let ProdInCart of prodInCartService._prodInCart">
         <app-product-card
           [ProdInCart]="ProdInCart"

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Orders } from '../models/ordersModel';
 import { ApiService } from './api.service';
+import { ProdInCartService } from './prod-in-cart.service';
+import { UsersServiceService } from './users-service.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +13,12 @@ export class OrdersService {
   _order: Orders = new Orders();
   _isOrdering: boolean = false;
 
-  constructor(public apiService: ApiService) {}
+  constructor(
+    public usersServiceService: UsersServiceService,
+    public apiService: ApiService,
+    public prodInCartService: ProdInCartService,
+    private router: Router
+  ) {}
 
   _getOrders = async (userID?: number) => {
     let getOrders = !userID ? { AllOrders: 'All' } : { userID: userID };
@@ -30,19 +38,43 @@ export class OrdersService {
     console.log(this._orders);
   };
 
+  _isCreditCard = (str: string) => {
+    //visa, american express, masterCard
+    let visaAERMasterCRegexp =
+      /^4[0-9]{12}(?:[0-9]{3})?$/ ||
+      /^3[47][0-9]{13}$/ ||
+      /^5[1-5][0-9]{14}$|^2(?:2(?:2[1-9]|[3-9][0-9])|[3-6][0-9][0-9]|7(?:[01][0-9]|20))[0-9]{12}$/;
+    return visaAERMasterCRegexp.test(str) ? true : false;
+  };
+
+  myFunction = () => {
+    let r = confirm('Your purchase was made successfully');
+    if (r == true) {
+      this.router.navigateByUrl('/home');
+    }
+  };
+
   _addNewOrder = async (reqBody: object) => {
-    await this.apiService.createPostService(
-      'orders/addNewOrder',
-      //  {
-      //   TotalPrice: 555,
-      //   City: "Rosh Haa'ain",
-      //   Street: 'Hachashmonaim',
-      //   LastDigitsOfCard: '2546',
-      //   userID: 2,
-      // }
-      reqBody
-    );
-    this._getOrders();
+    if (this._isCreditCard(this._order.LastDigitsOfCard)) {
+      // this._order.userID = this.usersServiceService._Users.ID;
+      // this._order.TotalPrice = this.prodInCartService._totalPrice;
+      // await this.apiService.createPostService(
+      //   'orders/addNewOrder',
+
+      //   //  {
+      //   //   TotalPrice: 555,
+      //   //   City: "Rosh Haa'ain",
+      //   //   Street: 'Hachashmonaim',
+      //   //   LastDigitsOfCard: '2546',
+      //   //   userID: 2,
+      //   //   ShippingDate:00-00-0000
+      //   // }
+      //   reqBody
+      // );
+      // this._getOrders();
+      this.myFunction();
+    } else alert('Wrong Credit Card Number');
+
     console.log(this._orders);
   };
 }

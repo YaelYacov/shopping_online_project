@@ -29,6 +29,10 @@ const Orders = sequelize.define("Orders", {
     type: Sequelize.STRING(4),
     allowNull: false,
   },
+  ShippingDate: {
+    type: Sequelize.DATE(6),
+    allowNull: false,
+  },
 });
 
 module.exports = Orders;

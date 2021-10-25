@@ -97,6 +97,6 @@ export class HomeComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.searchService._fn('beer');
+    this.prodInCartService._fromOrders = false;
   }
 }

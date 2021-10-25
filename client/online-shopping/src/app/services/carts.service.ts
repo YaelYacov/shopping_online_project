@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Carts } from '../models/cartsModel';
 import { ApiService } from './api.service';
+import { ProdInCartService } from './prod-in-cart.service';
+import { UsersServiceService } from './users-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,11 @@ export class CartsService {
   _addCart: any;
   // _cart: any;
 
-  constructor(public apiService: ApiService) {}
+  constructor(
+    public apiService: ApiService,
+    public usersServiceService: UsersServiceService,
+    public prodInCartService: ProdInCartService
+  ) {}
 
   _getCartByID = async (type?: number, ID?: number, Status?: number) => {
     let defType =
@@ -29,6 +35,9 @@ export class CartsService {
       values: { userID: userID },
     });
     this._getCartByID();
+    console.log(this._addCart);
+    this.usersServiceService._getUser();
+    this.prodInCartService._getProdInCartByCartID(this._addCart.ID);
   };
 
   _updateCartStatus = async () => {

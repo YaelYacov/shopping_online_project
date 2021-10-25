@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/Usersmodel';
 import { ApiService } from './api.service';
-import { CartsService } from './carts.service';
+import { SettingsService } from './settings.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,8 @@ export class UsersServiceService {
 
   constructor(
     public apiService: ApiService,
-    public cartsService: CartsService,
+
+    public settingsService: SettingsService,
     private router: Router
   ) {}
 
@@ -27,13 +28,12 @@ export class UsersServiceService {
       { Password: this._User.Password, Mail: this._User.Mail }
     )) as Array<User>;
     // console.log('1: ', this._Users);
-    if (this._Users && this._Users.CartID > 0) {
+    if (this._Users && this._Users.IsAdmin == 1) this.router.navigate(['home']);
+    else if (this._Users && this._Users.CartID > 0) {
       this._currentUserID = this._Users.ID;
       this._currentCartID = this._Users.CartID;
     }
-    if (this._Users && this._Users.IsAdmin == 1) {
-      this.router.navigate(['home']);
-    }
+    // console.log(this._currentCartID);
   }
 
   async _updateUserCart(values: object) {

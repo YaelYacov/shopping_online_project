@@ -5,6 +5,7 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
 import { SettingsService } from 'src/app/services/settings.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public settingsService: SettingsService,
     public ordersService: OrdersService,
-    public prodInCartService: ProdInCartService
+    public prodInCartService: ProdInCartService,
+    private router: Router
   ) {
     this.productsService._getAllProducts();
     this.ordersService._isOrdering;
@@ -29,5 +31,8 @@ export class HeaderComponent implements OnInit {
     // console.log(this.router.url);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.usersServiceService._User.ID! > 0)
+      this.router.navigateByUrl('/home');
+  }
 }

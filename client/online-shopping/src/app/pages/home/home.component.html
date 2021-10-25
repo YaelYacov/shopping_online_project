@@ -8,12 +8,18 @@
     <div class="row">
       <div class="col-2 pt-2">
         <i
-          *ngIf="usersServiceService._Users.IsAdmin == 1"
+          *ngIf="
+            usersServiceService._currentUserID > 0 &&
+            usersServiceService._Users.IsAdmin == 1
+          "
           class="fas fa-plus bigger float"
           (click)="productsService._editOrAddIcons(true)"
         ></i>
         <i
-          *ngIf="usersServiceService._Users.IsAdmin == 0"
+          *ngIf="
+            usersServiceService._currentUserID > 0 &&
+            usersServiceService._Users.IsAdmin == 0
+          "
           class="fa fa-trash bigger float"
           (click)="deleteAllProdsFromCart()"
         ></i>
@@ -40,13 +46,22 @@
         *ngFor="let ProdInCart of prodInCartService._prodInCart"
       >
         <app-product-card
-          *ngIf="usersServiceService._Users.IsAdmin == 0"
+          *ngIf="
+            usersServiceService._currentUserID > 0 &&
+            usersServiceService._Users.IsAdmin == 0
+          "
           [ProdInCart]="ProdInCart"
           [ProdType]="0"
         ></app-product-card>
       </div>
 
-      <div *ngIf="usersServiceService._Users.IsAdmin == 0" class="ifNotAdmin">
+      <div
+        *ngIf="
+          usersServiceService._currentUserID > 0 &&
+          usersServiceService._Users.IsAdmin == 0
+        "
+        class="ifNotAdmin"
+      >
         <hr />
 
         <p class="totalPP">Total: {{ prodInCartService._totalPrice }}</p>

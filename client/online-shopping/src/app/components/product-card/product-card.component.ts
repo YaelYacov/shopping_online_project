@@ -4,6 +4,7 @@ import { Product } from 'src/app/models/productsModel';
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
+import { CartsService } from 'src/app/services/carts.service';
 
 @Component({
   selector: 'app-product-card',
@@ -24,8 +25,16 @@ export class ProductCardComponent implements OnInit {
   constructor(
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
-    public prodInCartService: ProdInCartService
+    public prodInCartService: ProdInCartService,
+    public cartsService: CartsService
   ) {
+    this.usersServiceService._getUser();
+    // console.log(this.usersServiceService._Users.CartID)
+    // if (
+    //   this.usersServiceService._Users &&
+    //   !this.usersServiceService._Users.CartID
+    // )
+    //   this.cartsService._addNewCart(this.usersServiceService._currentUserID);
     if (this.productsService._products.length == 0) {
       this.productsService._getAllProducts();
     }
@@ -33,6 +42,7 @@ export class ProductCardComponent implements OnInit {
       this.prodInCartService._prodInCart.length == 0 &&
       this.usersServiceService._Users
     ) {
+      console.log(this.usersServiceService._Users.CartID);
       this.prodInCartService._getProdInCartByCartID(
         this.usersServiceService._Users.CartID
       );

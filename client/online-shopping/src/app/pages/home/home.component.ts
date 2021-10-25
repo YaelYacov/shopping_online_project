@@ -3,9 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
+import { Router } from '@angular/router';
 import { ResizeEvent } from 'angular-resizable-element';
 import { OrdersService } from 'src/app/services/orders.service';
-import { SearchService } from 'src/app/services/search.service';
+import { CartsService } from 'src/app/services/carts.service';
 
 @Component({
   selector: 'app-home',
@@ -18,21 +19,12 @@ export class HomeComponent implements OnInit {
   adminEdit: boolean = false;
   constructor(
     public usersServiceService: UsersServiceService,
+    private router: Router,
     public productsService: ProductsService,
     public prodInCartService: ProdInCartService,
     public ordersService: OrdersService,
-    public searchService: SearchService
-  ) {
-    if (this.usersServiceService._Users.CartID > 0) {
-      this.prodInCartService._getProdInCartByCartID(
-        this.usersServiceService._Users.CartID
-      );
-    }
-    if (this.usersServiceService._Users.CartID > 0) {
-      this.productsService._isAdding = false;
-      this.productsService._isEditing = false;
-    }
-  }
+    public cartsService: CartsService
+  ) {}
 
   public style: any;
 
@@ -80,23 +72,23 @@ export class HomeComponent implements OnInit {
   addOrEditOrder = () => {
     this.ordersService._isOrdering = true;
     this.prodInCartService._fromOrders = true;
-    // this.ordersService._getOrders(this.usersServiceService._Users.ID);
-    // if (this.ordersService._orders.length == 0) {
-    //   let userOrdersInPlace: any = this.ordersService._orders.find(
-    //     (order) => !order.OrderInPlace
-    //   );
-    //   console.log(userOrdersInPlace);
-    //   if(userOrdersInPlace == undefined)this.ordersService._addNewOrder({
-    //     TotalPrice: this.prodInCartService._totalPrice,
-    //     City: this.usersServiceService._Users.City,
-    //     Street: this.usersServiceService._Users.Street,
-    //     LastDigitsOfCard: this.ordersService._order.LastDigitsOfCard,
-    //     userID: this.usersServiceService._Users.ID,
-    //   });
-    // }
   };
 
   ngOnInit(): void {
     this.prodInCartService._fromOrders = false;
+    let greaterThan0 =
+      this.usersServiceService._Users && this.usersServiceService._Users.ID > 0;
+    if (!greaterThan0) this.router.navigateByUrl('/logIn');
+    this.usersServiceService._getUser();
+    if (
+      this.usersServiceService._currentUserID > 0 &&
+      this.usersServiceService._Users.CartID > 0
+    ) {
+      this.productsService._isAdding = false;
+      this.productsService._isEditing = false;
+      this.prodInCartService._getProdInCartByCartID(
+        this.usersServiceService._Users.CartID
+      );
+    }
   }
 }

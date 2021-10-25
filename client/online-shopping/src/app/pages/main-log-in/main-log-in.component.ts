@@ -5,8 +5,8 @@ import { ProductsService } from 'src/app/services/products.service';
 import { SettingsService } from 'src/app/services/settings.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 import { OrdersService } from 'src/app/services/orders.service';
-
-// import { DragDropModule } from '@angular/cdk/drag-drop';
+import { Orders } from 'src/app/models/ordersModel';
+import { User } from 'src/app/models/Usersmodel';
 
 @Component({
   selector: 'app-main-log-in',
@@ -36,6 +36,9 @@ export class MainLogInComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(window.location.pathname);
+
     this.ordersService._isOrdering = false;
+    this.ordersService._order = new Orders();
+    this.usersServiceService._User = new User();
   }
 }

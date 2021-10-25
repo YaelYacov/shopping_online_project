@@ -53,7 +53,6 @@ export class OrdersFormComponent implements OnInit {
     filtered = this.ordersService._orders.filter((item) => {
       return item.ShippingDate == fullDate;
     });
-    console.log(filtered);
     if (filtered.length == 3) {
       return true;
     } else {
@@ -70,7 +69,6 @@ export class OrdersFormComponent implements OnInit {
       let myFutureDate: any = new Date(myCurrentDate);
       myFutureDate.setDate(myCurrentDate.getDate() + i);
       myFutureDate.toLocaleDateString();
-      console.log(myFutureDate);
       arr.push(myFutureDate.toString().slice(0, 15));
     }
     this.dates = arr;
@@ -79,8 +77,6 @@ export class OrdersFormComponent implements OnInit {
 
   chooseDefault = (type: number) => {
     //type: 0 - city, 1 - street, 2 -cardDigit
-    console.log(this.ordersService._order);
-    console.log(this.usersServiceService._Users.City);
     if (this.usersServiceService._Users) {
       if (type == 0)
         this.ordersService._order.City = this.usersServiceService._Users.City;
@@ -88,7 +84,6 @@ export class OrdersFormComponent implements OnInit {
         this.ordersService._order.Street =
           this.usersServiceService._Users.Street;
     }
-    console.log(this.ordersService._order);
   };
 
   ngOnInit(): void {

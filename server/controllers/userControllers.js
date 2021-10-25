@@ -14,7 +14,7 @@ exports.getUserByMailNPass = async (req, res, next) => {
 
   await User.findOne(condition)
     .then((result) => {
-      console.log(result, req.body, "option userssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+      // console.log(result, req.body, "option");
       res.send(result);
     })
     .catch((err) => {

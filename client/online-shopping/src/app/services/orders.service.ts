@@ -4,6 +4,7 @@ import { ApiService } from './api.service';
 import { ProdInCartService } from './prod-in-cart.service';
 import { UsersServiceService } from './users-service.service';
 import { Router } from '@angular/router';
+import { CartsService } from 'src/app/services/carts.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,8 @@ export class OrdersService {
     public usersServiceService: UsersServiceService,
     public apiService: ApiService,
     public prodInCartService: ProdInCartService,
+
+    public cartsService: CartsService,
     private router: Router
   ) {}
 
@@ -26,7 +29,7 @@ export class OrdersService {
       'orders/getOrders',
       getOrders
     )) as Array<Orders>;
-    console.log(this._orders);
+    // console.log(this._orders);
   };
 
   _updateOrder = async () => {
@@ -47,36 +50,27 @@ export class OrdersService {
     return visaAERMasterCRegexp.test(str) ? true : false;
   };
 
-  myFunction = () => {
+  _confirmFn = () => {
     let r = confirm('Your purchase was made successfully');
-    if (r == true) {
-      this.router.navigateByUrl('/home');
-    }
+    if (r == true) this.router.navigateByUrl('/home');
   };
 
   _addNewOrder = async (reqBody: object) => {
     if (this._isCreditCard(this._order.LastDigitsOfCard)) {
-      // this._order.userID = this.usersServiceService._Users.ID;
-      // this._order.TotalPrice = this.prodInCartService._totalPrice;
-      // await this.apiService.createPostService(
-      //   'orders/addNewOrder',
+      this._order.userID = this.usersServiceService._Users.ID;
+      this._order.TotalPrice = this.prodInCartService._totalPrice;
+      await this.apiService.createPostService('orders/addNewOrder', reqBody);
+      this._getOrders();
+      this;
+      this.cartsService._addNewCart(this.usersServiceService._currentUserID);
 
-      //   //  {
-      //   //   TotalPrice: 555,
-      //   //   City: "Rosh Haa'ain",
-      //   //   Street: 'Hachashmonaim',
-      //   //   LastDigitsOfCard: '2546',
-      //   //   userID: 2,
-      //   //   ShippingDate:00-00-0000
-      //   // }
-      //   reqBody
-      // );
-      // this._getOrders();
-      this.myFunction();
+      this._confirmFn();
     } else alert('Wrong Credit Card Number');
 
     console.log(this._orders);
   };
+
+  _finishOrder = () => {};
 }
 
 //create order only if client doesnt have an 'order in place  == 3' option

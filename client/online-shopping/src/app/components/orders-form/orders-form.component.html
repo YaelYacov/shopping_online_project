@@ -51,9 +51,9 @@
       <option selected>Open this select menu</option>
       <option
         *ngFor="let date of dates"
-        value="{{ date }} "
-        [disabled]="!returnFiltered(date) ? null : 'disabled'"
-        [ngClass]="!returnFiltered(date) ? 'regularText' : 'redText'"
+        value="{{ returnFiltered(date)[1] }}"
+        [disabled]="!returnFiltered(date)[0] ? null : 'disabled'"
+        [ngClass]="!returnFiltered(date)[0] ? 'regularText' : 'redText'"
       >
         {{ date }}
       </option>
@@ -75,13 +75,7 @@
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-      <button
-        class="btn btn-secondary"
-        (click)="ordersService._addNewOrder(ordersService._order)"
-        routerLink="/orderInPlace"
-      >
-        Order
-      </button>
+      <button class="btn btn-secondary" (click)="editNAddOrder()">Order</button>
     </div>
     <div class="col-4"></div>
   </div>

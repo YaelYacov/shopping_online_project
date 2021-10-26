@@ -4,6 +4,7 @@ import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CartsService } from 'src/app/services/carts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-in-place',
@@ -19,12 +20,14 @@ export class OrderInPlaceComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public ordersService: OrdersService,
     private sanitizer: DomSanitizer,
-    public cartsService: CartsService
+    public cartsService: CartsService,
+    private router: Router
   ) {
+    if (!this.usersServiceService._Users) this.router.navigateByUrl('/logIn');
+
     this.prodInCartService._getProdInCartByCartID(
       this.usersServiceService._Users.ID
     );
-    console.log(this.prodInCartService._prodInCart);
   }
 
   generateDownloadJsonUri = () => {
@@ -34,8 +37,6 @@ export class OrderInPlaceComponent implements OnInit {
       'data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON)
     );
     this.downloadJsonHref = uri;
-    console.log(this.downloadJsonHref, uri, 'shit');
-    // this.cartsService._addNewCart(this.usersServiceService._currentUserID);
   };
 
   ngOnInit(): void {}

@@ -30,7 +30,7 @@ const Orders = sequelize.define("Orders", {
     allowNull: false,
   },
   ShippingDate: {
-    type: Sequelize.DATE(6),
+    type: Sequelize.STRING(11),
     allowNull: false,
   },
 });

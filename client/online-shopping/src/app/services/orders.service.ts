@@ -13,6 +13,7 @@ export class OrdersService {
   _isOrdering: boolean = false;
   downloadJsonHref: any;
   Rcp: string = '';
+  _lastDigits: string = '';
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -48,7 +49,6 @@ export class OrdersService {
   };
 
   rcp = () => {
-    console.log(this.prodInCartService._prodInCart);
     this.Rcp += `total  price =  quantity  *  price   description   Product Name`;
     this.prodInCartService._prodInCart.map((prod: any) => {
       this.Rcp += `\n ${prod.Qnt * prod.Product.Price} = ${prod.Qnt} * ${
@@ -58,19 +58,14 @@ export class OrdersService {
     this.Rcp += `\n Total : ${this.prodInCartService._totalPrice}`;
     // return this.Rcp;
   };
-  _addNewOrder = async (reqBody: object) => {
-    if (this._isCreditCard(this._order.LastDigitsOfCard)) {
-      this._order.userID = this.usersServiceService._Users.ID;
-      this._order.TotalPrice = this.prodInCartService._totalPrice;
-      await this.apiService.createPostService('orders/addNewOrder', reqBody);
-      this._getOrders();
-      this.prodInCartService._getProdInCartByCartID(
-        this.usersServiceService._Users.ID
-      );
-      this.rcp();
-    } else alert('Wrong Credit Card Number');
 
-    console.log(this._orders);
+  _addNewOrder = async (reqBody: object) => {
+    await this.apiService.createPostService('orders/addNewOrder', reqBody);
+    this._getOrders();
+    this.prodInCartService._getProdInCartByCartID(
+      this.usersServiceService._Users.ID
+    );
+    this.rcp();
   };
 }
 

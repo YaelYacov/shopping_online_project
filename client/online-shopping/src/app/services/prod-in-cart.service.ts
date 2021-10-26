@@ -29,7 +29,7 @@ export class ProdInCartService {
       this._calcTotalPrice();
     }
 
-    console.log(this._prodInCart);
+    // console.log(this._prodInCart);
   };
 
   _addNewProdInCart = async (CartID: number, ProductID: number) => {

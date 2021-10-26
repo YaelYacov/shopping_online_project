@@ -15,11 +15,7 @@ export class ProductCardComponent implements OnInit {
   @Input() Product: Product = new Product();
   @Input() ProdInCart: ProdInCart = new ProdInCart();
   @Input() ProdType: number = 1; //0= prodInCart, 1= product, 2= orders
-  // @Input() ProdType: boolean = true;
-  searchStr: string = '';
-  prodNameStr: string = '';
   nameLenArr: Array<string> | any = [];
-  secondaryProdNameArr: Array<any> = [];
   searchArr: Array<any> = [];
 
   constructor(
@@ -29,12 +25,6 @@ export class ProductCardComponent implements OnInit {
     public cartsService: CartsService
   ) {
     this.usersServiceService._getUser();
-    // console.log(this.usersServiceService._Users.CartID)
-    // if (
-    //   this.usersServiceService._Users &&
-    //   !this.usersServiceService._Users.CartID
-    // )
-    //   this.cartsService._addNewCart(this.usersServiceService._currentUserID);
     if (this.productsService._products.length == 0) {
       this.productsService._getAllProducts();
     }
@@ -42,7 +32,6 @@ export class ProductCardComponent implements OnInit {
       this.prodInCartService._prodInCart.length == 0 &&
       this.usersServiceService._Users
     ) {
-      console.log(this.usersServiceService._Users.CartID);
       this.prodInCartService._getProdInCartByCartID(
         this.usersServiceService._Users.CartID
       );
@@ -94,7 +83,6 @@ export class ProductCardComponent implements OnInit {
             this.usersServiceService._Users.CartID
           );
     }
-    //   console.log(this.isProdInCart(ProductID), prodInCartID > 0);
   };
 
   addToCart = (
@@ -117,7 +105,6 @@ export class ProductCardComponent implements OnInit {
   };
 
   imgSrc = (type: number) => {
-    //type tru => product, false => prodInCart
     if (type == 1) {
       return this.Product.Img;
     } else if (type == 0 || type == 2) {

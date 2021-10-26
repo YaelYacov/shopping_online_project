@@ -35,7 +35,6 @@ export class CartsService {
       values: { userID: userID },
     });
     this._getCartByID();
-    console.log(this._addCart);
     this.usersServiceService._getUser();
     this.prodInCartService._getProdInCartByCartID(this._addCart.ID);
   };

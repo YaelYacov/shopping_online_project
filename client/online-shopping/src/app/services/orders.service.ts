@@ -3,8 +3,6 @@ import { Orders } from '../models/ordersModel';
 import { ApiService } from './api.service';
 import { ProdInCartService } from './prod-in-cart.service';
 import { UsersServiceService } from './users-service.service';
-import { Router } from '@angular/router';
-import { CartsService } from 'src/app/services/carts.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +11,13 @@ export class OrdersService {
   _orders: Array<Orders> = [];
   _order: Orders = new Orders();
   _isOrdering: boolean = false;
+  downloadJsonHref: any;
+  Rcp: string = '';
 
   constructor(
     public usersServiceService: UsersServiceService,
     public apiService: ApiService,
-    public prodInCartService: ProdInCartService,
-
-    public cartsService: CartsService,
-    private router: Router
+    public prodInCartService: ProdInCartService
   ) {}
 
   _getOrders = async (userID?: number) => {
@@ -50,27 +47,31 @@ export class OrdersService {
     return visaAERMasterCRegexp.test(str) ? true : false;
   };
 
-  _confirmFn = () => {
-    let r = confirm('Your purchase was made successfully');
-    if (r == true) this.router.navigateByUrl('/home');
+  rcp = () => {
+    console.log(this.prodInCartService._prodInCart);
+    this.Rcp += `total  price =  quantity  *  price   description   Product Name`;
+    this.prodInCartService._prodInCart.map((prod: any) => {
+      this.Rcp += `\n ${prod.Qnt * prod.Product.Price} = ${prod.Qnt} * ${
+        prod.Product.Price
+      } ${prod.Product.description} ${prod.Product.Name}`;
+    });
+    this.Rcp += `\n Total : ${this.prodInCartService._totalPrice}`;
+    // return this.Rcp;
   };
-
   _addNewOrder = async (reqBody: object) => {
     if (this._isCreditCard(this._order.LastDigitsOfCard)) {
       this._order.userID = this.usersServiceService._Users.ID;
       this._order.TotalPrice = this.prodInCartService._totalPrice;
       await this.apiService.createPostService('orders/addNewOrder', reqBody);
       this._getOrders();
-      this;
-      this.cartsService._addNewCart(this.usersServiceService._currentUserID);
-
-      this._confirmFn();
+      this.prodInCartService._getProdInCartByCartID(
+        this.usersServiceService._Users.ID
+      );
+      this.rcp();
     } else alert('Wrong Credit Card Number');
 
     console.log(this._orders);
   };
-
-  _finishOrder = () => {};
 }
 
 //create order only if client doesnt have an 'order in place  == 3' option

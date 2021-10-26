@@ -24,6 +24,7 @@ import { ResizableModule } from 'angular-resizable-element';
 import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 import { AdminFormComponent } from './components/admin-form/admin-form.component';
 import { OrdersFormComponent } from './components/orders-form/orders-form.component';
+import { OrderInPlaceComponent } from './components/order-in-place/order-in-place.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { OrdersFormComponent } from './components/orders-form/orders-form.compon
     UploadFilesComponent,
     AdminFormComponent,
     OrdersFormComponent,
+    OrderInPlaceComponent,
   ],
   imports: [
     BrowserModule,

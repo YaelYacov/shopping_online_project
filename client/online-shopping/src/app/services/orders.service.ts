@@ -30,15 +30,6 @@ export class OrdersService {
     // console.log(this._orders);
   };
 
-  _updateOrder = async () => {
-    await this.apiService.createPostService('orders/updateOrder', {
-      ID: 2,
-      OrderInPlace: 1,
-    });
-    this._getOrders();
-    console.log(this._orders);
-  };
-
   _isCreditCard = (str: string) => {
     //visa, american express, masterCard
     let visaAERMasterCRegexp =

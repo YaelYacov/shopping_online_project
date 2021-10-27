@@ -19,23 +19,9 @@ exports.getOrders = async (req, res, next) => {
     });
 };
 
-exports.updateOrder = async (req, res, next) => {
-  let values = { OrderInPlace: req.body.OrderInPlace };
-  let condition = { where: { ID: req.body.ID } };
-  await Orders.update(values, condition)
-    .then((result) => {
-      console.log(result);
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log("err updating orders", err);
-      res.send("err updating orders", err);
-    });
-};
-
 exports.addNewOrder = async (req, res, next) => {
-  // `ID`, `TotalPrice`, `City`, `Street`, `OrderInPlace`, `LastDigitsOfCard`, `createdAt`, `updatedAt`, `userID`;
-  await Orders.create({ TotalPrice: req.body.TotalPrice, City: req.body.City, Street: req.body.Street, ShippingDate: req.body.ShippingDate, LastDigitsOfCard: req.body.LastDigitsOfCard, userID: req.body.userID, OrderInPlace: true })
+  // `ID`, `TotalPrice`, `City`, `Street`, , `LastDigitsOfCard`, `createdAt`, `updatedAt`, `userID`;
+  await Orders.create({ TotalPrice: req.body.TotalPrice, City: req.body.City, Street: req.body.Street, ShippingDate: req.body.ShippingDate, LastDigitsOfCard: req.body.LastDigitsOfCard, userID: req.body.userID })
     .then((result) => {
       console.log(result);
       res.send(result);

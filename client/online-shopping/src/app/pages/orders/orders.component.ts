@@ -24,7 +24,6 @@ export class OrdersComponent implements OnInit {
     //   !this.ordersService._orders.find(
     //     (item) =>
     //       item.userID == this.usersServiceService._currentUserID &&
-    //       item.OrderInPlace == false
     //   )
     // )
     //   this.ordersService._addNewOrder(this.ordersService._order);

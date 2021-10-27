@@ -120,10 +120,10 @@ export class ProductCardComponent implements OnInit {
       (prod) => prod.ID === prodID
     );
     if (this.productsService._currentProdId != prodID) {
-      this.productsService.Name = foundProd?.Name;
-      this.productsService.description = foundProd?.description;
-      this.productsService.Price = foundProd?.Price;
-      this.productsService.CategoryID = foundProd?.CategoryID;
+      this.productsService._product.Name = foundProd?.Name;
+      this.productsService._product.description = foundProd?.description;
+      this.productsService._product.Price = foundProd?.Price;
+      this.productsService._product.CategoryID = foundProd?.CategoryID;
     }
     this.productsService.Name =
       this.productsService._currentProdId != prodID ? foundProd?.Name : '';

@@ -11,11 +11,7 @@
       placeholder=" {{
         !productsService._isAdding ? productsService.Name : 'Product Name'
       }} "
-      [(ngModel)]="
-        productsService._isAdding
-          ? productsService._product.Name
-          : productsService.Name
-      "
+      [(ngModel)]="productsService._product.Name"
     />
   </div>
   <div class="row p-3">
@@ -52,11 +48,7 @@
   </div>
   <div class="row p-3">
     <select
-      [(ngModel)]="
-        productsService._isAdding
-          ? productsService._product.CategoryID
-          : productsService.CategoryID
-      "
+      [(ngModel)]="productsService._product.CategoryID"
       class="form-select"
       aria-label="Default select example"
     >
@@ -82,11 +74,7 @@
           ? productsService.description
           : 'Product description'
       }} "
-      [(ngModel)]="
-        productsService._isAdding
-          ? productsService._product.description
-          : productsService.description
-      "
+      [(ngModel)]="productsService._product.description"
     />
   </div>
   <div class="row p-3">
@@ -96,11 +84,7 @@
       id="Price"
       type="number"
       class="form-control"
-      [(ngModel)]="
-        productsService._isAdding
-          ? productsService._product.Price
-          : productsService.Price
-      "
+      [(ngModel)]="productsService._product.Price"
     />
   </div>
   <div class="row p-3">

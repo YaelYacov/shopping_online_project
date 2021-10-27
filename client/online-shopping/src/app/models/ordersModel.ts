@@ -5,7 +5,6 @@ export class Orders {
   City: string = '';
   Street: string = '';
   LastDigitsOfCard: string = '';
-  OrderInPlace: boolean = false;
   TotalPrice: number = 0;
   userID: Array<User> = [];
   createdAt: string = '';
@@ -16,7 +15,6 @@ export class Orders {
     City?: string,
     Street?: string,
     LastDigitsOfCard?: string,
-    OrderInPlace?: boolean,
     TotalPrice?: number,
     userID?: Array<User>,
     createdAt?: string,
@@ -27,7 +25,6 @@ export class Orders {
     this.City = City || '';
     this.Street = Street || '';
     this.LastDigitsOfCard = LastDigitsOfCard || '';
-    this.OrderInPlace = OrderInPlace || false;
     this.TotalPrice = TotalPrice || 0;
     this.userID = userID || [];
     this.createdAt = createdAt || '';
@@ -39,7 +36,6 @@ export class Orders {
 // City: "Bnei Brak"
 // ID: 1
 // LastDigitsOfCard: "4456"
-// OrderInPlace: false
 // Street: "Yonatan"
 // TotalPrice: 33
 // createdAt: null

@@ -19,7 +19,7 @@ export class AboutUsComponent implements OnInit {
     public cartsService: CartsService,
     public usersServiceService: UsersServiceService
   ) {
-    // this.ordersService._getOrders();
+    this.ordersService._getOrders();
     // this.productsService._getAllProducts();
     // if (this.usersServiceService._Users) {
     //   console.log(this.usersServiceService._Users);
@@ -30,7 +30,7 @@ export class AboutUsComponent implements OnInit {
 
   ifUsers = () => {
     if (this.usersServiceService._Users) {
-      if (this.usersServiceService._Users.Carts.length == 1) {
+      if (this.usersServiceService._Users.CartID) {
         return this.usersServiceService._Users.Carts[0].createdAt.slice(0, 10);
       } else
         return this.usersServiceService._Users.Carts.find(

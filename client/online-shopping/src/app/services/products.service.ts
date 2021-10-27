@@ -61,6 +61,7 @@ export class ProductsService {
       this._isAdding = true;
       this._isEditing = false;
       this._currentProdId = 0;
+      this._product = new Product();
       // console.log('once from plus: ', this._currentProdId);
     } else if (
       (!isPlus && !this._isEditing) ||
@@ -81,5 +82,6 @@ export class ProductsService {
 
       // console.log('sec from plus or edit : ', this._currentProdId);
     }
+    console.log(this._isAdding, this._isEditing);
   };
 }

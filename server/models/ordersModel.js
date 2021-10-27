@@ -7,10 +7,6 @@ const Orders = sequelize.define("Orders", {
     autoIncrement: true,
     allowNull: false,
   },
-  // UserID: {
-  //   type: Sequelize.INTEGER(11),
-  //   foreignKey: true,
-  // },
   TotalPrice: {
     type: Sequelize.INTEGER(11),
   },
@@ -19,11 +15,6 @@ const Orders = sequelize.define("Orders", {
   },
   Street: {
     type: Sequelize.STRING(50),
-  },
-  OrderInPlace: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
   },
   LastDigitsOfCard: {
     type: Sequelize.STRING(4),

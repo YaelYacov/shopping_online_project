@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
+    <b class="whiteTxT nav-item" *ngIf="usersServiceService._Users">
+      Hello {{ usersServiceService._Users.Fname }} :)
+    </b>
     <button
       class="navbar-toggler"
       type="button"
@@ -38,6 +41,7 @@
         >
           <app-categories-nav></app-categories-nav>
         </div>
+
         <li class="orderSearch" *ngIf="ordersService._isOrdering">
           <input
             [(ngModel)]="prodInCartService._prodInCartSearch"

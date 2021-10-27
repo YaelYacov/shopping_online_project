@@ -14,11 +14,6 @@ import { CategoriesService } from 'src/app/services/categories.service';
 export class AdminFormComponent implements OnInit {
   @Input() Product: Product = new Product();
   newCat: boolean = false;
-  // firstNameControl = new FormControl();
-  Name: string = '';
-  description: string = '';
-  Price: number = 0;
-  CategoryID: number = 0;
   editProd: any = {};
 
   constructor(
@@ -26,23 +21,24 @@ export class AdminFormComponent implements OnInit {
     public productsService: ProductsService,
     public categoriesService: CategoriesService
   ) {
-    // this.categoriesService._getAllCategories();
-    // this.categoriesService._categories[0].Name;
+    this.categoriesService._getAllCategories();
   }
 
   IsNewCat = () => (this.newCat = !this.newCat ? true : false);
 
   saveChangesBTN = (isEditing: boolean) => {
-    // isEditing ? this.productsService._editProd({})
-
     if (!isEditing) {
-      this.productsService._addNewProd({
-        Name: this.productsService._product.Name,
-        description: this.productsService._product.description,
-        Price: this.productsService._product.Price,
-        Img: this.productsService._product.Img,
-        CategoryID: this.productsService._product.CategoryID,
-      });
+      console.log(
+        this.productsService._product,
+        this.productsService._isAdding
+      );
+      // this.productsService._addNewProd({
+      //   Name: this.productsService._product.Name,
+      //   description: this.productsService._product.description,
+      //   Price: this.productsService._product.Price,
+      //   Img: this.productsService._product.Img,
+      //   CategoryID: this.productsService._product.CategoryID,
+      // });
     } else {
       if (this.productsService.Name != '')
         this.editProd.Name = this.productsService.Name;
@@ -56,9 +52,10 @@ export class AdminFormComponent implements OnInit {
         this.productsService._currentProdId,
         this.editProd
       );
-      console.log(this.productsService.CategoryID, this.productsService.Name);
+      this.productsService._product = new Product();
+
+      // console.log(this.productsService.CategoryID, this.productsService.Name);
     }
-    this.productsService._product = new Product();
   };
   ngOnInit(): void {}
 }

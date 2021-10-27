@@ -26,9 +26,6 @@ export class HeaderComponent implements OnInit {
   ) {
     this.productsService._getAllProducts();
     this.ordersService._isOrdering;
-
-    // console.log(usersServiceService._currentUserID);
-    // console.log(this.router.url);
   }
 
   ngOnInit(): void {

@@ -25,7 +25,7 @@ export class UploadFilesComponent implements OnInit {
   };
 
   uploadFile = async () => {
-    // console.log(this.Product);
+    console.log(this.Product);
     let res: any;
     const formData = new FormData();
     const files = this.filesToUpload;
@@ -47,11 +47,11 @@ export class UploadFilesComponent implements OnInit {
       endOfImageName == '.gif'
     ) {
       // console.log(`http://www.localhost:5000/${res[0].originalname}`);
-      if (this.productsService._isAdding)
-        this.productsService._product.Img = `http://www.localhost:5000/${res[0].originalname}`;
-      else {
-        this.productsService._editProd(this.Product.ID, {
-          Img: `http://www.localhost:5000/${res[0].originalname}`,
+      this.productsService._product.Img = `http://www.localhost:5000/${res[0].originalname}`;
+      console.log(this.productsService._product.Img);
+      if (!this.productsService._isAdding) {
+        this.productsService._editProd(this.productsService._currentProdId, {
+          Img: this.productsService._product.Img,
         });
         this.productsService._getAllProducts();
       }

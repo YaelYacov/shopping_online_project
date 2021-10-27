@@ -85,25 +85,6 @@ export class ProductCardComponent implements OnInit {
     }
   };
 
-  addToCart = (
-    ProductID: number //
-  ) => {
-    // console.log(this.isProdInCart(ProductID));
-    this.isProdInCart(ProductID) == 0 ||
-    this.prodInCartService._prodInCart.length == 0 ||
-    this.isProdInCart(ProductID) == undefined
-      ? this.prodInCartService._addNewProdInCart(
-          this.usersServiceService._Users.CartID,
-          ProductID
-        )
-      : this.increaseOrDecreaseQnt(
-          true,
-          ProductID,
-          this.isProdInCart(ProductID).Qnt,
-          this.isProdInCart(ProductID).ID
-        );
-  };
-
   imgSrc = (type: number) => {
     if (type == 1) {
       return this.Product.Img;

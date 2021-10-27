@@ -28,32 +28,29 @@ export class AdminFormComponent implements OnInit {
 
   saveChangesBTN = (isEditing: boolean) => {
     if (!isEditing) {
-      console.log(
-        this.productsService._product,
-        this.productsService._isAdding
-      );
-      // this.productsService._addNewProd({
-      //   Name: this.productsService._product.Name,
-      //   description: this.productsService._product.description,
-      //   Price: this.productsService._product.Price,
-      //   Img: this.productsService._product.Img,
-      //   CategoryID: this.productsService._product.CategoryID,
-      // });
+      console.log(this.productsService._product);
+      this.productsService._addNewProd({
+        Name: this.productsService._product.Name,
+        description: this.productsService._product.description,
+        Price: this.productsService._product.Price,
+        Img: this.productsService._product.Img,
+        CategoryID: this.productsService._product.CategoryID,
+      });
+      this.productsService._isAdding = false;
     } else {
-      if (this.productsService.Name != '')
-        this.editProd.Name = this.productsService.Name;
-      if (this.productsService.description != '')
-        this.editProd.description = this.productsService.description;
-      if (this.productsService.Price != 0)
-        this.editProd.Price = this.productsService.Price;
-      if (this.productsService.CategoryID != 0)
-        this.editProd.CategoryID = this.productsService.CategoryID;
+      if (this.productsService._product.Name != '')
+        this.editProd.Name = this.productsService._product.Name;
+      if (this.productsService._product.description != '')
+        this.editProd.description = this.productsService._product.description;
+      if (this.productsService._product.Price != 0)
+        this.editProd.Price = this.productsService._product.Price;
+      if (this.productsService._product.CategoryID != 0)
+        this.editProd.CategoryID = this.productsService._product.CategoryID;
       this.productsService._editProd(
         this.productsService._currentProdId,
         this.editProd
       );
-      this.productsService._product = new Product();
-
+      this.productsService._isEditing = false;
       // console.log(this.productsService.CategoryID, this.productsService.Name);
     }
   };

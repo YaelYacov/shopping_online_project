@@ -6,6 +6,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 import { CartsService } from 'src/app/services/carts.service';
 import { PlusMinusIconsService } from 'src/app/services/plus-minus-icons.service';
+import { OrderProdSearchService } from 'src/app/services/order-prod-search.service';
 
 @Component({
   selector: 'app-product-card',
@@ -24,7 +25,8 @@ export class ProductCardComponent implements OnInit {
     public productsService: ProductsService,
     public prodInCartService: ProdInCartService,
     public cartsService: CartsService,
-    public plusMinusIconsService: PlusMinusIconsService
+    public plusMinusIconsService: PlusMinusIconsService,
+    public orderProdSearchService: OrderProdSearchService
   ) {
     this.usersServiceService._getUser();
     if (this.productsService._products.length == 0) {
@@ -65,7 +67,6 @@ export class ProductCardComponent implements OnInit {
       this.productsService._currentProdId != prodID ? foundProd?.Name : '';
     this.productsService._currentProdId = prodID;
   };
-
   deleteAll = () => {
     this.prodInCartService.strArr.map(
       (item: { isSearched: boolean; isChangeable: boolean }) => {

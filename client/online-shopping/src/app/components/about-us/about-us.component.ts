@@ -21,6 +21,7 @@ export class AboutUsComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public prodInCartService: ProdInCartService
   ) {
+    this.usersServiceService._getUser();
     this.ordersService._getOrders();
   }
 

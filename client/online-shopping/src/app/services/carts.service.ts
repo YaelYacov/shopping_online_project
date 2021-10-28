@@ -34,9 +34,9 @@ export class CartsService {
     this._addCart = await this.apiService.createPostService('cart/addNewCart', {
       values: { userID: userID },
     });
-    this._getCartByID();
-    this.usersServiceService._getUser();
-    this.prodInCartService._getProdInCartByCartID(this._addCart.ID);
+    await this._getCartByID();
+    await this.usersServiceService._getUser();
+    await this.prodInCartService._getProdInCartByCartID(this._addCart.ID);
   };
 
   _updateCartStatus = async () => {

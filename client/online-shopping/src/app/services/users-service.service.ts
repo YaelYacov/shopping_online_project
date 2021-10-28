@@ -55,6 +55,7 @@ export class UsersServiceService {
         this._Users.Carts.length - 1
       ].createdAt.slice(0, 10);
     } else {
+      this._totP = 0;
       this._createdAt = this._Users.Carts[
         this._Users.Carts.length - 2
       ].createdAt.slice(0, 10);

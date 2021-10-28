@@ -33,7 +33,7 @@ exports.addNewCart = async (req, res, next) => {
       console.log("err adding new cart", err);
       res.send("err adding new cart", err);
     });
-  console.log(Result, "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+  // console.log(Result, "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
 
   if (Result && Result.ID) {
     await User.update({ CartID: Result.ID }, { where: { ID: Result.userID } })

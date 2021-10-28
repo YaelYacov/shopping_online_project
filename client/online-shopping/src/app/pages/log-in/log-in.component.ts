@@ -19,25 +19,7 @@ export class LogInComponent implements OnInit {
     public prodInCartService: ProdInCartService,
     public categoriesService: CategoriesService,
     public ordersService: OrdersService
-  ) {
-    // this.categoriesService._categories;
-    // console.log(this.usersServiceService._getUser());
-    // console.log(this.usersServiceService._updateUserCart());
-    // console.log(this.usersServiceService._createNewUser());
-    // console.log(this.productsService._addNewProd());
-    // console.log(this.productsService._editProd());
-    // console.log(this.productsService._getAllProducts());
-    // console.log(this.cartsService._addNewCart());
-    // console.log(this.cartsService._getCartByID());
-    // console.log(this.cartsService._updateCartStatus());
-    // console.log(this.prodInCartService._getProdInCartByCartID());
-    // console.log(this.categoriesService._getAllCategories());
-    // console.log(this.ordersService._getOrders());
-    // console.log(this.ordersService._updateOrder());
-    // console.log(this.ordersService._addNewOrder());
-    // console.log(this.prodInCartService._getProdInCartByCartID());
-    // console.log(this.prodInCartService._addNewProdInCart());
-  }
+  ) {}
 
   ngOnInit(): void {}
 }

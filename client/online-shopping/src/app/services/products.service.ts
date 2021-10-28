@@ -14,10 +14,6 @@ export class ProductsService {
   _isAdding: boolean = false; //or edit
   _isEditing: boolean = false;
   _currentProdId: number = 0;
-  Name: string = '';
-  description: string = '';
-  Price: number = 0;
-  CategoryID: number = 0;
 
   constructor(public apiService: ApiService) {}
 

@@ -8,7 +8,8 @@ exports.getUserByMailNPass = async (req, res, next) => {
       Mail: req.body.Mail,
       Password: req.body.Password,
     },
-    include: [{ model: Cart }],
+    include: [{ model: Cart, order: [["createdAt", "DESC"]] }],
+    // include: [{ model: Cart, order: [["createdAt", "DESC"]] }],
   };
   // let options = { include: Cart };
 

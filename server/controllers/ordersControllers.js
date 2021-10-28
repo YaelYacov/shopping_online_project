@@ -21,7 +21,7 @@ exports.getOrders = async (req, res, next) => {
 
 exports.addNewOrder = async (req, res, next) => {
   // `ID`, `TotalPrice`, `City`, `Street`, , `LastDigitsOfCard`, `createdAt`, `updatedAt`, `userID`;
-  await Orders.create({ TotalPrice: req.body.TotalPrice, City: req.body.City, Street: req.body.Street, ShippingDate: req.body.ShippingDate, LastDigitsOfCard: req.body.LastDigitsOfCard, userID: req.body.userID })
+  await Orders.create({ TotalPrice: req.body.TotalPrice, City: req.body.City, Street: req.body.Street, ShippingDate: req.body.ShippingDate, LastDigitsOfCard: req.body.LastDigitsOfCard, userID: req.body.userID, CartID: req.body.CartID })
     .then((result) => {
       console.log(result);
       res.send(result);

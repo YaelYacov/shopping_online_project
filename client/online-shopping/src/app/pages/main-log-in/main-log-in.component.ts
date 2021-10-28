@@ -28,7 +28,6 @@ export class MainLogInComponent implements OnInit {
   findCart = () => {
     if (this.usersServiceService._Users) {
       let CartID = this.usersServiceService._Users.CartID;
-      localStorage.setItem('currentUser', this.usersServiceService._Users);
       if (CartID == null)
         this.cartsService._addNewCart(this.usersServiceService._Users.ID);
     }

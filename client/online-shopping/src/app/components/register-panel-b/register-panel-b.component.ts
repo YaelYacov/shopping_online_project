@@ -10,5 +10,16 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
 export class RegisterPanelBComponent implements OnInit {
   constructor(public usersServiceService: UsersServiceService) {}
 
+  submitRegistration = () => {
+    if (
+      this.usersServiceService._User.City == '' ||
+      this.usersServiceService._User.Street == '' ||
+      this.usersServiceService._User.Fname == '' ||
+      this.usersServiceService._User.Lname == ''
+    )
+      alert('Please fill in all the required fields.');
+    else this.usersServiceService._createNewUser();
+  };
+
   ngOnInit(): void {}
 }

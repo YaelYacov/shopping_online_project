@@ -24,6 +24,11 @@ const Orders = sequelize.define("Orders", {
     type: Sequelize.STRING(11),
     allowNull: false,
   },
+  CartID: {
+    type: Sequelize.INTEGER(11),
+    foreignKey: true,
+    allowNull: true,
+  },
 });
 
 module.exports = Orders;

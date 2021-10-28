@@ -32,7 +32,6 @@ export class OrderInPlaceComponent implements OnInit {
 
   generateDownloadJsonUri = () => {
     let theJSON = this.ordersService.Rcp;
-
     var uri = this.sanitizer.bypassSecurityTrustUrl(
       'data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON)
     );

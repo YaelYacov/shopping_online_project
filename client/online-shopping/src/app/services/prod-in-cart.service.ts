@@ -17,6 +17,13 @@ export class ProdInCartService {
 
   constructor(public apiService: ApiService) {}
 
+  _calcTotalPrice = () => {
+    this._totalPrice = 0;
+    this._prodInCart.map((prod) => {
+      this._totalPrice += prod.Qnt * prod.Product.Price;
+    });
+  };
+
   _getProdInCartByCartID = async (CartID: number) => {
     if (CartID > 0) {
       this._prodInCart = (await this.apiService.createPostService(
@@ -32,11 +39,16 @@ export class ProdInCartService {
     // console.log(this._prodInCart);
   };
 
-  _addNewProdInCart = async (CartID: number, ProductID: number) => {
+  _addNewProdInCart = async (
+    CartID: number,
+    ProductID: number,
+    price: number
+  ) => {
     await this.apiService.createPostService('prodInCart/addNewProdInCart', {
       values: {
         CartID: CartID,
         ProductID: ProductID,
+        TotalPrice: price,
       },
     });
     this._getProdInCartByCartID(CartID);
@@ -48,13 +60,6 @@ export class ProdInCartService {
       values: values,
     });
     this._getProdInCartByCartID(CartID);
-  };
-
-  _calcTotalPrice = () => {
-    this._totalPrice = 0;
-    this._prodInCart.map((prod) => {
-      this._totalPrice += prod.Qnt * prod.Product.Price;
-    });
   };
 
   _deleteProdInCart = (ProdInCartID: number, CartID: number) => {

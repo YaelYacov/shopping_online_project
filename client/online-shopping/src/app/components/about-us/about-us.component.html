@@ -9,7 +9,7 @@
     usersServiceService._Users && usersServiceService._Users.Carts.length == 0
   "
 >
-  Welcome to your new shopping 🤩
+  Welcome to your first shopping 🤩
 </p>
 
 <p
@@ -19,5 +19,15 @@
   "
 >
   You have opened cart from
-  {{ ifUsers() }}
+  {{ usersServiceService._createdAt }}
+</p>
+
+<p
+  *ngIf="
+    usersServiceService._Users &&
+    usersServiceService._Users.Carts.length > 0 &&
+    usersServiceService._totP > 0
+  "
+>
+  Total to Payment: {{ usersServiceService._totP }}
 </p>

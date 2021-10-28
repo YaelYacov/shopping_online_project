@@ -113,6 +113,7 @@ export class OrdersFormComponent implements OnInit {
     ob.userID = this.usersServiceService._Users.ID;
 
     ob.TotalPrice = this.prodInCartService._totalPrice;
+    ob.CartID = this.usersServiceService._Users.CartID;
     if (
       this.ordersService._order.Street != '' &&
       this.ordersService._order.City != '' &&
@@ -120,7 +121,6 @@ export class OrdersFormComponent implements OnInit {
       this.ordersService._isCreditCard(lastDigits)
     ) {
       this.ordersService._addNewOrder(ob);
-
       this.router.navigateByUrl('/orderInPlace');
     } else alert('something went wrong, please reload the page');
   };

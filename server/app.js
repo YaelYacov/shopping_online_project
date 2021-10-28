@@ -26,6 +26,7 @@ CartProduct.belongsTo(Cart);
 Products.hasMany(CartProduct);
 CartProduct.belongsTo(Products);
 Orders.belongsTo(Users);
+Orders.belongsTo(Cart);
 
 app.use(express.static(path.join(__dirname, "uploads")));
 

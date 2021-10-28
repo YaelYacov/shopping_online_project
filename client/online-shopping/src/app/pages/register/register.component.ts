@@ -18,23 +18,62 @@ export class RegisterComponent implements OnInit {
   constructor(
     public usersServiceService: UsersServiceService,
     public settingsService: SettingsService
-  ) {}
+  ) {
+    console.log(this.usersServiceService._getAllUsers());
+  }
 
-  mailValidation = (e: any) => {
+  validateEmail = async (email: string) => {
+    await this.usersServiceService._getAllUsers();
+    let findMail = this.usersServiceService._manyUsers.find(
+      (user: any) => user.Mail == this.usersServiceService._User.Mail
+    );
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase()) == true && findMail == undefined
+      ? true
+      : false;
+  };
+  mailValidation = async (e: any) => {
     this.confirmMail = true;
-    this.confirmMailSuccess = e.target.value.includes('@') ? true : false;
+    this.confirmMailSuccess =
+      (await this.validateEmail(this.usersServiceService._User.Mail)) == true
+        ? true
+        : false;
   };
 
-  identificationValidation = (e: any) => {
+  identificationValidation = async (e: any) => {
+    await this.usersServiceService._getAllUsers();
+    let findID = this.usersServiceService._manyUsers.find(
+      (user: any) =>
+        user.Identification == this.usersServiceService._User.Identification
+    );
+    let re = /^[0-9]{9}$/g;
     this.confirmIdentification = true;
     this.confirmIdentificationSuccess =
-      e.target.value.length != 9 ? false : true;
+      re.test(this.usersServiceService._User.Identification) &&
+      findID == undefined
+        ? true
+        : false;
   };
 
   confirmPassword = (e: any) => {
     this.confirmPasswordText = true;
     let password = this.usersServiceService._User.Password;
     this.confirmPasswordSuccess = e.target.value != password ? false : true;
+  };
+
+  changeRegisterPB = (registerPB: boolean) => {
+    if (
+      this.usersServiceService._User.Identification.length != 9 &&
+      this.usersServiceService._User.Mail != '' &&
+      this.confirmMailSuccess &&
+      this.usersServiceService._User.Password != '' &&
+      this.confirmPasswordSuccess &&
+      this.confirmIdentificationSuccess
+    ) {
+      this.settingsService._registerPanelB = registerPB;
+      this.settingsService._isRegister = false;
+    } else alert('Please fill in all the required fields.');
   };
 
   ngOnInit(): void {}

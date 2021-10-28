@@ -5,6 +5,7 @@ import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 import { CartsService } from 'src/app/services/carts.service';
+import { PlusMinusIconsService } from 'src/app/services/plus-minus-icons.service';
 
 @Component({
   selector: 'app-product-card',
@@ -22,7 +23,8 @@ export class ProductCardComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public productsService: ProductsService,
     public prodInCartService: ProdInCartService,
-    public cartsService: CartsService
+    public cartsService: CartsService,
+    public plusMinusIconsService: PlusMinusIconsService
   ) {
     this.usersServiceService._getUser();
     if (this.productsService._products.length == 0) {
@@ -37,53 +39,6 @@ export class ProductCardComponent implements OnInit {
       );
     }
   }
-
-  isProdInCart = (ProductID: number) => {
-    let IsProdInCart: any;
-    if (this.prodInCartService._prodInCart.length > 0) {
-      IsProdInCart = this.prodInCartService._prodInCart.find(
-        (prod) => prod.Product.ID == ProductID
-      );
-      // console.log(IsProdInCart, ProductID);
-      return IsProdInCart;
-    } else {
-      return 0;
-    }
-  };
-
-  increaseOrDecreaseQnt = (
-    type: boolean,
-    ProductID: number,
-    qnt: number,
-    prodInCartID: number
-  ) => {
-    if (
-      (prodInCartID == 0 && this.isProdInCart(ProductID) == undefined) ||
-      (prodInCartID == 0 && this.isProdInCart(ProductID) == 0)
-    ) {
-      this.prodInCartService._addNewProdInCart(
-        this.usersServiceService._Users.CartID,
-        ProductID
-      );
-    } else {
-      let ProdInCartID =
-        prodInCartID > 0 ? prodInCartID : this.isProdInCart(ProductID).ID;
-      let Qnt = ProductID > 0 ? this.isProdInCart(ProductID).Qnt : qnt;
-
-      Qnt = !type ? Qnt - 1 : Qnt + 1;
-
-      Qnt == 0
-        ? this.prodInCartService._deleteProdInCart(
-            ProdInCartID,
-            this.usersServiceService._Users.CartID
-          )
-        : this.prodInCartService._updateProdInCart(
-            ProdInCartID,
-            { Qnt: Qnt },
-            this.usersServiceService._Users.CartID
-          );
-    }
-  };
 
   imgSrc = (type: number) => {
     if (type == 1) {
@@ -106,7 +61,7 @@ export class ProductCardComponent implements OnInit {
       this.productsService._product.Price = foundProd?.Price;
       this.productsService._product.CategoryID = foundProd?.CategoryID;
     }
-    this.productsService.Name =
+    this.productsService._product.Name =
       this.productsService._currentProdId != prodID ? foundProd?.Name : '';
     this.productsService._currentProdId = prodID;
   };

@@ -79,26 +79,41 @@
               class="fas fa-plus"
               (click)="
                 plusMinusIconsService.increaseOrDecreaseQnt(
-                  true,
                   Product.ID,
                   ProdInCart.Qnt,
                   ProdInCart.ID,
-                  Product.Price
+                  Product.Price,
+                  1
                 )
               "
             ></i>
           </div>
-          <div class="col-8"></div>
+          <div class="col-8">
+            <button
+              class="btn btn-secondary"
+              (click)="
+                plusMinusIconsService.increaseOrDecreaseQnt(
+                  Product.ID,
+                  ProdInCart.Qnt,
+                  ProdInCart.ID,
+                  Product.Price,
+                  2
+                )
+              "
+            >
+              Costumed Quantity
+            </button>
+          </div>
           <div class="col-2">
             <i
               class="fas fa-minus"
               (click)="
                 plusMinusIconsService.increaseOrDecreaseQnt(
-                  false,
                   Product.ID,
                   ProdInCart.Qnt,
                   ProdInCart.ID,
-                  Product.Price
+                  Product.Price,
+                  0
                 )
               "
             ></i>

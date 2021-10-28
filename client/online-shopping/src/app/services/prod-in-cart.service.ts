@@ -39,19 +39,12 @@ export class ProdInCartService {
     // console.log(this._prodInCart);
   };
 
-  _addNewProdInCart = async (
-    CartID: number,
-    ProductID: number,
-    price: number
-  ) => {
+  _addNewProdInCart = async (values: any) => {
+    console.log(values);
     await this.apiService.createPostService('prodInCart/addNewProdInCart', {
-      values: {
-        CartID: CartID,
-        ProductID: ProductID,
-        TotalPrice: price,
-      },
+      values: values,
     });
-    this._getProdInCartByCartID(CartID);
+    this._getProdInCartByCartID(values.CartID);
   };
 
   _updateProdInCart = async (ID: number, values: object, CartID: number) => {

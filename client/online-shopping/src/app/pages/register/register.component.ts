@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/Usersmodel';
 import { SettingsService } from 'src/app/services/settings.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public settingsService: SettingsService
   ) {
-    console.log(this.usersServiceService._getAllUsers());
+    this.usersServiceService._User = new User();
   }
 
   validateEmail = async (email: string) => {

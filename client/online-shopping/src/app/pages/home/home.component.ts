@@ -61,12 +61,17 @@ export class HomeComponent implements OnInit {
   }
 
   deleteAllProdsFromCart = () => {
-    this.prodInCartService._prodInCart.forEach((prod) =>
-      this.prodInCartService._deleteProdInCart(
-        prod.ID,
-        this.usersServiceService._Users.CartID
-      )
-    );
+    let r = confirm('Press a button!');
+    console.log(r);
+    debugger;
+    if (r == true) {
+      this.prodInCartService._prodInCart.forEach((prod) =>
+        this.prodInCartService._deleteProdInCart(
+          prod.ID,
+          this.usersServiceService._Users.CartID
+        )
+      );
+    }
   };
 
   addOrEditOrder = () => {

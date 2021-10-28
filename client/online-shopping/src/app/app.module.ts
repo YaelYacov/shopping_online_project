@@ -55,7 +55,9 @@ import { OrderInPlaceComponent } from './components/order-in-place/order-in-plac
     DragDropModule,
     ResizableModule,
   ],
-  providers: [],
+  providers: [
+    // { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

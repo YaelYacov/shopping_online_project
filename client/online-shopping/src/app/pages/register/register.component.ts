@@ -72,8 +72,8 @@ export class RegisterComponent implements OnInit {
       this.confirmPasswordSuccess &&
       this.confirmIdentificationSuccess
     ) {
-      this.settingsService._registerPanelB = registerPB;
-      this.settingsService._isRegister = false;
+      this.usersServiceService._registerPanelB = registerPB;
+      this.usersServiceService._isRegister = false;
     } else alert('Please fill in all the required fields.');
   };
 

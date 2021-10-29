@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  // @Input('isRegister') isRegister: boolean = false;
+  logOut: boolean = false;
 
   constructor(
     public categoriesService: CategoriesService,
@@ -31,5 +31,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if (this.usersServiceService._User.ID! > 0)
       this.router.navigateByUrl('/home');
+
+    // if(this.usersServiceService._User.)
   }
 }

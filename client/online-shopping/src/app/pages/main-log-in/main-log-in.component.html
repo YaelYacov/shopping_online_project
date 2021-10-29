@@ -2,16 +2,25 @@
   <div class="row">
     <div class="col-4">
       <app-log-in
-        *ngIf="!settingsService._isRegister && !settingsService._registerPanelB"
+        *ngIf="
+          !usersServiceService._isRegister &&
+          !usersServiceService._registerPanelB
+        "
       ></app-log-in>
       <app-register
-        *ngIf="settingsService._isRegister && !settingsService._registerPanelB"
+        *ngIf="
+          usersServiceService._isRegister &&
+          !usersServiceService._registerPanelB
+        "
       ></app-register>
       <app-register-panel-b
-        *ngIf="settingsService._registerPanelB"
+        *ngIf="usersServiceService._registerPanelB"
       ></app-register-panel-b>
       <div
-        *ngIf="settingsService._registerPanelB || !settingsService._isRegister"
+        *ngIf="
+          usersServiceService._registerPanelB ||
+          !usersServiceService._isRegister
+        "
         class="col-8"
       >
         <button

@@ -19,7 +19,20 @@ export class LogInComponent implements OnInit {
     public prodInCartService: ProdInCartService,
     public categoriesService: CategoriesService,
     public ordersService: OrdersService
-  ) {}
+  ) {
+    this.assignStorage();
+  }
+
+  assignStorage = () => {
+    if (localStorage.getItem('currentUser')) {
+      const json: any = localStorage.getItem('currentUser');
+      const currentUser: any = JSON.parse(json);
+      this.usersServiceService._User.Mail = currentUser.Mail;
+      this.usersServiceService._User.Password = currentUser.Password;
+      this.usersServiceService._getUser(0);
+      this.usersServiceService._logOut = true;
+    }
+  };
 
   ngOnInit(): void {}
 }

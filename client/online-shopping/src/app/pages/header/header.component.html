@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <b class="whiteTxT nav-item" *ngIf="usersServiceService._Users">
+    <b
+      class="whiteTxT nav-item"
+      *ngIf="usersServiceService._Users && usersServiceService._logOut == true"
+    >
       Hello {{ usersServiceService._Users.Fname }} :)
     </b>
     <button
@@ -20,18 +23,29 @@
           <a
             class="nav-link active"
             aria-current="page"
-            (click)="settingsService._changeRegisterStatus(true)"
+            (click)="usersServiceService._changeRegisterStatus(true)"
             routerLink="/logIn"
             >Register</a
           >
         </li>
-        <li class="nav-item">
+
+        <li class="nav-item" *ngIf="!usersServiceService._logOut">
           <a
             class="nav-link active"
             aria-current="page"
-            (click)="settingsService._changeRegisterStatus(false)"
+            (click)="usersServiceService._changeRegisterStatus(false)"
             routerLink="/logIn"
             >Log In</a
+          >
+        </li>
+
+        <li class="nav-item" *ngIf="usersServiceService._logOut">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            (click)="usersServiceService._changeRegisterStatus(false)"
+            routerLink="/logIn"
+            >Log Out</a
           >
         </li>
         <div

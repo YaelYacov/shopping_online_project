@@ -18,6 +18,9 @@ export class UsersServiceService {
   _currentCartID: any;
   _createdAt: string = '';
   _totP: number = 0;
+  _logOut: boolean = false;
+  _isRegister: boolean = false;
+  _registerPanelB: boolean = false;
 
   constructor(
     public apiService: ApiService,
@@ -32,19 +35,23 @@ export class UsersServiceService {
       { Password: this._User.Password, Mail: this._User.Mail }
     )) as Array<User>;
     if (type == 0) {
-      this.ifUsers(this._Users.CartID);
-      let string = JSON.stringify(this._Users);
-      localStorage.setItem('currentUser', string);
-      console.log(localStorage.getItem('currentUser'));
+      if (this.ifUsers) {
+        this.ifUsers(this._Users.CartID);
+        if (localStorage.getItem('currentUser') == null) {
+          let string = JSON.stringify({
+            Password: this._User.Password,
+            Mail: this._User.Mail,
+          });
+          localStorage.setItem('currentUser', string);
+        }
+      }
+      this._logOut = true;
     }
-    if (this._Users && this._Users.IsAdmin == 1)
-      // console.log('1: ', this._Users);
-      this.router.navigate(['home']);
+    if (this._Users && this._Users.IsAdmin == 1) this.router.navigate(['home']);
     else if (this._Users && this._Users.CartID > 0) {
       this._currentUserID = this._Users.ID;
       this._currentCartID = this._Users.CartID;
     }
-    // console.log(this._currentCartID);
   }
 
   ifUsers = async (CartID: number) => {
@@ -88,12 +95,26 @@ export class UsersServiceService {
 
     this._getUser();
   }
+
   async _getAllUsers() {
     this._manyUsers = (await this.apiService.createGetService(
       `users/getAllUsers`
     )) as Array<User>;
     // return this._manyUsers;
   }
+
+  _changeRegisterStatus = (isRegister: boolean) => {
+    this._isRegister = isRegister;
+    this._registerPanelB = false;
+    if (this._logOut == true && this._Users) {
+      localStorage.clear();
+      this._logOut = false;
+      this._User = new User();
+      this._totP = 0;
+      this._createdAt = '';
+    } else this._logOut = true;
+    if (this._isRegister) this._logOut = false;
+  };
 }
 
 // {"ID":1,"Fname":"Yoshi","Lname":"Yosh","Mail":"yoshi@gmail.com ","Password":"111","Identification":258963214,"City":"Bnei Brak","Street":"Yonatan","IsAdmin":false,"createdAt":null,"updatedAt":null}

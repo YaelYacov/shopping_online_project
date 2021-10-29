@@ -40,7 +40,6 @@ export class ProdInCartService {
   };
 
   _addNewProdInCart = async (values: any) => {
-    console.log(values);
     await this.apiService.createPostService('prodInCart/addNewProdInCart', {
       values: values,
     });

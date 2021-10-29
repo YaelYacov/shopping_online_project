@@ -18,7 +18,6 @@ export class PlusMinusIconsService {
     const costumedStr = prompt('Please enter quantity');
     if (costumedStr != null) {
       const costumedNum = Number(costumedStr);
-      console.log(costumedNum);
       // debugger;
       this.costumedQnt = costumedNum;
     }
@@ -30,7 +29,6 @@ export class PlusMinusIconsService {
       IsProdInCart = this.prodInCartService._prodInCart.find(
         (prod) => prod.Product.ID == ProductID
       );
-      // console.log(IsProdInCart, ProductID);
       return IsProdInCart;
     } else {
       return 0;

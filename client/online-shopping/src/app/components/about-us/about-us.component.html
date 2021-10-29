@@ -15,7 +15,9 @@
 <p
   class="yellowBG"
   *ngIf="
-    usersServiceService._Users && usersServiceService._Users.Carts.length > 0
+    usersServiceService._Users &&
+    usersServiceService._Users.Carts.length > 0 &&
+    usersServiceService._createdAt != ''
   "
 >
   You have opened cart from

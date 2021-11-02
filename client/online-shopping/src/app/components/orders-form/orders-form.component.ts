@@ -88,6 +88,7 @@ export class OrdersFormComponent implements OnInit {
   };
 
   editNAddOrder = () => {
+    console.log(this.ordersService._order.City);
     let ob: object | any = {};
     let lastDigits: string =
       this.ordersService._order.LastDigitsOfCard.toString();

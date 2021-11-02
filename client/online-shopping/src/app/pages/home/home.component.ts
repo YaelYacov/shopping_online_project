@@ -4,7 +4,6 @@ import { ProductsService } from 'src/app/services/products.service';
 import { ProdInCartService } from 'src/app/services/prod-in-cart.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 import { Router } from '@angular/router';
-import { ResizeEvent } from 'angular-resizable-element';
 import { OrdersService } from 'src/app/services/orders.service';
 import { CartsService } from 'src/app/services/carts.service';
 
@@ -14,7 +13,7 @@ import { CartsService } from 'src/app/services/carts.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  resizable: boolean = false;
+  isOpen: boolean = true;
   openCart: boolean = false;
   adminEdit: boolean = false;
   constructor(
@@ -28,42 +27,8 @@ export class HomeComponent implements OnInit {
 
   public style: any;
 
-  validate(event: ResizeEvent): boolean {
-    const MIN_DIMENSIONS_PX: number = screen.width / 5;
-    // console.log(event.rectangle);
-    if (
-      event.rectangle.width &&
-      event.rectangle.height &&
-      event.rectangle.width > MIN_DIMENSIONS_PX
-    ) {
-      return false;
-    }
-    return true;
-  }
-
-  onResizeEnd(event: any): void {
-    // console.log(event.rectangle);
-    this.style = {
-      position: 'relative',
-      left: `0`,
-      top: `20px`,
-      bottom: `10px`,
-      width: `${event.rectangle.width}px`,
-      height: `${event.rectangle.height}px`,
-    };
-    this.resizable = true;
-
-    if (
-      event.rectangle.right < screen.width / 5 + 20 &&
-      event.rectangle.right > screen.width / 5 / 3
-    )
-      this.resizable = false;
-  }
-
   deleteAllProdsFromCart = () => {
-    let r = confirm('Press a button!');
-    console.log(r);
-    debugger;
+    let r = confirm('Sure you wanna delete All products from cart?');
     if (r == true) {
       this.prodInCartService._prodInCart.forEach((prod) =>
         this.prodInCartService._deleteProdInCart(
@@ -81,6 +46,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.prodInCartService._fromOrders = false;
+    this.ordersService._isOrdering = false;
     let greaterThan0 =
       this.usersServiceService._Users && this.usersServiceService._Users.ID > 0;
     if (!greaterThan0) this.router.navigateByUrl('/logIn');

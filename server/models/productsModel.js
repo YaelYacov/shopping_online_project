@@ -11,11 +11,6 @@ const Products = sequelize.define("Products", {
     type: Sequelize.STRING(50),
     allowNull: false,
   },
-  // CategoryId: {
-  //   type: Sequelize.INTEGER(11),
-  //   allowNull: false,
-  //   foreignKey: true,
-  // },
   Price: {
     type: DataTypes.FLOAT(11),
     allowNull: false,

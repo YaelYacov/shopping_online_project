@@ -45,11 +45,6 @@ const Users = sequelize.define("users", {
     foreignKey: true,
     allowNull: true,
   },
-  // justRegistered: {
-  //   type: Sequelize.BOOLEAN,
-  //   allowNull: true,
-  //   defaultValue: true,
-  // },
 });
 
 module.exports = Users;

@@ -7,18 +7,6 @@ const ProductsInCart = sequelize.define("ProductsInCart", {
     autoIncrement: true,
     allowNull: false,
   },
-  // ProductID: {
-  //   type: Sequelize.INTEGER(11),
-  //   foreignKey: true,
-  // },
-  // CartId: {
-  //   type: Sequelize.INTEGER(11),
-  //   foreignKey: true,
-  // },
-  // Product: {
-  //   type: Sequelize.INTEGER(11),
-  //   foreignKey: true,
-  // },
   Qnt: {
     type: Sequelize.INTEGER(11),
     defaultValue: 1,

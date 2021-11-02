@@ -36,10 +36,11 @@
           "
         >
           {{
-            !usersServiceService._Users ||
-            usersServiceService._Users.CartID == null
-              ? "Start New Shopping"
-              : "Go To Cart"
+            usersServiceService._Users &&
+            usersServiceService._Users.Carts.length > 0 &&
+            usersServiceService._totP > 0
+              ? "Resume Shopping"
+              : "Initiate Shopping"
           }}
         </button>
       </div>

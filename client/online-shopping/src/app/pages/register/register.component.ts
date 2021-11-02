@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     public usersServiceService: UsersServiceService,
     public settingsService: SettingsService
   ) {
-    this.usersServiceService._User = new User();
+    // this.usersServiceService._Users = new User();
   }
 
   validateEmail = async (email: string) => {
@@ -65,6 +65,7 @@ export class RegisterComponent implements OnInit {
 
   changeRegisterPB = (registerPB: boolean) => {
     if (
+      this.usersServiceService._User.Identification &&
       this.usersServiceService._User.Identification.length != 9 &&
       this.usersServiceService._User.Mail != '' &&
       this.confirmMailSuccess &&

@@ -34,5 +34,17 @@ export class LogInComponent implements OnInit {
     }
   };
 
+  formValidation = async () => {
+    if (
+      this.usersServiceService._User.Mail == '' ||
+      this.usersServiceService._User.Password == ''
+    ) {
+      if (this.usersServiceService._User.Mail == '')
+        alert('Incorrect Mail address');
+      if (this.usersServiceService._User.Password == '')
+        alert('Incorrect password');
+    } else await this.usersServiceService._getUser(0);
+  };
+
   ngOnInit(): void {}
 }

@@ -6,28 +6,41 @@
 
 <p
   *ngIf="
-    usersServiceService._Users && usersServiceService._Users.Carts.length == 0
+    usersServiceService._Users &&
+    usersServiceService._Users.ID > 0 &&
+    (usersServiceService._Users.Carts.length == 0 ||
+      (usersServiceService._Users.Carts.length == 1 &&
+        usersServiceService._totP == 0))
   "
 >
   Welcome to your first shopping 🤩
 </p>
 
 <p
-  class="yellowBG"
   *ngIf="
     usersServiceService._Users &&
-    usersServiceService._Users.Carts.length > 0 &&
+    usersServiceService._isOpenedCart &&
     usersServiceService._createdAt != ''
   "
 >
-  You have opened cart from
-  {{ usersServiceService._createdAt }}
+  You have an open cart since :{{ usersServiceService._createdAt }}
 </p>
-
 <p
   *ngIf="
     usersServiceService._Users &&
-    usersServiceService._Users.Carts.length > 0 &&
+    !usersServiceService._isOpenedCart &&
+    ((usersServiceService._Users.Carts.length > 1 &&
+      usersServiceService._totP == 0) ||
+      (usersServiceService._Users.Carts.length == 1 &&
+        usersServiceService._totP > 0))
+  "
+>
+  You'r last shopping was at: {{ usersServiceService._createdAt }}
+</p>
+<p
+  *ngIf="
+    usersServiceService._Users &&
+    usersServiceService._isOpenedCart &&
     usersServiceService._totP > 0
   "
 >

@@ -25,17 +25,16 @@ export class MainLogInComponent implements OnInit {
 
   draggableEl: any;
 
-  findCart = () => {
+  findCart = async () => {
+    console.log(this.usersServiceService._Users);
     if (this.usersServiceService._Users) {
       let CartID = this.usersServiceService._Users.CartID;
       if (CartID == null)
-        this.cartsService._addNewCart(this.usersServiceService._Users.ID);
+        await this.cartsService._addNewCart(this.usersServiceService._Users.ID);
     }
   };
 
   ngOnInit(): void {
-    console.log(window.location.pathname);
-
     this.ordersService._isOrdering = false;
     this.ordersService._order = new Orders();
     this.usersServiceService._User = new User();

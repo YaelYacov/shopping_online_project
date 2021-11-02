@@ -6,7 +6,7 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   providedIn: 'root',
 })
 export class PlusMinusIconsService {
-  costumedQnt: number = 0;
+  costumedQnt: number | any = 0;
 
   constructor(
     public usersServiceService: UsersServiceService,
@@ -14,20 +14,26 @@ export class PlusMinusIconsService {
     public prodInCartService: ProdInCartService
   ) {}
 
-  popUpFN = () => {
+  popUpFN = (ProductID: number) => {
     const costumedStr = prompt('Please enter quantity');
-    if (costumedStr != null) {
+    console.log(this.isProdInCart(ProductID));
+    if (costumedStr !== null) {
       const costumedNum = Number(costumedStr);
       // debugger;
       this.costumedQnt = costumedNum;
-    }
+    } else
+      this.costumedQnt =
+        this.isProdInCart(ProductID) == undefined
+          ? 0
+          : this.isProdInCart(ProductID).Qnt;
+    // else this.costumedQnt = 0;
   };
 
   isProdInCart = (ProductID: number) => {
     let IsProdInCart: any;
     if (this.prodInCartService._prodInCart.length > 0) {
       IsProdInCart = this.prodInCartService._prodInCart.find(
-        (prod) => prod.Product.ID == ProductID
+        (prod) => prod.Product.ID == ProductID || prod.ID == ProductID
       );
       return IsProdInCart;
     } else {
@@ -43,18 +49,21 @@ export class PlusMinusIconsService {
     price: number,
     type: number
   ) => {
+    let prodID = ProductID == 0 ? prodInCartID : ProductID;
     if (
-      (prodInCartID == 0 && this.isProdInCart(ProductID) == undefined) ||
-      (prodInCartID == 0 && this.isProdInCart(ProductID) == 0)
+      (prodInCartID == 0 && this.isProdInCart(prodID) == undefined) ||
+      (prodInCartID == 0 && this.isProdInCart(prodID) == 0)
     ) {
       if (type == 2) {
-        this.popUpFN();
-        await this.prodInCartService._addNewProdInCart({
-          CartID: this.usersServiceService._Users.CartID,
-          ProductID: ProductID,
-          Qnt: this.costumedQnt,
-          TotalPrice: price,
-        });
+        this.popUpFN(prodID);
+        if (this.costumedQnt > 0) {
+          await this.prodInCartService._addNewProdInCart({
+            CartID: this.usersServiceService._Users.CartID,
+            ProductID: ProductID,
+            Qnt: this.costumedQnt,
+            TotalPrice: price,
+          });
+        }
       } else if (type == 1) {
         await this.prodInCartService._addNewProdInCart({
           CartID: this.usersServiceService._Users.CartID,
@@ -64,13 +73,13 @@ export class PlusMinusIconsService {
       }
     } else {
       let ProdInCartID =
-        prodInCartID > 0 ? prodInCartID : this.isProdInCart(ProductID).ID;
-      let Qnt = ProductID > 0 ? this.isProdInCart(ProductID).Qnt : qnt;
+        prodInCartID > 0 ? prodInCartID : this.isProdInCart(prodID).ID;
+      let Qnt = ProductID > 0 ? this.isProdInCart(prodID).Qnt : qnt;
 
       if (type == 0) Qnt -= 1;
       else if (type == 1) Qnt += 1;
       else {
-        this.popUpFN();
+        this.popUpFN(prodID);
         Qnt = this.costumedQnt;
       }
       Qnt == 0

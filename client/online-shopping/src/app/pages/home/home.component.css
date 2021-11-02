@@ -1,39 +1,5 @@
-mwlResizable {
-  box-sizing: border-box;
-}
-
-.rectangle {
-  position: relative;
-  top: 0;
-  display: flex;
-  justify-content: flex-start;
-  width: 90%;
-  height: 100%;
-  /* font-size: 25px; */
-  font-weight: bold;
-}
-.resize-handle-top,
-.resize-handle-bottom {
-  position: relative;
-}
-.resize-handle-top {
-  top: 0;
-}
-.resize-handle-bottom {
-  bottom: 0;
-}
-
-.resize-handle-right {
-  position: absolute;
-  height: 100%;
-  cursor: col-resize;
-  width: 0;
-  right: 0;
-  background-color: gray;
-}
-
-.resize-handle-left {
-  left: 0;
+.pointer {
+  cursor: pointer;
 }
 
 .bigger {
@@ -42,4 +8,20 @@ mwlResizable {
 
 .float {
   float: right;
+  margin-left: 1vw;
+}
+
+.scroller {
+  overflow: scroll;
+  height: 200vh;
+}
+
+.cartSECTION {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.productSECTION {
+  height: 100vh;
+  overflow-x: auto;
 }

@@ -51,7 +51,10 @@
         <div
           class="isUserID"
           *ngIf="
-            usersServiceService._currentUserID > 0 && !ordersService._isOrdering
+            usersServiceService._Users &&
+            usersServiceService._Users.ID > 0 &&
+            !ordersService._isOrdering &&
+            usersServiceService._logOut == true
           "
         >
           <app-categories-nav></app-categories-nav>

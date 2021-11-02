@@ -21,6 +21,7 @@ export class UsersServiceService {
   _logOut: boolean = false;
   _isRegister: boolean = false;
   _registerPanelB: boolean = false;
+  _isOpenedCart: boolean = false;
 
   constructor(
     public apiService: ApiService,
@@ -30,21 +31,25 @@ export class UsersServiceService {
   ) {}
 
   async _getUser(type?: number) {
+    //type -עלייה של העמוד
+
     this._Users = (await this.apiService.createPostService(
       `users/getUserByMailNPass`,
       { Password: this._User.Password, Mail: this._User.Mail }
     )) as Array<User>;
+    // console.log(this._Users);
     if (type == 0) {
-      if (this.ifUsers) {
+      // if (this.ifUsers) {
+      if (this._Users && this._Users.CartID != null)
         this.ifUsers(this._Users.CartID);
-        if (localStorage.getItem('currentUser') == null) {
-          let string = JSON.stringify({
-            Password: this._User.Password,
-            Mail: this._User.Mail,
-          });
-          localStorage.setItem('currentUser', string);
-        }
+      if (localStorage.getItem('currentUser') == null) {
+        let string = JSON.stringify({
+          Password: this._User.Password,
+          Mail: this._User.Mail,
+        });
+        localStorage.setItem('currentUser', string);
       }
+      // }
       this._logOut = true;
     }
     if (this._Users && this._Users.IsAdmin == 1) this.router.navigate(['home']);
@@ -54,19 +59,33 @@ export class UsersServiceService {
     }
   }
 
+  // ifUsers = async (CartID: number) => {
+  //   await this.prodInCartService._getProdInCartByCartID(CartID);
+  //   if (this.prodInCartService._prodInCart.length > 0) {
+  //     this._totP = this.prodInCartService._totalPrice;
+  //     this._createdAt = this._Users.Carts[
+  //       this._Users.Carts.length - 1
+  //     ].createdAt.slice(0, 10);
+  //   } else {
+  //     this._totP = 0;
+  //     this._createdAt = this._Users.Carts[
+  //       this._Users.Carts.length - 2
+  //     ].createdAt.slice(0, 10);
+  //   }
+  // };
+
   ifUsers = async (CartID: number) => {
     await this.prodInCartService._getProdInCartByCartID(CartID);
-    if (this.prodInCartService._prodInCart.length > 0) {
+    if (this.prodInCartService._prodInCart.length > 0 && this._Users) {
+      this._isOpenedCart = true;
       this._totP = this.prodInCartService._totalPrice;
-      this._createdAt = this._Users.Carts[
-        this._Users.Carts.length - 1
-      ].createdAt.slice(0, 10);
     } else {
       this._totP = 0;
-      this._createdAt = this._Users.Carts[
-        this._Users.Carts.length - 2
-      ].createdAt.slice(0, 10);
+      this._isOpenedCart = false;
     }
+    this._createdAt = this._Users.Carts[
+      this._Users.Carts.length - 1
+    ].createdAt.slice(0, 10);
   };
 
   async _updateUserCart(values: object) {
@@ -93,7 +112,7 @@ export class UsersServiceService {
       }
     );
 
-    this._getUser();
+    this._getUser(0);
   }
 
   async _getAllUsers() {
@@ -110,6 +129,7 @@ export class UsersServiceService {
       localStorage.clear();
       this._logOut = false;
       this._User = new User();
+      this._Users = this._User;
       this._totP = 0;
       this._createdAt = '';
     } else this._logOut = true;

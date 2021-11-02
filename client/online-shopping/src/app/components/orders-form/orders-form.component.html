@@ -54,6 +54,7 @@
         value="{{ returnFiltered(date)[1] }}"
         [disabled]="!returnFiltered(date)[0] ? null : 'disabled'"
         [ngClass]="!returnFiltered(date)[0] ? 'regularText' : 'redText'"
+        required
       >
         {{ date }}
       </option>

@@ -58,7 +58,6 @@ export class ProductsService {
       this._isEditing = false;
       this._currentProdId = 0;
       this._product = new Product();
-      // console.log('once from plus: ', this._currentProdId);
     } else if (
       (!isPlus && !this._isEditing) ||
       (!isPlus &&
@@ -69,15 +68,10 @@ export class ProductsService {
       this._isAdding = false;
       this._isEditing = true;
       prodEditID = this._currentProdId;
-
-      // console.log('once from edit or sec or more edit: ', this._currentProdId);
     } else if ((isPlus && this._isAdding) || (!isPlus && this._isEditing)) {
       this._isAdding = false;
       this._isEditing = false;
       this._currentProdId = 0;
-
-      // console.log('sec from plus or edit : ', this._currentProdId);
     }
-    console.log(this._isAdding, this._isEditing);
   };
 }

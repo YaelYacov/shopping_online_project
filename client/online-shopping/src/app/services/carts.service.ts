@@ -29,12 +29,16 @@ export class CartsService {
     // console.log(this._cart);
   };
 
-  _addNewCart = async (userID: number) => {
+  _addNewCart = async (userID: number, type?: number) => {
     this._addCart = await this.apiService.createPostService('cart/addNewCart', {
       values: { userID: userID },
     });
     await this._getCartByID();
     await this.usersServiceService._getUser();
     await this.prodInCartService._getProdInCartByCartID(this._addCart.ID);
+    type == 0
+      ? ((this.usersServiceService._isOpenedCart = false),
+        (this.usersServiceService._totP = 0))
+      : null;
   };
 }

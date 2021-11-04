@@ -87,43 +87,34 @@ export class OrdersFormComponent implements OnInit {
     }
   };
 
-  editNAddOrder = () => {
-    console.log(this.ordersService._order.City);
+  AddOrder = () => {
     let ob: object | any = {};
     let lastDigits: string =
       this.ordersService._order.LastDigitsOfCard.toString();
     let slicedString: string = '';
 
-    if (this.ordersService._isCreditCard(lastDigits)) {
+    if (this.ordersService._order.City == '') {
+      alert('Please select City!');
+    } else if (this.ordersService._order.Street == '') {
+      alert('Please select Street!');
+    } else if (this.ordersService._order.ShippingDate == '') {
+      alert('Please select Shipping Date!');
+    } else if (!this.ordersService._isCreditCard(lastDigits)) {
+      alert('Wrong Credit Card Number');
+    } else {
+      ob.City = this.ordersService._order.City;
+      ob.Street = this.ordersService._order.Street;
+      ob.ShippingDate = this.ordersService._order.ShippingDate;
       slicedString = lastDigits.slice(lastDigits.length - 4, lastDigits.length);
       ob.LastDigitsOfCard = slicedString;
-    } else alert('Wrong Credit Card Number');
 
-    this.ordersService._order.ShippingDate == ''
-      ? alert('Please select Shipping Date!')
-      : (ob.ShippingDate = this.ordersService._order.ShippingDate);
+      ob.userID = this.usersServiceService._Users.ID;
+      ob.TotalPrice = this.prodInCartService._totalPrice;
+      ob.CartID = this.usersServiceService._Users.CartID;
 
-    this.ordersService._order.City == ''
-      ? alert('Please select City!')
-      : (ob.City = this.ordersService._order.City);
-
-    this.ordersService._order.Street == ''
-      ? alert('Please select street')
-      : (ob.Street = this.ordersService._order.Street);
-
-    ob.userID = this.usersServiceService._Users.ID;
-
-    ob.TotalPrice = this.prodInCartService._totalPrice;
-    ob.CartID = this.usersServiceService._Users.CartID;
-    if (
-      this.ordersService._order.Street != '' &&
-      this.ordersService._order.City != '' &&
-      this.ordersService._order.ShippingDate != '' &&
-      this.ordersService._isCreditCard(lastDigits)
-    ) {
       this.ordersService._addNewOrder(ob);
       this.router.navigateByUrl('/orderInPlace');
-    } else alert('something went wrong, please reload the page');
+    }
   };
 
   ngOnInit(): void {

@@ -1,5 +1,7 @@
+<p>Your order was successful</p>
+
 <a
-  class="btn btn-clear"
+  class="btn btn-clear m-2"
   title="Download JSON"
   (click)="generateDownloadJsonUri()"
   [href]="downloadJsonHref"
@@ -7,8 +9,8 @@
   >Download Reception</a
 >
 <button
-  class="btn btn-secondary"
-  (click)="cartsService._addNewCart(usersServiceService._currentUserID)"
+  class="btn btn-secondary m-2"
+  (click)="cartsService._addNewCart(usersServiceService._currentUserID, 0)"
   routerLink="/logIn"
 >
   OK

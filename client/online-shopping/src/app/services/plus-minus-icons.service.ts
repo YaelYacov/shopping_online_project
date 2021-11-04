@@ -16,17 +16,14 @@ export class PlusMinusIconsService {
 
   popUpFN = (ProductID: number) => {
     const costumedStr = prompt('Please enter quantity');
-    console.log(this.isProdInCart(ProductID));
     if (costumedStr !== null) {
       const costumedNum = Number(costumedStr);
-      // debugger;
       this.costumedQnt = costumedNum;
     } else
       this.costumedQnt =
         this.isProdInCart(ProductID) == undefined
           ? 0
           : this.isProdInCart(ProductID).Qnt;
-    // else this.costumedQnt = 0;
   };
 
   isProdInCart = (ProductID: number) => {

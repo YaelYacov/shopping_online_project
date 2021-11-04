@@ -8,7 +8,14 @@
   />
 </div>
 <div class="row mt-2">
-  <button type="button" class="btn btn-secondary" (click)="uploadFile()">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="uploadFile()"
+    [disabled]="
+      filesToUpload[0] && filesToUpload[0].name.length > 4 ? null : 'disabled'
+    "
+  >
     Upload img
   </button>
 </div>

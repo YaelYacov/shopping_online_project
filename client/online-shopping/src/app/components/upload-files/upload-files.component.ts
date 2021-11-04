@@ -9,7 +9,7 @@ import { Product } from 'src/app/models/productsModel';
   styleUrls: ['./upload-files.component.css'],
 })
 export class UploadFilesComponent implements OnInit {
-  filesToUpload: any;
+  filesToUpload: any = {};
   test: boolean = true;
   @Input() Product: Product = new Product();
   // @Input() isAdding: boolean = false;
@@ -21,7 +21,7 @@ export class UploadFilesComponent implements OnInit {
 
   fileChangeEvent = async (fileInput: any) => {
     this.filesToUpload = fileInput.target.files;
-    // console.log(this.filesToUpload);
+    console.log(this.filesToUpload[0].name.length > 4);
   };
 
   uploadFile = async () => {
@@ -35,6 +35,7 @@ export class UploadFilesComponent implements OnInit {
       }
     }
     res = await this.apiService.createPostService('upload', formData);
+    console.log(res);
     let endOfImageName = res
       ? res.map((result: any) => `${result.originalname.substr(-4)}`)[0]
       : alert('some went wrong!, Please reload the page');

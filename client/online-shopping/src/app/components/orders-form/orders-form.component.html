@@ -9,7 +9,6 @@
       (dblclick)="chooseDefault(0)"
       [(ngModel)]="ordersService._order.City"
     >
-      <option selected>Open this select menu</option>
       <option value="Jerusalem">Jerusalem</option>
       <option value="Tel Aviv">Tel Aviv</option>
       <option value="Haifa">Haifa</option>
@@ -76,7 +75,7 @@
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-      <button class="btn btn-secondary" (click)="editNAddOrder()">Order</button>
+      <button class="btn btn-secondary" (click)="AddOrder()">Order</button>
     </div>
     <div class="col-4"></div>
   </div>

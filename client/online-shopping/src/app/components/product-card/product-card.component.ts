@@ -63,10 +63,9 @@ export class ProductCardComponent implements OnInit {
       this.productsService._product.Price = foundProd?.Price;
       this.productsService._product.CategoryID = foundProd?.CategoryID;
     }
-    this.productsService._product.Name =
-      this.productsService._currentProdId != prodID ? foundProd?.Name : '';
     this.productsService._currentProdId = prodID;
   };
+
   deleteAll = () => {
     this.prodInCartService.strArr.map(
       (item: { isSearched: boolean; isChangeable: boolean }) => {

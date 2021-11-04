@@ -25,7 +25,9 @@
       >
         <button
           class="btn btn-primary"
-          [disabled]="!usersServiceService._Users"
+          [disabled]="
+            !usersServiceService._Users || usersServiceService._Users.ID == 0
+          "
           (click)="findCart()"
           [routerLink]="
             !usersServiceService._Users

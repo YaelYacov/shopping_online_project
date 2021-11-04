@@ -8,9 +8,7 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./register-panel-b.component.css'],
 })
 export class RegisterPanelBComponent implements OnInit {
-  constructor(public usersServiceService: UsersServiceService) {
-    console.log(this.usersServiceService._Users);
-  }
+  constructor(public usersServiceService: UsersServiceService) {}
 
   submitRegistration = () => {
     if (

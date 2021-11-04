@@ -26,7 +26,6 @@ export class MainLogInComponent implements OnInit {
   draggableEl: any;
 
   findCart = async () => {
-    console.log(this.usersServiceService._Users);
     if (this.usersServiceService._Users) {
       let CartID = this.usersServiceService._Users.CartID;
       if (CartID == null)

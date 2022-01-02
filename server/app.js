@@ -1,9 +1,9 @@
 const express = require("express");
-const http = require("http");
+// const http = require("http");
 const cors = require("cors");
-var mysql = require("mysql2");
+// var mysql = require("mysql2");
 const bodyParser = require("body-parser");
-const expressFileUpload = require("express-fileupload");
+// const expressFileUpload = require("express-fileupload");
 const multer = require("multer");
 const path = require("path");
 
@@ -15,7 +15,7 @@ const Orders = require("./models/ordersModel");
 const CartProduct = require("./models/productsInCartModel");
 
 const sequelize = require("./utils/database");
-const Sequelize = require("sequelize");
+// const Sequelize = require("sequelize");
 
 const app = express();
 
